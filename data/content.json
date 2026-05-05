@@ -16,6 +16,9 @@
       { "label": "Услуги", "href": "#services" },
       { "label": "Проекты", "href": "#portfolio" },
       { "label": "О нас", "href": "#services" },
+      { "label": "Этапы", "href": "#services" },
+      { "label": "Отзывы", "href": "#portfolio" },
+      { "label": "FAQ", "href": "#services" },
       { "label": "Контакты", "href": "#portfolio" }
     ],
     "cta": {
@@ -35,6 +38,7 @@
       "label": "Смотреть работы",
       "href": "#portfolio"
     },
+    "callIcon": "☎",
     "advantages": [
       "Собственное производство",
       "Гарантия до 3 лет",
