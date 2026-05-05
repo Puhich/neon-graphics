@@ -1,0 +1,38 @@
+# dependencies
+node_modules
+
+# Next.js
+.next
+out
+
+# production
+build
+
+# local env files
+.env
+.env*.local
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# system files
+.DS_Store
+
+# local design sources and client files
+.claude
+*.pen
+*.afphoto
+*.pdf
+*.xlsx
+/images
+/index.html
+/*.jpg
+/*.jpeg
+/*.png
+/*.svg
+
+# Vercel
+.vercel
