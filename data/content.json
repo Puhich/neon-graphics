@@ -10,7 +10,7 @@
     "Пн-Пт: 9:00-17:00"
   ],
   "nav": {
-    "logoSrc": "/logo.svg",
+    "logoSrc": "/logo-dark.svg",
     "logoAlt": "Неон Графикс",
     "links": [
       { "label": "Услуги", "href": "#services" },
@@ -30,6 +30,7 @@
   "subtitle": "Проектируем, производим и монтируем вывески, объемные буквы, световые короба и гибкий неон. Собственное производство в Тольятти. Гарантия до 3 лет.",
   "ctaText": "Получить расчет",
   "hero": {
+    "watermarkLogoSrc": "/logo.svg",
     "highlight": "полного цикла с 2002 года",
     "primaryCta": {
       "href": "#services"

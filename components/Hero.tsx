@@ -79,7 +79,7 @@ export default function Hero({ content }: HeroProps) {
       <div className="pointer-events-none absolute right-[-9rem] top-28 hidden h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle_at_center,rgba(204,26,44,0.34),rgba(22,140,205,0.16)_42%,rgba(15,15,13,0)_70%)] blur-3xl lg:block" />
       <Image
         className="pointer-events-none absolute right-[7rem] top-[9.8rem] hidden h-auto w-[26.5rem] opacity-[0.48] brightness-0 lg:block"
-        src={nav.logoSrc}
+        src={hero.watermarkLogoSrc}
         alt=""
         width={422}
         height={182}
