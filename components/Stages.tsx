@@ -7,10 +7,10 @@ type StagesProps = {
 export default function Stages({ stages }: StagesProps) {
   return (
     <section className="bg-[#f8f8f8] px-5 py-16 text-brand-ink sm:px-6 lg:px-0 lg:py-20" id={stages.id}>
-      <div className="mx-auto max-w-[1200px]">
+      <div className="reveal mx-auto max-w-[1200px]">
         <div className="mx-auto max-w-[760px] text-center">
           <h2 className="font-heading text-[34px] leading-tight sm:text-[42px] lg:text-[48px]">{stages.title}</h2>
-          <p className="mx-auto mt-4 max-w-[700px] text-sm leading-[1.6] text-[#666666] sm:text-base">{stages.subtitle}</p>
+          <p className="mx-auto mt-4 max-w-[700px] text-sm leading-[1.55] text-[#666666] sm:text-base sm:leading-[1.55]">{stages.subtitle}</p>
         </div>
 
         <div className="relative mt-12 grid gap-8 lg:grid-cols-4 lg:gap-6">

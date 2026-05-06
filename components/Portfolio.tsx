@@ -20,18 +20,19 @@ export default function Portfolio({ portfolio }: PortfolioProps) {
 
   return (
     <section className="bg-white px-5 py-16 text-brand-ink sm:px-6 lg:px-0 lg:py-20" id={portfolio.id}>
-      <div className="mx-auto max-w-[1200px] text-center">
+      <div className="reveal mx-auto max-w-[1200px] text-center">
         <h2 className="font-heading text-[34px] leading-tight sm:text-[42px] lg:text-[48px]">{portfolio.title}</h2>
-        <p className="mx-auto mt-4 max-w-[620px] text-sm leading-7 text-[#666666] sm:text-base">
+        <p className="mx-auto mt-4 max-w-[620px] text-sm leading-[1.55] text-[#666666] sm:text-base sm:leading-[1.55]">
           {portfolio.subtitle}
         </p>
 
+        <div className="-mx-5 mt-10 overflow-hidden sm:-mx-6 lg:hidden">
         <div
-          className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-4 sm:gap-5 lg:hidden [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-px-5 scroll-smooth px-5 pb-4 [touch-action:pan-x_pan-y] sm:gap-5 sm:scroll-px-6 sm:px-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {slides.map((slide) => (
             <div
-              className="relative h-72 min-w-[82vw] snap-start overflow-hidden rounded-xl bg-zinc-100 sm:h-[420px] sm:min-w-[72vw]"
+              className="relative h-[62vw] max-h-[360px] min-h-[250px] min-w-[calc(100vw-40px)] snap-start overflow-hidden rounded-[18px] bg-zinc-100 sm:h-[420px] sm:min-w-[calc(100vw-48px)]"
               key={slide.src}
             >
               <Image
@@ -43,6 +44,7 @@ export default function Portfolio({ portfolio }: PortfolioProps) {
               />
             </div>
           ))}
+        </div>
         </div>
 
         <div className="mt-10 hidden items-center gap-5 lg:grid lg:grid-cols-[48px_1fr_48px]">

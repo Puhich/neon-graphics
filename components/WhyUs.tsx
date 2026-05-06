@@ -9,7 +9,7 @@ type WhyUsProps = {
 const iconPaths: Record<string, string> = {
   "shield-check": "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Zm-3-10 2 2 4-5",
   timer: "M10 2h4M12 14l3-3m5 3a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z",
-  "plug-zap": "M13 2 3 14h7l-1 8 10-12h-7l1-8ZM6 14l-2 2m14-6 2-2",
+  "plug-zap": "M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46L12 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46L11 14H4Z",
   truck: "M10 17h4V5H2v12h3m5 0a2 2 0 1 1-4 0m4 0a2 2 0 0 0-4 0m8 0h2m0 0a2 2 0 1 0 4 0m-4 0a2 2 0 0 1 4 0m0 0h2v-5l-3-4h-5"
 };
 
@@ -30,7 +30,7 @@ function TextCard({ card }: { card: WhyUsContent["rows"][number]["card"] }) {
         <p className="mt-4 text-sm leading-[1.6] text-[#666666]">{card.description}</p>
       </div>
 
-      <dl className="mt-8 flex flex-wrap items-end gap-6">
+      <dl className="mt-8 grid grid-cols-2 gap-6">
         {card.metrics.map((metric) => (
           <div className="min-w-[110px]" key={metric.label}>
             <dt className="font-heading text-[28px] leading-none text-brand-accent">{metric.value}</dt>
@@ -45,13 +45,13 @@ function TextCard({ card }: { card: WhyUsContent["rows"][number]["card"] }) {
 export default function WhyUs({ whyUs }: WhyUsProps) {
   return (
     <section className="bg-white px-5 py-16 text-brand-ink sm:px-6 lg:px-0 lg:py-20" id={whyUs.id}>
-      <div className="mx-auto max-w-[1200px]">
+      <div className="reveal mx-auto max-w-[1200px]">
         <div className="mx-auto max-w-[800px] text-center">
           <p className="text-xs font-bold uppercase tracking-[0.15em] text-brand-accent">{whyUs.eyebrow}</p>
           <h2 className="mt-3 font-heading text-[34px] leading-[1.15] sm:text-[42px] lg:text-[48px]">
             {whyUs.title}
           </h2>
-          <p className="mx-auto mt-4 max-w-[600px] text-sm leading-[1.6] text-[#666666] sm:text-base">
+          <p className="mx-auto mt-4 max-w-[600px] text-sm leading-[1.55] text-[#666666] sm:text-base sm:leading-[1.55]">
             {whyUs.subtitle}
           </p>
         </div>

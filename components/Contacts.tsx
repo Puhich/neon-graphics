@@ -25,10 +25,12 @@ function getMapUrls(contacts: ContactsContent) {
   const [centerLat, centerLon] = contacts.mapWidgetCenter;
   const encodedCenter = `${centerLon}%2C${centerLat}`;
   const encodedPoint = `${lon}%2C${lat}`;
+  const mobileCenter = `${lon + 0.0018}%2C${lat + 0.0002}`;
 
   return {
     directions: contacts.mapLinkUrl,
-    widget: `https://yandex.ru/map-widget/v1/?ll=${encodedCenter}&pt=${encodedPoint}%2Cpm2rdm&z=${contacts.mapZoom}`
+    widget: `https://yandex.ru/map-widget/v1/?ll=${encodedCenter}&pt=${encodedPoint}%2Cpm2rdm&z=${contacts.mapZoom}&l=map`,
+    mobileWidget: `https://yandex.ru/map-widget/v1/?ll=${mobileCenter}&pt=${encodedPoint}%2Cpm2rdm&z=${contacts.mapZoom}&l=map`
   };
 }
 
@@ -40,15 +42,22 @@ export default function Contacts({ contacts }: ContactsProps) {
       <div className="relative min-h-[700px] overflow-hidden">
         <iframe
           aria-label={contacts.mapAlt}
-          className="absolute inset-0 h-full w-full border-0"
-          loading="lazy"
+          className="absolute inset-0 hidden h-full w-full border-0 md:block"
+          loading="eager"
           src={mapUrls.widget}
           title={contacts.mapAlt}
         />
-        <div className="pointer-events-none absolute inset-0 bg-[#0f0f0d]/58" />
+        <iframe
+          aria-label={contacts.mapAlt}
+          className="absolute inset-0 h-full w-full border-0 md:hidden"
+          loading="eager"
+          src={mapUrls.mobileWidget}
+          title={contacts.mapAlt}
+        />
+        <div className="pointer-events-none absolute inset-0 bg-[#0f0f0d]/48" />
 
         <div className="relative z-10 mx-auto flex min-h-[700px] max-w-[1440px] items-start px-5 py-16 sm:px-6 lg:px-20">
-          <div className="w-full rounded-xl border border-[#2a2a28] bg-[#151513]/95 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.28)] backdrop-blur md:w-[480px] md:p-[30px]">
+          <div className="reveal w-full rounded-xl border border-[#2a2a28] bg-[#151513]/95 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.28)] backdrop-blur md:w-[480px] md:p-[30px]">
             <h2 className="font-heading text-[26px]">{contacts.title}</h2>
 
             <div className="mt-5 grid gap-2">

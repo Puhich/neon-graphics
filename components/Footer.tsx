@@ -24,8 +24,10 @@ function SocialIcon({ icon }: { icon: string }) {
 
 export default function Footer({ footer }: FooterProps) {
   return (
-    <footer className="bg-brand-bg px-5 py-12 text-white sm:px-6 lg:px-0">
-      <div className="mx-auto max-w-[1200px]">
+    <footer className="relative overflow-hidden bg-brand-bg px-5 py-12 text-white sm:px-6 lg:px-0">
+      <div className="pointer-events-none absolute left-[5%] top-[-5rem] h-64 w-[28rem] rounded-full bg-brand-blue/20 blur-[90px]" />
+      <div className="pointer-events-none absolute bottom-[-6rem] right-[12%] h-64 w-[30rem] rounded-full bg-brand-accent/28 blur-[96px]" />
+      <div className="relative mx-auto max-w-[1200px]">
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr_1fr] lg:gap-12">
           <div>
             <Image className="h-auto w-[150px]" src={footer.logoSrc} alt={footer.logoAlt} width={150} height={65} />

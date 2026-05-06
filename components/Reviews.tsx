@@ -32,22 +32,34 @@ export default function Reviews({ reviews }: ReviewsProps) {
       return;
     }
 
+    const maxScroll = scroller.scrollWidth - scroller.clientWidth;
     const scrollAmount = scroller.clientWidth + 24;
-    scroller.scrollBy({
-      left: direction === "left" ? -scrollAmount : scrollAmount,
+    const currentScroll = scroller.scrollLeft;
+    let nextScroll = direction === "left" ? currentScroll - scrollAmount : currentScroll + scrollAmount;
+
+    if (direction === "right" && currentScroll >= maxScroll - 8) {
+      nextScroll = 0;
+    }
+
+    if (direction === "left" && currentScroll <= 8) {
+      nextScroll = maxScroll;
+    }
+
+    scroller.scrollTo({
+      left: nextScroll,
       behavior: "smooth"
     });
   };
 
   return (
     <section className="bg-white px-5 py-16 text-brand-ink sm:px-6 lg:px-0 lg:py-20" id={reviews.id}>
-      <div className="mx-auto max-w-[1200px]">
+      <div className="reveal mx-auto max-w-[1200px]">
         <div className="mx-auto max-w-[720px] text-center">
           <h2 className="font-heading text-[34px] leading-tight sm:text-[42px] lg:text-[48px]">{reviews.title}</h2>
-          <p className="mx-auto mt-4 max-w-[600px] text-sm leading-[1.6] text-[#666666] sm:text-base">{reviews.subtitle}</p>
+          <p className="mx-auto mt-4 max-w-[600px] text-sm leading-[1.55] text-[#666666] sm:text-base sm:leading-[1.55]">{reviews.subtitle}</p>
         </div>
 
-        <div className="mt-12 flex items-center gap-4 lg:gap-6">
+        <div className="-mx-5 mt-12 flex items-center gap-4 overflow-hidden sm:-mx-6 lg:mx-0 lg:overflow-visible lg:gap-6">
           <button
             aria-label={reviews.previousLabel}
             className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#f0f0f0] text-brand-ink transition hover:bg-brand-accent hover:text-white lg:flex"
@@ -58,11 +70,11 @@ export default function Reviews({ reviews }: ReviewsProps) {
           </button>
 
           <div
-            className="flex touch-pan-x snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-4 sm:gap-6 lg:pb-0 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-px-5 scroll-smooth px-5 pb-4 [touch-action:pan-x_pan-y] sm:gap-6 sm:scroll-px-6 sm:px-6 lg:px-0 lg:pb-0 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             ref={scrollerRef}
           >
             {reviews.items.map((review) => (
-              <article className="min-w-[82vw] snap-start sm:min-w-[360px] lg:min-w-[calc((100%_-_48px)/3)]" key={review.author}>
+              <article className="min-w-[calc(100vw-40px)] snap-start sm:min-w-[360px] lg:min-w-[calc((100%_-_48px)/3)]" key={review.author}>
                 <div className="relative h-[220px] overflow-hidden rounded-lg bg-zinc-200">
                   <Image
                     className="pointer-events-none object-cover"

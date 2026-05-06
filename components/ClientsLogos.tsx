@@ -8,8 +8,8 @@ type ClientsLogosProps = {
 
 export default function ClientsLogos({ clientsLogos }: ClientsLogosProps) {
   return (
-    <section className="bg-white py-12 text-brand-bg md:py-16" id={clientsLogos.id}>
-      <div className="mx-auto max-w-[1240px] px-5 sm:px-6">
+    <section className="bg-white pb-8 pt-16 text-brand-bg md:pb-10 md:pt-18" id={clientsLogos.id}>
+      <div className="reveal mx-auto max-w-[1240px] px-5 sm:px-6">
         <div className="mx-auto max-w-[760px] text-center">
           <h2 className="font-heading text-[28px] leading-[1.08] md:text-[40px]">
             {clientsLogos.title}
@@ -32,7 +32,7 @@ export default function ClientsLogos({ clientsLogos }: ClientsLogosProps) {
             </div>
           ))}
         </div>
-        <p className="mx-auto mt-10 max-w-[760px] text-center text-[13px] leading-[1.55] text-[#8a8a8a] sm:text-sm">
+        <p className="mx-auto mt-6 max-w-[600px] text-center text-[13px] font-medium leading-[1.55] text-[#666666] sm:text-sm">
           {clientsLogos.note}
         </p>
       </div>

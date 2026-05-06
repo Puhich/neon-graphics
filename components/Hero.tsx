@@ -82,6 +82,7 @@ export default function Hero({ content }: HeroProps) {
   const [isPaused, setIsPaused] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [navOpacity, setNavOpacity] = useState(0);
   const dragState = useRef({ startX: 0, scrollLeft: 0 });
   const carouselImages = useMemo(() => [...hero.images, ...hero.images, ...hero.images], [hero.images]);
 
@@ -108,6 +109,15 @@ export default function Hero({ content }: HeroProps) {
 
     return () => cancelAnimationFrame(frameId);
   }, [isDragging, isPaused]);
+
+  useEffect(() => {
+    const updateHeaderState = () => setNavOpacity(Math.min(window.scrollY / 120, 1));
+
+    updateHeaderState();
+    window.addEventListener("scroll", updateHeaderState, { passive: true });
+
+    return () => window.removeEventListener("scroll", updateHeaderState);
+  }, []);
 
   const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
     const carousel = carouselRef.current;
@@ -143,27 +153,7 @@ export default function Hero({ content }: HeroProps) {
   };
 
   return (
-    <section className="relative isolate overflow-hidden bg-brand-bg text-white">
-      <div className="pointer-events-none absolute right-[6.8rem] top-[8.2rem] z-0 hidden h-[31.8rem] w-[25.8rem] lg:block">
-        <Image
-          className="absolute inset-[-5.5rem] h-[calc(100%+11rem)] w-[calc(100%+11rem)] object-contain opacity-75 blur-[88px] saturate-150"
-          src={hero.watermarkLogoSrc}
-          alt=""
-          fill
-          priority
-          sizes="540px"
-        />
-        <div className="absolute inset-[-8rem] bg-[radial-gradient(circle_at_center,rgba(204,26,44,0.2),rgba(243,164,13,0.12)_34%,rgba(22,140,205,0.18)_58%,rgba(15,15,13,0)_76%)] blur-[72px]" />
-        <Image
-          className="absolute inset-0 h-full w-full object-contain opacity-[0.72] brightness-0"
-          src={hero.watermarkLogoSrc}
-          alt=""
-          fill
-          priority
-          sizes="420px"
-        />
-      </div>
-
+    <>
       <div className="hidden bg-[#0a0a09] px-6 py-[10px] text-[12px] font-medium text-[#999999] lg:block">
         <div className="mx-auto flex max-w-[1200px] justify-end gap-4">
           {topBar.map((item, index) => (
@@ -175,53 +165,72 @@ export default function Hero({ content }: HeroProps) {
         </div>
       </div>
 
-      <header className="relative z-20 mx-auto flex max-w-[1200px] items-center justify-between px-5 py-3 sm:px-6 lg:px-0">
-        <Image className="h-14 w-auto lg:h-16" src={nav.logoSrc} alt={nav.logoAlt} width={148} height={64} priority />
-        <div className="hidden items-center gap-7 lg:flex">
-          <nav className="flex items-center gap-8 text-[14px] font-medium text-[#999999]">
-            {nav.links.map((link) => (
-              <a className="transition hover:text-white" href={link.href} key={link.label}>
-                {link.label}
-              </a>
-            ))}
-          </nav>
-          <div className="flex items-center gap-5 text-[#999999]">
-            {nav.socials.map((social) => (
-              <a
-                aria-label={social.label}
-                className="transition hover:text-white"
-                href={social.href}
-                key={social.label}
-              >
-                <NavSocialIcon icon={social.icon} />
-              </a>
-            ))}
+      <header
+        className="sticky top-0 z-[9000] -mb-[80px] lg:-mb-[88px]"
+        style={{
+          "--nav-bg-opacity": isMenuOpen ? 0.9 : navOpacity * 0.9,
+          "--nav-blur": `${(isMenuOpen ? 1 : navOpacity) * 18}px`,
+          "--nav-shadow-opacity": (isMenuOpen ? 1 : navOpacity) * 0.28,
+          "--logo-scale": 1 - navOpacity * 0.12
+        } as React.CSSProperties}
+      >
+        <div
+          className="pointer-events-none absolute inset-0 bg-[rgb(7_7_6_/_var(--nav-bg-opacity))] shadow-[0_10px_34px_rgb(0_0_0_/_var(--nav-shadow-opacity))] backdrop-blur-[var(--nav-blur)]"
+        />
+        <div className="relative mx-auto flex max-w-[1200px] items-center justify-between px-5 py-3 sm:px-6 lg:px-0">
+          <Image
+            className="h-11 w-auto origin-left lg:h-16 lg:transition-transform lg:duration-150 lg:[transform:scale(var(--logo-scale))]"
+            src={nav.logoSrc}
+            alt={nav.logoAlt}
+            width={148}
+            height={64}
+            priority
+          />
+          <div className="hidden items-center gap-7 lg:flex">
+            <nav className="flex items-center gap-8 text-[14px] font-medium text-[#999999]">
+              {nav.links.map((link) => (
+                <a className="transition hover:text-white" href={link.href} key={link.label}>
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+            <div className="flex items-center gap-5 text-[#999999]">
+              {nav.socials.map((social) => (
+                <a
+                  aria-label={social.label}
+                  className="transition hover:text-white"
+                  href={social.href}
+                  key={social.label}
+                >
+                  <NavSocialIcon icon={social.icon} />
+                </a>
+              ))}
+            </div>
+            <a
+              className="rounded bg-brand-accent px-6 py-[10px] text-[14px] font-bold text-white transition hover:bg-red-700"
+              href={nav.cta.href}
+            >
+              {nav.cta.label}
+            </a>
           </div>
           <a
-            className="rounded bg-brand-accent px-6 py-[10px] text-[14px] font-bold text-white transition hover:bg-red-700"
+            className="ml-auto mr-3 rounded bg-brand-accent px-5 py-[10px] text-[14px] font-bold text-white transition hover:bg-red-700 lg:hidden"
             href={nav.cta.href}
           >
             {nav.cta.label}
           </a>
-        </div>
-        <a
-          className="ml-auto mr-3 rounded bg-brand-accent px-5 py-[10px] text-[14px] font-bold text-white transition hover:bg-red-700 lg:hidden"
-          href={nav.cta.href}
-        >
-          {nav.cta.label}
-        </a>
-        <button
-          aria-expanded={isMenuOpen}
-          aria-label={isMenuOpen ? nav.menuCloseLabel : nav.menuOpenLabel}
-          className="flex h-11 w-11 items-center justify-center rounded border border-[#333333] text-[#dddddd] transition hover:border-[#555555] lg:hidden"
-          onClick={() => setIsMenuOpen((value) => !value)}
-          type="button"
-        >
-          <BurgerIcon isOpen={isMenuOpen} />
-        </button>
+          <button
+            aria-expanded={isMenuOpen}
+            aria-label={isMenuOpen ? nav.menuCloseLabel : nav.menuOpenLabel}
+            className="relative z-[9100] flex h-11 w-11 items-center justify-center rounded border border-[#333333] text-[#dddddd] transition hover:border-[#555555] lg:hidden"
+            onClick={() => setIsMenuOpen((value) => !value)}
+            type="button"
+          >
+            <BurgerIcon isOpen={isMenuOpen} />
+          </button>
 
         {isMenuOpen ? (
-          <div className="absolute left-5 right-5 top-[calc(100%+8px)] z-30 rounded-lg border border-[#2a2a28] bg-[#0a0a09]/95 p-5 shadow-[0_18px_48px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:left-6 sm:right-6 lg:hidden">
+          <div className="absolute left-5 right-5 top-[calc(100%+8px)] z-[9100] rounded-lg border border-[#2a2a28] bg-[#0a0a09]/95 p-5 shadow-[0_18px_48px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:left-6 sm:right-6 lg:hidden">
             <div className="grid gap-3 text-[12px] font-medium text-[#999999]">
               {topBar.map((item, index) => (
                 <span className="flex items-center gap-2" key={item}>
@@ -259,9 +268,35 @@ export default function Hero({ content }: HeroProps) {
             </div>
           </div>
         ) : null}
+        </div>
       </header>
 
-      <div className="relative z-10 mx-auto max-w-[1440px] px-5 pb-8 pt-8 sm:px-6 md:pt-10 lg:px-[120px]">
+      <section className="relative isolate overflow-hidden bg-brand-bg text-white">
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-0 hidden lg:block">
+        <div className="relative mx-auto max-w-[1440px]">
+          <div className="absolute right-[7.5rem] top-[8.2rem] h-[31.8rem] w-[25.8rem]">
+            <Image
+              className="absolute inset-[-5.5rem] h-[calc(100%+11rem)] w-[calc(100%+11rem)] object-contain opacity-75 blur-[88px] saturate-150"
+              src={hero.watermarkLogoSrc}
+              alt=""
+              fill
+              priority
+              sizes="540px"
+            />
+            <div className="absolute inset-[-8rem] bg-[radial-gradient(circle_at_center,rgba(204,26,44,0.2),rgba(22,140,205,0.18)_58%,rgba(15,15,13,0)_76%)] blur-[72px]" />
+            <Image
+              className="absolute inset-0 h-full w-full object-contain opacity-[0.72] brightness-0"
+              src={hero.watermarkLogoSrc}
+              alt=""
+              fill
+              priority
+              sizes="420px"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="reveal relative z-10 mx-auto max-w-[1440px] px-5 pb-8 pt-28 sm:px-6 md:pt-32 lg:px-[120px]">
         <div className="max-w-[860px]">
           <h1 className="font-heading text-[34px] leading-[1.08] sm:text-[46px] lg:text-[52px]">
             <span className="block">{title}</span>
@@ -299,7 +334,7 @@ export default function Hero({ content }: HeroProps) {
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1440px] pb-6 pt-0">
+      <div className="reveal relative z-10 mx-auto max-w-[1920px] pb-6 pt-0">
         <div className="pointer-events-none absolute bottom-6 left-0 top-6 z-10 w-20 bg-gradient-to-r from-brand-bg to-transparent sm:w-28" />
         <div className="pointer-events-none absolute bottom-6 right-0 top-6 z-10 w-20 bg-gradient-to-l from-brand-bg to-transparent sm:w-28" />
         <div
@@ -318,7 +353,7 @@ export default function Hero({ content }: HeroProps) {
         >
           {carouselImages.map((image, index) => (
             <div
-              className="relative h-[156px] w-[238px] shrink-0 overflow-hidden rounded-lg bg-zinc-900 sm:h-[198px] sm:w-[292px] lg:h-[230px] lg:w-[320px]"
+              className="relative h-[156px] w-[238px] shrink-0 overflow-hidden rounded-lg bg-zinc-900 sm:h-[198px] sm:w-[292px] lg:h-[230px] lg:w-[340px] 2xl:h-[260px] 2xl:w-[410px]"
               key={`${image.src}-${index}`}
             >
               <Image
@@ -326,7 +361,7 @@ export default function Hero({ content }: HeroProps) {
                 src={image.src}
                 alt={image.alt}
                 fill
-                sizes="320px"
+                sizes="(min-width: 1536px) 410px, (min-width: 1024px) 340px, (min-width: 640px) 292px, 238px"
                 priority={index < hero.images.length}
               />
             </div>
@@ -343,13 +378,14 @@ export default function Hero({ content }: HeroProps) {
         ))}
       </dl>
 
+      </section>
       <a
-        className="fixed bottom-6 right-6 z-[100] flex h-14 w-14 items-center justify-center rounded-full bg-brand-accent text-xl text-white shadow-[0_0_24px_rgba(204,26,44,0.6)] transition hover:bg-red-700 lg:h-16 lg:w-16"
+        className="fixed bottom-20 right-5 z-[2147483647] flex h-14 w-14 items-center justify-center rounded-full bg-brand-accent text-xl text-white shadow-[0_0_24px_rgba(204,26,44,0.6)] transition hover:bg-red-700 sm:bottom-6 sm:right-6 lg:h-16 lg:w-16"
         href="tel:+78482270999"
         aria-label={nav.cta.label}
       >
         <PhoneFillIcon />
       </a>
-    </section>
+    </>
   );
 }

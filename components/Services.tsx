@@ -34,10 +34,10 @@ function ServiceIcon({ icon }: { icon: string }) {
 export default function Services({ services }: ServicesProps) {
   return (
     <section className="bg-white px-5 py-16 text-brand-ink sm:px-6 lg:px-0 lg:py-20" id={services.id}>
-      <div className="mx-auto max-w-[1200px]">
+      <div className="reveal mx-auto max-w-[1200px]">
         <div className="mx-auto max-w-[820px] text-center">
           <h2 className="font-heading text-[34px] leading-tight sm:text-[42px] lg:text-[48px]">{services.title}</h2>
-          <p className="mt-4 text-sm leading-7 text-[#666666] sm:text-base">{services.subtitle}</p>
+          <p className="mt-4 text-sm leading-[1.55] text-[#666666] sm:text-base sm:leading-[1.55]">{services.subtitle}</p>
         </div>
 
         <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
