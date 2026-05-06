@@ -23,6 +23,7 @@ pnpm-debug.log*
 
 # local design sources and client files
 .claude
+_references/
 *.pen
 *.afphoto
 *.pdf
