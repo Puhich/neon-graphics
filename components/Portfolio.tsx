@@ -3,8 +3,6 @@
 import Image from "next/image";
 import { useCallback, useMemo, useState } from "react";
 
-import SectionWatermark from "@/components/SectionWatermark";
-
 type PortfolioContent = typeof import("@/data/content.json")["portfolio"];
 
 type PortfolioProps = {
@@ -21,8 +19,7 @@ export default function Portfolio({ portfolio }: PortfolioProps) {
   }, [slides.length]);
 
   return (
-    <section className="relative isolate overflow-hidden bg-white px-5 py-16 text-brand-ink sm:px-6 lg:px-0 lg:py-20" id={portfolio.id}>
-      <SectionWatermark side="right" />
+    <section className="bg-white px-5 py-16 text-brand-ink sm:px-6 lg:px-0 lg:py-20" id={portfolio.id}>
       <div className="reveal mx-auto max-w-[1200px] text-center">
         <h2 className="font-heading text-[34px] leading-tight sm:text-[42px] lg:text-[48px]">{portfolio.title}</h2>
         <p className="mx-auto mt-4 max-w-[620px] text-sm leading-[1.55] text-[#666666] sm:text-base sm:leading-[1.55]">

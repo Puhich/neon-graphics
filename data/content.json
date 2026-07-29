@@ -25,7 +25,7 @@
     ],
     "socials": [
       { "label": "Telegram", "href": "https://telegram.org", "icon": "telegram" },
-      { "label": "WhatsApp", "href": "https://wa.me/79914583915", "icon": "whatsapp" },
+      { "label": "MAX", "href": "https://max.ru", "icon": "max" },
       { "label": "VK", "href": "https://vk.com", "icon": "vk" }
     ],
     "cta": {
@@ -399,7 +399,7 @@
   "finalForm": {
     "id": "request",
     "eyebrow": "НАЧНИТЕ ПРЯМО СЕЙЧАС",
-    "title": "Рассчитаем стоимость в кратчайшие сроки \nОтветим в WhatsApp или по телефону",
+    "title": "Рассчитаем стоимость в кратчайшие сроки \nОтветим в мессенджерах или по телефону",
     "description": "Каждый день без вывески — это потерянные клиенты. Оставьте заявку сейчас, и мы подготовим бесплатный расчёт стоимости вашего проекта в кратчайшие сроки. 500+ выполненных проектов — следующий может быть вашим.",
     "bullets": [
       "Бесплатный выезд на замер",
@@ -451,7 +451,7 @@
     "about": "Производство наружной рекламы полного цикла. Работаем с 2002 года.",
     "socials": [
       { "label": "Telegram", "href": "https://telegram.org", "icon": "telegram" },
-      { "label": "WhatsApp", "href": "https://wa.me/79914583915", "icon": "whatsapp" },
+      { "label": "MAX", "href": "https://max.ru", "icon": "max" },
       { "label": "VK", "href": "https://vk.com", "icon": "vk" }
     ],
     "servicesTitle": "Услуги",

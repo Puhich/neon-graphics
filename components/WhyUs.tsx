@@ -1,7 +1,5 @@
 import Image from "next/image";
 
-import SectionWatermark from "@/components/SectionWatermark";
-
 type WhyUsContent = typeof import("@/data/content.json")["whyUs"];
 
 type WhyUsProps = {
@@ -46,8 +44,7 @@ function TextCard({ card }: { card: WhyUsContent["rows"][number]["card"] }) {
 
 export default function WhyUs({ whyUs }: WhyUsProps) {
   return (
-    <section className="relative isolate overflow-hidden bg-white px-5 py-16 text-brand-ink sm:px-6 lg:px-0 lg:py-20" id={whyUs.id}>
-      <SectionWatermark side="left" />
+    <section className="bg-white px-5 py-16 text-brand-ink sm:px-6 lg:px-0 lg:py-20" id={whyUs.id}>
       <div className="reveal mx-auto max-w-[1200px]">
         <div className="mx-auto max-w-[880px] text-center">
           <p className="text-[13px] font-bold uppercase tracking-[0.15em] text-brand-accent sm:text-sm">{whyUs.eyebrow}</p>

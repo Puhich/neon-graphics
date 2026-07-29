@@ -53,9 +53,18 @@ function BurgerIcon({ isOpen }: { isOpen: boolean }) {
 }
 
 function NavSocialIcon({ icon }: { icon: string }) {
-  if (icon === "vk") {
+  if (icon === "max") {
     return (
       <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
+        <path d="M21 11.5a8.38 8.38 0 0 1-1.17 4.28A8.5 8.5 0 0 1 12.5 20a8.38 8.38 0 0 1-4.28-1.17L3 20l1.17-5.22A8.38 8.38 0 0 1 3 10.5 8.5 8.5 0 0 1 7.22 3.17 8.38 8.38 0 0 1 11.5 2h.5A8.48 8.48 0 0 1 21 10v1.5Z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+        <path d="M8.9 14.4V9.2l3.1 2.9 3.1-2.9v5.2" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" />
+      </svg>
+    );
+  }
+
+  if (icon === "vk") {
+    return (
+      <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="1.5 4 21 13.5">
         <path d="M12.79 16.24s.28-.03.43-.19c.14-.15.13-.43.13-.43s-.02-1.3.58-1.5c.59-.19 1.34 1.26 2.14 1.82.6.42 1.06.33 1.06.33l2.14-.03s1.12-.07.59-.96c-.04-.08-.31-.66-1.59-1.87-1.34-1.27-1.16-1.06.45-3.25.99-1.33 1.38-2.14 1.26-2.49-.12-.33-.84-.24-.84-.24l-2.41.01s-.18-.02-.31.06c-.13.08-.21.26-.21.26s-.38 1.03-.89 1.91c-1.07 1.85-1.5 1.95-1.67 1.83-.41-.27-.31-1.07-.31-1.65 0-1.79.27-2.54-.52-2.73-.26-.07-.45-.11-1.12-.11-.86-.01-1.59 0-2 .2-.27.14-.48.44-.35.46.16.02.52.1.71.36.25.34.24 1.11.24 1.11s.14 2.11-.33 2.37c-.32.18-.77-.19-1.72-1.87-.49-.86-.86-1.81-.86-1.81s-.07-.18-.2-.27c-.15-.12-.37-.15-.37-.15l-2.29.01s-.34.01-.47.16c-.11.14-.01.42-.01.42s1.79 4.25 3.82 6.4c1.86 1.97 3.97 1.84 3.97 1.84h.96Z" fill="currentColor" />
       </svg>
     );
@@ -174,7 +183,7 @@ export default function Hero({ content }: HeroProps) {
       </div>
 
       <header
-        className="sticky top-0 z-[9000] -mb-[76px] lg:-mb-[104px]"
+        className="sticky top-0 z-[9000] -mb-[64px] lg:-mb-[88px]"
         style={{
           "--nav-bg-opacity": isMenuOpen ? 0.9 : navOpacity * 0.9,
           "--nav-blur": `${(isMenuOpen ? 1 : navOpacity) * 18}px`,
@@ -185,9 +194,9 @@ export default function Hero({ content }: HeroProps) {
         <div
           className="pointer-events-none absolute inset-0 bg-[rgb(7_7_6_/_var(--nav-bg-opacity))] shadow-[0_10px_34px_rgb(0_0_0_/_var(--nav-shadow-opacity))] backdrop-blur-[var(--nav-blur)]"
         />
-        <div className="relative mx-auto flex max-w-[1200px] items-center justify-between px-5 py-3 sm:px-6 lg:px-0">
+        <div className="relative mx-auto flex max-w-[1200px] items-center justify-between px-5 py-2 sm:px-6 lg:px-0">
           <Image
-            className="h-[52px] w-auto origin-left lg:h-20 lg:transition-transform lg:duration-150 lg:[transform:scale(var(--logo-scale))]"
+            className="h-12 w-auto origin-left lg:h-[72px] lg:transition-transform lg:duration-150 lg:[transform:scale(var(--logo-scale))]"
             src={nav.logoSrc}
             alt={nav.logoAlt}
             width={185}

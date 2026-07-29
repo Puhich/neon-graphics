@@ -1,5 +1,3 @@
-import SectionWatermark from "@/components/SectionWatermark";
-
 type StagesContent = typeof import("@/data/content.json")["stages"];
 
 type StagesProps = {
@@ -8,8 +6,7 @@ type StagesProps = {
 
 export default function Stages({ stages }: StagesProps) {
   return (
-    <section className="relative isolate overflow-hidden bg-[#f8f8f8] px-5 py-16 text-brand-ink sm:px-6 lg:px-0 lg:py-20" id={stages.id}>
-      <SectionWatermark side="right" />
+    <section className="bg-[#f8f8f8] px-5 py-16 text-brand-ink sm:px-6 lg:px-0 lg:py-20" id={stages.id}>
       <div className="reveal mx-auto max-w-[1200px]">
         <div className="mx-auto max-w-[760px] text-center">
           <h2 className="font-heading text-[34px] leading-tight sm:text-[42px] lg:text-[48px]">{stages.title}</h2>

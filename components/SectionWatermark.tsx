@@ -1,19 +1,13 @@
 import Image from "next/image";
 
-type SectionWatermarkProps = {
-  side?: "left" | "right";
-};
-
-export default function SectionWatermark({ side = "right" }: SectionWatermarkProps) {
+export default function SectionWatermark() {
   return (
     <div
       aria-hidden
-      className={`pointer-events-none absolute top-1/2 -z-10 -translate-y-1/2 select-none ${
-        side === "right" ? "right-[-60px] lg:right-[-80px]" : "left-[-60px] lg:left-[-80px]"
-      }`}
+      className="pointer-events-none fixed right-[-40px] top-1/2 z-[1] -translate-y-1/2 select-none sm:right-[-60px] lg:right-[-80px]"
     >
       <Image
-        className="h-[280px] w-auto brightness-0 opacity-[0.05] lg:h-[480px]"
+        className="h-[320px] w-auto brightness-0 opacity-[0.05] sm:h-[440px] lg:h-[560px]"
         src="/logo-mark.svg"
         alt=""
         width={560}

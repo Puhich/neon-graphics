@@ -3,8 +3,6 @@
 import Image from "next/image";
 import { useRef } from "react";
 
-import SectionWatermark from "@/components/SectionWatermark";
-
 type ReviewsContent = typeof import("@/data/content.json")["reviews"];
 
 type ReviewsProps = {
@@ -54,8 +52,7 @@ export default function Reviews({ reviews }: ReviewsProps) {
   };
 
   return (
-    <section className="relative isolate overflow-hidden bg-white px-5 py-16 text-brand-ink sm:px-6 lg:px-0 lg:py-20" id={reviews.id}>
-      <SectionWatermark side="left" />
+    <section className="bg-white px-5 py-16 text-brand-ink sm:px-6 lg:px-0 lg:py-20" id={reviews.id}>
       <div className="reveal mx-auto max-w-[1200px]">
         <div className="mx-auto max-w-[720px] text-center">
           <h2 className="font-heading text-[34px] leading-tight sm:text-[42px] lg:text-[48px]">{reviews.title}</h2>
