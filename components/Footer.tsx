@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import SectionWatermark from "@/components/SectionWatermark";
+
 type FooterContent = typeof import("@/data/content.json")["footer"];
 
 type FooterProps = {
@@ -26,7 +28,8 @@ function SocialIcon({ icon }: { icon: string }) {
 
 export default function Footer({ footer }: FooterProps) {
   return (
-    <footer className="relative overflow-hidden bg-brand-bg px-5 py-12 text-white sm:px-6 lg:px-0">
+    <footer className="relative isolate overflow-hidden bg-brand-bg px-5 py-12 text-white [clip-path:inset(0)] sm:px-6 lg:px-0">
+      <SectionWatermark variant="hero" />
       <div className="pointer-events-none absolute left-[5%] top-[-5rem] h-64 w-[28rem] rounded-full bg-brand-blue/20 blur-[90px]" />
       <div className="pointer-events-none absolute bottom-[-6rem] right-[12%] h-64 w-[30rem] rounded-full bg-brand-accent/28 blur-[96px]" />
       <div className="relative mx-auto max-w-[1200px]">
