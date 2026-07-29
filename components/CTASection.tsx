@@ -18,7 +18,7 @@ export default function CTASection({ cta }: CTASectionProps) {
   return (
     <section className="relative isolate bg-[linear-gradient(to_bottom,#ffffff_0%,#ffffff_50%,#f8f8f8_50%,#f8f8f8_100%)] px-5 py-12 text-white [clip-path:inset(0)] sm:px-6 lg:px-0 lg:py-16">
       <SectionWatermark />
-      <div className="reveal relative isolate mx-auto max-w-[1200px] overflow-hidden rounded-2xl bg-brand-ink px-6 py-10 text-center [clip-path:inset(0_round_1rem)] sm:px-10 lg:px-16 lg:py-12">
+      <div className="reveal-fade relative isolate mx-auto max-w-[1200px] overflow-hidden rounded-2xl bg-brand-ink px-6 py-10 text-center [clip-path:inset(0_round_1rem)] sm:px-10 lg:px-16 lg:py-12">
         <SectionWatermark variant="hero" />
         <div className="pointer-events-none absolute left-[6%] top-[-4rem] h-64 w-[30rem] rounded-full bg-brand-blue/26 blur-[74px]" />
         <div className="pointer-events-none absolute bottom-[4.7rem] left-1/2 h-48 w-[30rem] -translate-x-1/2 rounded-full bg-brand-accent/62 blur-[64px]" />

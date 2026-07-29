@@ -49,8 +49,28 @@ a {
   animation-range: entry 0% cover 22%;
 }
 
+/* Fade-only variant for blocks that host the fixed fish watermark:
+   translateY would turn the block into a containing block for
+   position: fixed and break the fish alignment. */
+@keyframes reveal-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.reveal-fade {
+  animation: reveal-fade 0.65s ease both;
+  animation-timeline: view();
+  animation-range: entry 0% cover 22%;
+}
+
 @supports not (animation-timeline: view()) {
-  .reveal {
+  .reveal,
+  .reveal-fade {
     animation: none;
     opacity: 1;
     transform: none;
