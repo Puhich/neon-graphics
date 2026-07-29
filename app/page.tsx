@@ -15,7 +15,7 @@ import content from "@/data/content.json";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-brand-bg">
+    <main className="min-h-screen bg-white">
       <Hero content={content} />
       <ClientsLogos clientsLogos={content.clientsLogos} />
       <Services services={content.services} />
