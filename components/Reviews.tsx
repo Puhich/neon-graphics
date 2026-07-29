@@ -65,7 +65,7 @@ export default function Reviews({ reviews }: ReviewsProps) {
         <div className="-mx-5 mt-12 flex items-center gap-4 overflow-hidden sm:-mx-6 lg:mx-0 lg:overflow-visible lg:gap-6">
           <button
             aria-label={reviews.previousLabel}
-            className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#f0f0f0] text-brand-ink transition hover:bg-brand-accent hover:text-white lg:flex"
+            className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-brand-ink shadow-[0_6px_20px_rgba(0,0,0,0.14)] transition hover:bg-brand-accent hover:text-white lg:flex"
             onClick={() => scrollByCard("left")}
             type="button"
           >
@@ -101,7 +101,7 @@ export default function Reviews({ reviews }: ReviewsProps) {
 
           <button
             aria-label={reviews.nextLabel}
-            className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#f0f0f0] text-brand-ink transition hover:bg-brand-accent hover:text-white lg:flex"
+            className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-brand-ink shadow-[0_6px_20px_rgba(0,0,0,0.14)] transition hover:bg-brand-accent hover:text-white lg:flex"
             onClick={() => scrollByCard("right")}
             type="button"
           >

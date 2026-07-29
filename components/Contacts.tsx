@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type ContactsContent = typeof import("@/data/content.json")["contacts"];
 
 type ContactsProps = {
@@ -28,7 +30,6 @@ function getMapUrls(contacts: ContactsContent) {
   const mobileCenter = `${lon + 0.0018}%2C${lat + 0.0002}`;
 
   return {
-    directions: contacts.mapLinkUrl,
     widget: `https://yandex.ru/map-widget/v1/?ll=${encodedCenter}&pt=${encodedPoint}%2Cpm2rdm&z=${contacts.mapZoom}&l=map`,
     mobileWidget: `https://yandex.ru/map-widget/v1/?ll=${mobileCenter}&pt=${encodedPoint}%2Cpm2rdm&z=${contacts.mapZoom}&l=map`
   };
@@ -96,14 +97,26 @@ export default function Contacts({ contacts }: ContactsProps) {
               </div>
             </div>
 
-            <a
-              className="mt-6 inline-flex rounded-lg bg-brand-accent px-5 py-3 text-sm font-extrabold text-white transition hover:bg-[#b91626]"
-              href={mapUrls.directions}
-              rel="noreferrer"
-              target="_blank"
-            >
-              {contacts.mapLinkText}
-            </a>
+            <div className="mt-6 flex flex-wrap gap-2.5">
+              {contacts.mapButtons.map((button) => (
+                <a
+                  className="inline-flex items-center gap-2.5 rounded-lg border border-[#2e2e2b] bg-[#1d1d1b] px-4 py-2.5 text-[13px] font-bold text-white transition hover:border-[#4a4a46] hover:bg-[#242422]"
+                  href={button.href}
+                  key={button.label}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  <Image
+                    className="h-[22px] w-[22px] rounded-[5px]"
+                    src={button.icon}
+                    alt=""
+                    width={22}
+                    height={22}
+                  />
+                  {button.label}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </div>

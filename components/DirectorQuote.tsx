@@ -30,7 +30,7 @@ export default function DirectorQuote({ quote }: DirectorQuoteProps) {
 
         <div className="relative z-10 flex flex-col justify-center px-6 py-10 sm:px-10 lg:px-14 lg:py-13">
           <p className="font-heading text-[64px] leading-none text-brand-accent">{quote.quoteMark}</p>
-          <blockquote className="mt-2 text-[22px] font-bold leading-[1.55] sm:text-[28px]">
+          <blockquote className="mt-2 text-[22px] font-bold leading-[1.55] text-[#d6d6d6] sm:text-[28px]">
             {quote.text}
           </blockquote>
           <div className="mt-8">

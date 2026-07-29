@@ -5,7 +5,7 @@ type SectionWatermarkProps = {
 };
 
 const boxClasses =
-  "pointer-events-none fixed -z-10 select-none right-[-70px] top-[18vh] h-[20rem] w-[16rem] sm:h-[26rem] sm:w-[21rem] lg:right-[7.5rem] lg:top-[8.2rem] lg:h-[31.8rem] lg:w-[25.8rem]";
+  "pointer-events-none fixed -z-10 select-none right-[-70px] top-[18vh] h-[20rem] w-[16rem] sm:h-[26rem] sm:w-[21rem] lg:right-[9.5rem] lg:top-[8.2rem] lg:h-[31.8rem] lg:w-[25.8rem]";
 
 export default function SectionWatermark({ variant = "grey" }: SectionWatermarkProps) {
   if (variant === "hero") {

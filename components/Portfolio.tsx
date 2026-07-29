@@ -11,6 +11,20 @@ type PortfolioProps = {
   portfolio: PortfolioContent;
 };
 
+function ChevronIcon({ direction }: { direction: "left" | "right" }) {
+  return (
+    <svg aria-hidden="true" className="h-6 w-6" fill="none" viewBox="0 0 24 24">
+      <path
+        d={direction === "left" ? "m15 18-6-6 6-6" : "m9 18 6-6-6-6"}
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+      />
+    </svg>
+  );
+}
+
 export default function Portfolio({ portfolio }: PortfolioProps) {
   const slides = useMemo(() => [portfolio.featured, ...portfolio.thumbnails], [portfolio.featured, portfolio.thumbnails]);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -21,7 +35,7 @@ export default function Portfolio({ portfolio }: PortfolioProps) {
   }, [slides.length]);
 
   return (
-    <section className="relative isolate bg-white px-5 py-16 text-brand-ink [clip-path:inset(0)] sm:px-6 lg:px-0 lg:py-20" id={portfolio.id}>
+    <section className="relative isolate bg-[#f8f8f8] px-5 py-16 text-brand-ink [clip-path:inset(0)] sm:px-6 lg:px-0 lg:py-20" id={portfolio.id}>
       <SectionWatermark />
       <div className="reveal mx-auto max-w-[1200px] text-center">
         <h2 className="font-heading text-[34px] leading-tight sm:text-[42px] lg:text-[48px]">{portfolio.title}</h2>
@@ -53,11 +67,11 @@ export default function Portfolio({ portfolio }: PortfolioProps) {
         <div className="mt-10 hidden items-center gap-5 lg:grid lg:grid-cols-[48px_1fr_48px]">
           <button
             aria-label={portfolio.previousLabel}
-            className="hidden h-12 w-12 rounded-full bg-[#f0f0f0] text-3xl leading-none text-[#333333] transition hover:bg-brand-accent hover:text-white lg:block"
+            className="hidden h-12 w-12 items-center justify-center rounded-full bg-white text-brand-ink shadow-[0_6px_20px_rgba(0,0,0,0.14)] transition hover:bg-brand-accent hover:text-white lg:flex"
             onClick={() => goToSlide(activeIndex - 1)}
             type="button"
           >
-            {portfolio.previousIcon}
+            <ChevronIcon direction="left" />
           </button>
 
           <div
@@ -80,11 +94,11 @@ export default function Portfolio({ portfolio }: PortfolioProps) {
 
           <button
             aria-label={portfolio.nextLabel}
-            className="hidden h-12 w-12 rounded-full bg-[#f0f0f0] text-3xl leading-none text-[#333333] transition hover:bg-brand-accent hover:text-white lg:block"
+            className="hidden h-12 w-12 items-center justify-center rounded-full bg-white text-brand-ink shadow-[0_6px_20px_rgba(0,0,0,0.14)] transition hover:bg-brand-accent hover:text-white lg:flex"
             onClick={() => goToSlide(activeIndex + 1)}
             type="button"
           >
-            {portfolio.nextIcon}
+            <ChevronIcon direction="right" />
           </button>
         </div>
 

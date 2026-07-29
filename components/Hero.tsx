@@ -14,22 +14,22 @@ type HeroProps = {
 const contactIcons = [
   {
     label: "phone",
-    path: "M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.35 1.9.66 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.31 1.84.53 2.8.66A2 2 0 0 1 22 16.92Z"
+    path: "M22 16.92v2.5a2.45 2.45 0 0 1-2.67 2.45A19.3 19.3 0 0 1 10.92 19 18.9 18.9 0 0 1 5 13.08a19.3 19.3 0 0 1-2.87-8.46A2.45 2.45 0 0 1 4.57 2h2.5a2.45 2.45 0 0 1 2.45 2.1c.16 1.18.43 2.33.82 3.43a2.45 2.45 0 0 1-.55 2.52l-1.06 1.06a15.7 15.7 0 0 0 6.16 6.16l1.06-1.06a2.45 2.45 0 0 1 2.52-.55c1.1.39 2.25.66 3.43.82A2.45 2.45 0 0 1 22 16.92Z"
   },
   {
     label: "map",
-    path: "M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0ZM12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+    path: "M12 22s8-6.8 8-12a8 8 0 1 0-16 0c0 5.2 8 12 8 12Zm0-9.2a2.8 2.8 0 1 1 0-5.6 2.8 2.8 0 0 1 0 5.6Z"
   },
   {
     label: "clock",
-    path: "M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20ZM12 6v6l4 2"
+    path: "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1.2 5.2v4.3l3.5 2-1.2 2.1-4.7-2.7V7.2h2.4Z"
   }
 ];
 
 function ContactIcon({ path, label }: { path: string; label: string }) {
   return (
-    <svg aria-label={label} className="h-3.5 w-3.5 text-[#666666]" fill="none" viewBox="0 0 24 24">
-      <path d={path} stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+    <svg aria-label={label} className="h-3.5 w-3.5 shrink-0 text-[#8a8a8a]" fill="none" viewBox="0 0 24 24">
+      <path d={path} fill="currentColor" fillRule="evenodd" />
     </svg>
   );
 }
@@ -158,7 +158,7 @@ export default function Hero({ content }: HeroProps) {
 
   return (
     <>
-      <div className="hidden bg-[#0a0a09] px-6 py-[10px] text-[12px] font-medium text-[#999999] lg:block">
+      <div className="hidden bg-[linear-gradient(to_right,#0f0f0d_0%,#0c0c0b_45%,#050504_100%)] px-6 py-[10px] text-[12px] font-medium text-[#999999] lg:block">
         <div className="mx-auto flex max-w-[1200px] justify-end gap-4">
           {topBar.map((item, index) => (
             <span className="flex items-center gap-1.5" key={item}>
@@ -202,7 +202,7 @@ export default function Hero({ content }: HeroProps) {
               {nav.socials.map((social) => (
                 <a
                   aria-label={social.label}
-                  className="transition hover:text-white"
+                  className="flex items-center transition hover:text-white"
                   href={social.href}
                   key={social.label}
                 >
@@ -261,7 +261,7 @@ export default function Hero({ content }: HeroProps) {
               {nav.socials.map((social) => (
                 <a
                   aria-label={social.label}
-                  className="transition hover:text-white"
+                  className="flex items-center transition hover:text-white"
                   href={social.href}
                   key={social.label}
                   onClick={() => setIsMenuOpen(false)}
@@ -305,7 +305,7 @@ export default function Hero({ content }: HeroProps) {
             </a>
           </div>
 
-          <ul className="mt-4 flex flex-col gap-2 text-[13px] text-[#999999] sm:flex-row sm:flex-wrap sm:gap-x-5 sm:gap-y-2">
+          <ul className="mt-7 flex flex-col gap-2 text-[13px] text-[#999999] sm:flex-row sm:flex-wrap sm:gap-x-5 sm:gap-y-2">
             {hero.advantages.map((advantage) => (
               <li className="flex items-center gap-1.5" key={advantage}>
                 <CheckIcon />
