@@ -62,12 +62,12 @@ export default function Portfolio({ portfolio }: PortfolioProps) {
 
         <div className="-mx-5 mt-10 overflow-hidden sm:-mx-6 lg:hidden">
         <div
-          className="flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-px-5 scroll-smooth px-5 pb-4 [touch-action:pan-x_pan-y] sm:gap-5 sm:scroll-px-6 sm:px-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-smooth px-8 pb-4 [touch-action:pan-x_pan-y] sm:gap-5 sm:px-11 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           ref={mobileScrollerRef}
         >
           {slides.map((slide) => (
             <div
-              className="relative h-[62vw] max-h-[360px] min-h-[250px] min-w-[calc(100vw-64px)] snap-start overflow-hidden rounded-[18px] bg-zinc-100 sm:h-[420px] sm:min-w-[calc(100vw-88px)]"
+              className="relative h-[62vw] max-h-[360px] min-h-[250px] min-w-[calc(100vw-64px)] snap-center overflow-hidden rounded-2xl bg-zinc-100 sm:h-[420px] sm:min-w-[calc(100vw-88px)]"
               key={slide.src}
             >
               <Image
@@ -112,7 +112,7 @@ export default function Portfolio({ portfolio }: PortfolioProps) {
           </button>
 
           <div
-            className="relative h-72 overflow-hidden rounded-xl bg-zinc-100 sm:h-[420px] lg:h-[500px]"
+            className="relative h-72 overflow-hidden rounded-2xl bg-zinc-100 sm:h-[420px] lg:h-[500px]"
           >
             {slides.map((slide, index) => (
               <Image

@@ -25,7 +25,7 @@ function AdvantageIcon({ icon }: { icon: string }) {
 
 function TextCard({ card }: { card: WhyUsContent["rows"][number]["card"] }) {
   return (
-    <article className="flex min-h-[400px] flex-col justify-between rounded-[16px] bg-[#f8f8f8] p-8 lg:h-full lg:min-h-0">
+    <article className="flex min-h-[400px] flex-col justify-between rounded-2xl bg-[#f8f8f8] p-8 lg:h-full lg:min-h-0">
       <div>
         <p className="text-[13px] font-bold uppercase tracking-[0.15em] text-brand-accent">{card.eyebrow}</p>
         <h3 className="mt-3 font-heading text-[28px] leading-[1.2] text-brand-ink">{card.title}</h3>
@@ -62,7 +62,7 @@ export default function WhyUs({ whyUs }: WhyUsProps) {
         <div className="mt-12 grid gap-5">
           {whyUs.rows.map((row) => {
             const image = (
-              <div className="relative min-h-[280px] overflow-hidden rounded-[16px] bg-zinc-200 lg:h-full lg:min-h-0">
+              <div className="relative min-h-[280px] overflow-hidden rounded-2xl bg-zinc-200 lg:h-full lg:min-h-0">
                 <Image
                   className="object-cover"
                   src={row.image.src}
@@ -94,7 +94,7 @@ export default function WhyUs({ whyUs }: WhyUsProps) {
 
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {whyUs.advantages.map((advantage) => (
-            <article className="rounded-[18px] bg-[#f8f8f8] p-6 text-center" key={advantage.title}>
+            <article className="rounded-2xl bg-[#f8f8f8] p-6 text-center" key={advantage.title}>
               <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-white">
                 <AdvantageIcon icon={advantage.icon} />
               </div>

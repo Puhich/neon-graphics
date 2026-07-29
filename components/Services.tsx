@@ -46,8 +46,8 @@ export default function Services({ services }: ServicesProps) {
 
         <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {services.main.map((service) => (
-            <article className="rounded-lg bg-[#f8f8f8] p-7" key={service.title}>
-              <div className="relative h-40 overflow-hidden rounded bg-zinc-200">
+            <article className="rounded-2xl bg-[#f8f8f8] p-7" key={service.title}>
+              <div className="relative h-40 overflow-hidden rounded-xl bg-zinc-200">
                 <Image
                   className="object-cover"
                   src={service.imageSrc}
@@ -68,7 +68,7 @@ export default function Services({ services }: ServicesProps) {
         <h3 className="mt-12 font-heading text-[28px]">{services.additionalTitle}</h3>
         <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {services.additional.map((service) => (
-            <article className="flex min-h-[170px] gap-4 rounded bg-[#f8f8f8] px-6 py-5" key={service.title}>
+            <article className="flex min-h-[170px] gap-4 rounded-2xl bg-[#f8f8f8] px-6 py-5" key={service.title}>
               <div className="mt-0.5 shrink-0">
                 <ServiceIcon icon={service.icon} />
               </div>

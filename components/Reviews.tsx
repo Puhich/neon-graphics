@@ -73,12 +73,12 @@ export default function Reviews({ reviews }: ReviewsProps) {
           </button>
 
           <div
-            className="flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-px-5 scroll-smooth px-5 pb-4 [touch-action:pan-x_pan-y] sm:gap-6 sm:scroll-px-6 sm:px-6 lg:px-0 lg:pb-0 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-smooth px-8 pb-4 [touch-action:pan-x_pan-y] sm:gap-6 sm:px-11 lg:px-0 lg:pb-0 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             ref={scrollerRef}
           >
             {reviews.items.map((review) => (
-              <article className="min-w-[calc(100vw-84px)] snap-start sm:min-w-[360px] lg:min-w-[calc((100%_-_48px)/3)]" key={review.author}>
-                <div className="relative h-[220px] overflow-hidden rounded-lg bg-zinc-200">
+              <article className="min-w-[calc(100vw-64px)] snap-center sm:min-w-[360px] lg:min-w-[calc((100%_-_48px)/3)] lg:snap-start" key={review.author}>
+                <div className="relative h-[220px] overflow-hidden rounded-xl bg-zinc-200">
                   <Image
                     className="pointer-events-none object-cover"
                     src={review.imageSrc}

@@ -63,7 +63,7 @@ export default function Contacts({ contacts }: ContactsProps) {
         <div className="pointer-events-none absolute inset-0 bg-[#0f0f0d]/48" />
 
         <div className="relative z-10 mx-auto flex min-h-[700px] max-w-[1440px] items-start px-5 pb-72 pt-10 sm:px-6 md:py-16 lg:px-20">
-          <div className="reveal w-full rounded-xl border border-[#2a2a28] bg-[#151513]/95 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.28)] backdrop-blur md:w-[480px] md:p-[30px]">
+          <div className="reveal w-full rounded-2xl border border-[#2a2a28] bg-[#151513]/95 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.28)] backdrop-blur md:w-[480px] md:p-[30px]">
             <h2 className="font-heading text-[26px]">{contacts.title}</h2>
 
             <div className="mt-5 grid gap-2">

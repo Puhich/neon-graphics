@@ -243,7 +243,7 @@ export default function Hero({ content }: HeroProps) {
           </button>
 
         {isMenuOpen ? (
-          <div className="absolute left-5 right-5 top-[calc(100%+8px)] z-[9100] rounded-lg border border-[#2a2a28] bg-[#0a0a09]/95 p-5 shadow-[0_18px_48px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:left-6 sm:right-6 lg:hidden">
+          <div className="absolute left-5 right-5 top-[calc(100%+8px)] z-[9100] rounded-2xl border border-[#2a2a28] bg-[#0a0a09]/95 p-5 shadow-[0_18px_48px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:left-6 sm:right-6 lg:hidden">
             <div className="grid gap-3 text-[12px] font-medium text-[#999999]">
               {topBar.map((item, index) => (
                 <span className="flex items-center gap-2" key={item}>
@@ -344,7 +344,7 @@ export default function Hero({ content }: HeroProps) {
         >
           {carouselImages.map((image, index) => (
             <div
-              className="relative h-[156px] w-[238px] shrink-0 overflow-hidden rounded-lg bg-zinc-900 sm:h-[198px] sm:w-[292px] lg:h-[230px] lg:w-[340px] 2xl:h-[260px] 2xl:w-[410px]"
+              className="relative h-[156px] w-[238px] shrink-0 overflow-hidden rounded-xl bg-zinc-900 sm:h-[198px] sm:w-[292px] lg:h-[230px] lg:w-[340px] 2xl:h-[260px] 2xl:w-[410px]"
               key={`${image.src}-${index}`}
             >
               <Image
