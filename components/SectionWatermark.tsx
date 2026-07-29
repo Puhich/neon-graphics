@@ -4,8 +4,11 @@ type SectionWatermarkProps = {
   variant?: "hero" | "grey";
 };
 
+// Below lg the fish is absolute (scrolls with its section): iOS WebKit
+// mispaints position: fixed inside clip-path containers, which showed up as
+// black flashes and a vanishing header while scrolling.
 const boxClasses =
-  "pointer-events-none fixed -z-10 select-none right-[-70px] top-[18vh] h-[20rem] w-[16rem] sm:h-[26rem] sm:w-[21rem] lg:right-[9.5rem] lg:top-[8.2rem] lg:h-[31.8rem] lg:w-[25.8rem]";
+  "pointer-events-none absolute -z-10 select-none right-[-70px] top-24 h-[20rem] w-[16rem] sm:h-[26rem] sm:w-[21rem] lg:fixed lg:right-[9.5rem] lg:top-[8.2rem] lg:h-[31.8rem] lg:w-[25.8rem]";
 
 export default function SectionWatermark({ variant = "grey" }: SectionWatermarkProps) {
   if (variant === "hero") {

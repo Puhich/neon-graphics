@@ -76,3 +76,15 @@ a {
     transform: none;
   }
 }
+
+/* Scroll-driven reveals stay desktop-only: on phones the sections are taller
+   than the viewport, so content stayed invisible until half-scrolled, and the
+   extra compositing made iOS scrolling janky. */
+@media (max-width: 1023.98px) {
+  .reveal,
+  .reveal-fade {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
