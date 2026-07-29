@@ -10,7 +10,7 @@ const boxClasses =
 export default function SectionWatermark({ variant = "grey" }: SectionWatermarkProps) {
   if (variant === "hero") {
     return (
-      <div aria-hidden className={`${boxClasses} hidden lg:block`}>
+      <div aria-hidden className={boxClasses}>
         <Image
           className="absolute inset-[-5.5rem] h-[calc(100%+11rem)] w-[calc(100%+11rem)] object-contain opacity-75 blur-[88px] saturate-150"
           src="/logo-mark.svg"

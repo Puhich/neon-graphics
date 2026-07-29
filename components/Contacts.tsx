@@ -32,7 +32,7 @@ function getMapUrls(contacts: ContactsContent) {
   const [centerLat, centerLon] = contacts.mapWidgetCenter;
   const encodedCenter = `${centerLon}%2C${centerLat}`;
   const encodedPoint = `${lon}%2C${lat}`;
-  const mobileCenter = `${lon + 0.0018}%2C${lat + 0.0002}`;
+  const mobileCenter = `${lon}%2C${lat + 0.0075}`;
 
   return {
     widget: `https://yandex.ru/map-widget/v1/?ll=${encodedCenter}&pt=${encodedPoint}%2Cpm2rdm&z=${contacts.mapZoom}&l=map`,
@@ -62,19 +62,19 @@ export default function Contacts({ contacts }: ContactsProps) {
         />
         <div className="pointer-events-none absolute inset-0 bg-[#0f0f0d]/48" />
 
-        <div className="relative z-10 mx-auto flex min-h-[700px] max-w-[1440px] items-start px-5 py-16 sm:px-6 lg:px-20">
+        <div className="relative z-10 mx-auto flex min-h-[700px] max-w-[1440px] items-start px-5 pb-72 pt-10 sm:px-6 md:py-16 lg:px-20">
           <div className="reveal w-full rounded-xl border border-[#2a2a28] bg-[#151513]/95 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.28)] backdrop-blur md:w-[480px] md:p-[30px]">
             <h2 className="font-heading text-[26px]">{contacts.title}</h2>
 
             <div className="mt-5 grid gap-2">
-              <a className="flex items-center gap-3.5 rounded-lg border border-[#242421] bg-[#181816] px-4 py-3.5" href={contacts.phone.href}>
+              <a className="flex items-center gap-4 rounded-lg border border-[#242421] bg-[#181816] py-3.5 pl-5 pr-4" href={contacts.phone.href}>
                 <Icon path={iconPaths.phone} />
                 <span>
                   <span className="block text-[11px] font-bold text-[#777777]">{contacts.phone.label}</span>
                   <span className="mt-1 block text-[19px] font-extrabold">{contacts.phone.value}</span>
                 </span>
               </a>
-              <a className="flex items-center gap-3.5 rounded-lg border border-[#242421] bg-[#181816] px-4 py-3.5" href={contacts.email.href}>
+              <a className="flex items-center gap-4 rounded-lg border border-[#242421] bg-[#181816] py-3.5 pl-5 pr-4" href={contacts.email.href}>
                 <Icon path={iconPaths.mail} />
                 <span>
                   <span className="block text-[11px] font-bold text-[#777777]">{contacts.email.label}</span>
@@ -86,14 +86,14 @@ export default function Contacts({ contacts }: ContactsProps) {
             <div className="my-5 h-px bg-[#242421]" />
 
             <div className="grid gap-4">
-              <div className="flex items-start gap-3">
+              <div className="flex items-center gap-4 pl-1">
                 <Icon muted path={iconPaths.pin} />
                 <span>
                   <span className="block text-[11px] font-bold text-[#5a5a5a]">{contacts.address.label}</span>
                   <span className="mt-1 block text-[13px] font-medium leading-[1.25] text-[#a0a0a0]">{contacts.address.value}</span>
                 </span>
               </div>
-              <div className="flex items-start gap-3">
+              <div className="flex items-center gap-4 pl-1">
                 <Icon muted path={iconPaths.clock} />
                 <span>
                   <span className="block text-[11px] font-bold text-[#5a5a5a]">{contacts.schedule.label}</span>

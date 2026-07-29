@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 
 import SectionWatermark from "@/components/SectionWatermark";
 
@@ -28,6 +28,19 @@ function ChevronIcon({ direction }: { direction: "left" | "right" }) {
 export default function Portfolio({ portfolio }: PortfolioProps) {
   const slides = useMemo(() => [portfolio.featured, ...portfolio.thumbnails], [portfolio.featured, portfolio.thumbnails]);
   const [activeIndex, setActiveIndex] = useState(0);
+  const mobileScrollerRef = useRef<HTMLDivElement>(null);
+
+  const scrollMobile = (direction: "left" | "right") => {
+    const scroller = mobileScrollerRef.current;
+    if (!scroller) {
+      return;
+    }
+
+    scroller.scrollBy({
+      left: scroller.clientWidth * 0.9 * (direction === "left" ? -1 : 1),
+      behavior: "smooth"
+    });
+  };
 
   const goToSlide = useCallback((nextIndex: number) => {
     const normalizedIndex = (nextIndex + slides.length) % slides.length;
@@ -46,10 +59,11 @@ export default function Portfolio({ portfolio }: PortfolioProps) {
         <div className="-mx-5 mt-10 overflow-hidden sm:-mx-6 lg:hidden">
         <div
           className="flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-px-5 scroll-smooth px-5 pb-4 [touch-action:pan-x_pan-y] sm:gap-5 sm:scroll-px-6 sm:px-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          ref={mobileScrollerRef}
         >
           {slides.map((slide) => (
             <div
-              className="relative h-[62vw] max-h-[360px] min-h-[250px] min-w-[calc(100vw-40px)] snap-start overflow-hidden rounded-[18px] bg-zinc-100 sm:h-[420px] sm:min-w-[calc(100vw-48px)]"
+              className="relative h-[62vw] max-h-[360px] min-h-[250px] min-w-[calc(100vw-84px)] snap-start overflow-hidden rounded-[18px] bg-zinc-100 sm:h-[420px] sm:min-w-[calc(100vw-104px)]"
               key={slide.src}
             >
               <Image
@@ -62,6 +76,25 @@ export default function Portfolio({ portfolio }: PortfolioProps) {
             </div>
           ))}
         </div>
+        </div>
+
+        <div className="mt-4 flex justify-center gap-3 lg:hidden">
+          <button
+            aria-label={portfolio.previousLabel}
+            className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-brand-ink shadow-[0_6px_20px_rgba(0,0,0,0.14)] transition hover:bg-brand-accent hover:text-white"
+            onClick={() => scrollMobile("left")}
+            type="button"
+          >
+            <ChevronIcon direction="left" />
+          </button>
+          <button
+            aria-label={portfolio.nextLabel}
+            className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-brand-ink shadow-[0_6px_20px_rgba(0,0,0,0.14)] transition hover:bg-brand-accent hover:text-white"
+            onClick={() => scrollMobile("right")}
+            type="button"
+          >
+            <ChevronIcon direction="right" />
+          </button>
         </div>
 
         <div className="mt-10 hidden items-center gap-5 lg:grid lg:grid-cols-[48px_1fr_48px]">

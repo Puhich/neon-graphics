@@ -77,7 +77,7 @@ export default function Reviews({ reviews }: ReviewsProps) {
             ref={scrollerRef}
           >
             {reviews.items.map((review) => (
-              <article className="min-w-[calc(100vw-40px)] snap-start sm:min-w-[360px] lg:min-w-[calc((100%_-_48px)/3)]" key={review.author}>
+              <article className="min-w-[calc(100vw-84px)] snap-start sm:min-w-[360px] lg:min-w-[calc((100%_-_48px)/3)]" key={review.author}>
                 <div className="relative h-[220px] overflow-hidden rounded-lg bg-zinc-200">
                   <Image
                     className="pointer-events-none object-cover"
@@ -102,6 +102,25 @@ export default function Reviews({ reviews }: ReviewsProps) {
           <button
             aria-label={reviews.nextLabel}
             className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-brand-ink shadow-[0_6px_20px_rgba(0,0,0,0.14)] transition hover:bg-brand-accent hover:text-white lg:flex"
+            onClick={() => scrollByCard("right")}
+            type="button"
+          >
+            <ChevronIcon direction="right" />
+          </button>
+        </div>
+
+        <div className="mt-4 flex justify-center gap-3 lg:hidden">
+          <button
+            aria-label={reviews.previousLabel}
+            className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-brand-ink shadow-[0_6px_20px_rgba(0,0,0,0.14)] transition hover:bg-brand-accent hover:text-white"
+            onClick={() => scrollByCard("left")}
+            type="button"
+          >
+            <ChevronIcon direction="left" />
+          </button>
+          <button
+            aria-label={reviews.nextLabel}
+            className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-brand-ink shadow-[0_6px_20px_rgba(0,0,0,0.14)] transition hover:bg-brand-accent hover:text-white"
             onClick={() => scrollByCard("right")}
             type="button"
           >
