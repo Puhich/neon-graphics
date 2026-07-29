@@ -49,12 +49,12 @@ export default function WhyUs({ whyUs }: WhyUsProps) {
     <section className="relative isolate bg-white px-5 py-16 text-brand-ink [clip-path:inset(0)] sm:px-6 lg:px-0 lg:py-20" id={whyUs.id}>
       <SectionWatermark />
       <div className="reveal mx-auto max-w-[1200px]">
-        <div className="mx-auto max-w-[880px] text-center">
-          <p className="text-[13px] font-bold uppercase tracking-[0.15em] text-brand-accent sm:text-sm">{whyUs.eyebrow}</p>
-          <h2 className="mt-3 font-heading text-[38px] leading-[1.15] sm:text-[48px] lg:text-[56px]">
+        <div className="mx-auto max-w-[840px] text-center">
+          <p className="text-[15px] font-bold uppercase tracking-[0.18em] text-brand-accent sm:text-[18px]">{whyUs.eyebrow}</p>
+          <h2 className="mt-4 font-heading text-[34px] leading-[1.15] sm:text-[42px] lg:text-[48px]">
             {whyUs.title}
           </h2>
-          <p className="mx-auto mt-5 max-w-[680px] text-[15px] leading-[1.6] text-[#666666] sm:text-lg sm:leading-[1.6]">
+          <p className="mx-auto mt-4 max-w-[640px] text-[15px] leading-[1.6] text-[#666666] sm:text-base sm:leading-[1.6]">
             {whyUs.subtitle}
           </p>
         </div>

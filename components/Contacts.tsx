@@ -8,16 +8,21 @@ type ContactsProps = {
 
 const iconPaths = {
   phone:
-    "M22 16.92v2.5a2.45 2.45 0 0 1-2.67 2.45A19.3 19.3 0 0 1 10.92 19 18.9 18.9 0 0 1 5 13.08a19.3 19.3 0 0 1-2.87-8.46A2.45 2.45 0 0 1 4.57 2h2.5a2.45 2.45 0 0 1 2.45 2.1c.16 1.18.43 2.33.82 3.43a2.45 2.45 0 0 1-.55 2.52l-1.06 1.06a15.7 15.7 0 0 0 6.16 6.16l1.06-1.06a2.45 2.45 0 0 1 2.52-.55c1.1.39 2.25.66 3.43.82A2.45 2.45 0 0 1 22 16.92Z",
-  mail: "M4 4h16v16H4V4Zm0 3 8 6 8-6",
-  pin: "M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Zm-8 3a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z",
+    "M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.35 1.9.66 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.31 1.84.53 2.8.66A2 2 0 0 1 22 16.92Z",
+  mail: "M2 6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6Zm20 1-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7",
+  pin: "M20 10c0 4.99-5.54 10.19-7.4 11.8a1 1 0 0 1-1.2 0C9.54 20.19 4 14.99 4 10a8 8 0 0 1 16 0Zm-8 3a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z",
   clock: "M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Zm0-16v6l4 2"
 };
 
 function Icon({ path, muted = false }: { path: string; muted?: boolean }) {
   return (
-    <svg aria-hidden="true" className={`h-5 w-5 shrink-0 ${muted ? "text-[#666666]" : "text-brand-accent"}`} fill="none" viewBox="0 0 24 24">
-      <path d={path} stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+    <svg
+      aria-hidden="true"
+      className={`h-5 w-5 shrink-0 ${muted ? "text-[#666666]" : "text-brand-accent"}`}
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <path d={path} stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" />
     </svg>
   );
 }
@@ -62,18 +67,18 @@ export default function Contacts({ contacts }: ContactsProps) {
             <h2 className="font-heading text-[26px]">{contacts.title}</h2>
 
             <div className="mt-5 grid gap-2">
-              <a className="flex items-center gap-3 rounded-lg border border-[#242421] bg-[#181816] px-3.5 py-3" href={contacts.phone.href}>
+              <a className="flex items-center gap-3.5 rounded-lg border border-[#242421] bg-[#181816] px-4 py-3.5" href={contacts.phone.href}>
                 <Icon path={iconPaths.phone} />
                 <span>
                   <span className="block text-[11px] font-bold text-[#777777]">{contacts.phone.label}</span>
-                  <span className="mt-0.5 block text-[19px] font-extrabold">{contacts.phone.value}</span>
+                  <span className="mt-1 block text-[19px] font-extrabold">{contacts.phone.value}</span>
                 </span>
               </a>
-              <a className="flex items-center gap-3 rounded-lg border border-[#242421] bg-[#181816] px-3.5 py-3" href={contacts.email.href}>
+              <a className="flex items-center gap-3.5 rounded-lg border border-[#242421] bg-[#181816] px-4 py-3.5" href={contacts.email.href}>
                 <Icon path={iconPaths.mail} />
                 <span>
                   <span className="block text-[11px] font-bold text-[#777777]">{contacts.email.label}</span>
-                  <span className="mt-0.5 block text-[17px] font-extrabold">{contacts.email.value}</span>
+                  <span className="mt-1 block text-[17px] font-extrabold">{contacts.email.value}</span>
                 </span>
               </a>
             </div>
@@ -81,18 +86,18 @@ export default function Contacts({ contacts }: ContactsProps) {
             <div className="my-5 h-px bg-[#242421]" />
 
             <div className="grid gap-4">
-              <div className="flex items-start gap-2.5">
+              <div className="flex items-start gap-3">
                 <Icon muted path={iconPaths.pin} />
                 <span>
                   <span className="block text-[11px] font-bold text-[#5a5a5a]">{contacts.address.label}</span>
-                  <span className="mt-0.5 block text-[13px] font-medium leading-[1.25] text-[#a0a0a0]">{contacts.address.value}</span>
+                  <span className="mt-1 block text-[13px] font-medium leading-[1.25] text-[#a0a0a0]">{contacts.address.value}</span>
                 </span>
               </div>
-              <div className="flex items-start gap-2.5">
+              <div className="flex items-start gap-3">
                 <Icon muted path={iconPaths.clock} />
                 <span>
                   <span className="block text-[11px] font-bold text-[#5a5a5a]">{contacts.schedule.label}</span>
-                  <span className="mt-0.5 block text-[13px] font-medium text-[#a0a0a0]">{contacts.schedule.value}</span>
+                  <span className="mt-1 block text-[13px] font-medium text-[#a0a0a0]">{contacts.schedule.value}</span>
                 </span>
               </div>
             </div>

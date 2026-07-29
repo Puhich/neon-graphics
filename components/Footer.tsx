@@ -35,7 +35,7 @@ export default function Footer({ footer }: FooterProps) {
       <div className="relative mx-auto max-w-[1200px]">
         <div className="grid gap-10 lg:grid-cols-[1.5fr_1fr_1fr_1.2fr] lg:gap-12">
           <div>
-            <Image className="h-auto w-[185px]" src={footer.logoSrc} alt={footer.logoAlt} width={185} height={80} />
+            <Image className="h-auto w-[225px]" src={footer.logoSrc} alt={footer.logoAlt} width={225} height={97} />
             <p className="mt-6 max-w-[340px] text-[14px] leading-[1.55] text-[#999999]">{footer.about}</p>
             <div className="mt-6 flex items-center gap-4 text-[#999999]">
               {footer.socials.map((social) => (
