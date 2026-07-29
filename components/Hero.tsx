@@ -88,6 +88,7 @@ export default function Hero({ content }: HeroProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [navOpacity, setNavOpacity] = useState(0);
   const dragState = useRef({ startX: 0, scrollLeft: 0 });
+  const autoScrollPos = useRef(0);
   const carouselImages = useMemo(() => [...hero.images, ...hero.images, ...hero.images], [hero.images]);
 
   useEffect(() => {
@@ -99,11 +100,19 @@ export default function Hero({ content }: HeroProps) {
     let frameId = 0;
     const tick = () => {
       if (!isPaused && !isDragging) {
-        carousel.scrollLeft += 0.55;
-
-        if (carousel.scrollLeft >= carousel.scrollWidth / 3) {
-          carousel.scrollLeft = 0;
+        // Safari rounds scrollLeft to integers, so a fractional increment on
+        // the live value never accumulates — keep the position in a float ref.
+        if (Math.abs(carousel.scrollLeft - autoScrollPos.current) > 2) {
+          autoScrollPos.current = carousel.scrollLeft;
         }
+
+        autoScrollPos.current += 0.55;
+
+        if (autoScrollPos.current >= carousel.scrollWidth / 3) {
+          autoScrollPos.current = 0;
+        }
+
+        carousel.scrollLeft = autoScrollPos.current;
       }
 
       frameId = requestAnimationFrame(tick);
@@ -211,14 +220,14 @@ export default function Hero({ content }: HeroProps) {
               ))}
             </div>
             <a
-              className="rounded bg-brand-accent px-6 py-[10px] text-[14px] font-bold text-white transition hover:bg-red-700"
+              className="rounded-xl bg-brand-accent px-6 py-[10px] text-[14px] font-bold text-white transition hover:bg-red-700"
               href={nav.cta.href}
             >
               {nav.cta.label}
             </a>
           </div>
           <a
-            className="ml-auto mr-3 rounded bg-brand-accent px-5 py-[10px] text-[14px] font-bold text-white transition hover:bg-red-700 lg:hidden"
+            className="ml-auto mr-3 rounded-xl bg-brand-accent px-5 py-[10px] text-[14px] font-bold text-white transition hover:bg-red-700 lg:hidden"
             href={nav.cta.href}
           >
             {nav.cta.label}
@@ -226,7 +235,7 @@ export default function Hero({ content }: HeroProps) {
           <button
             aria-expanded={isMenuOpen}
             aria-label={isMenuOpen ? nav.menuCloseLabel : nav.menuOpenLabel}
-            className="relative z-[9100] flex h-11 w-11 items-center justify-center rounded border border-[#333333] text-[#dddddd] transition hover:border-[#555555] lg:hidden"
+            className="relative z-[9100] flex h-11 w-11 items-center justify-center rounded-xl border border-[#333333] text-[#dddddd] transition hover:border-[#555555] lg:hidden"
             onClick={() => setIsMenuOpen((value) => !value)}
             type="button"
           >
@@ -292,13 +301,13 @@ export default function Hero({ content }: HeroProps) {
 
           <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:gap-5">
             <a
-              className="rounded bg-brand-accent px-9 py-4 text-center text-[16px] font-bold text-white shadow-[0_0_22px_rgba(204,26,44,0.42)] transition hover:bg-red-700"
+              className="rounded-xl bg-brand-accent px-9 py-4 text-center text-[16px] font-bold text-white shadow-[0_0_22px_rgba(204,26,44,0.42)] transition hover:bg-red-700"
               href={hero.primaryCta.href}
             >
               {ctaText}
             </a>
             <a
-              className="rounded border border-[#444444] px-9 py-4 text-center text-[16px] font-semibold text-white transition hover:border-white"
+              className="rounded-xl border border-[#444444] px-9 py-4 text-center text-[16px] font-semibold text-white transition hover:border-white"
               href={hero.secondaryCta.href}
             >
               {hero.secondaryCta.label}
@@ -353,7 +362,7 @@ export default function Hero({ content }: HeroProps) {
 
       <dl className="relative z-10 mx-auto grid max-w-[1200px] grid-cols-2 gap-y-8 px-5 pb-12 pt-3 sm:px-6 lg:grid-cols-4 lg:px-0 lg:pb-16">
         {stats.map((stat) => (
-          <div className="border-[#333333] text-center lg:border-l lg:first:border-l-0" key={stat.label}>
+          <div className="border-white/10 text-center lg:border-l lg:first:border-l-0" key={stat.label}>
             <dt className="font-heading text-[36px] leading-none text-brand-accent sm:text-[48px]">{stat.value}</dt>
             <dd className="mt-3 text-[15px] font-medium text-[#999999]">{stat.label}</dd>
           </div>

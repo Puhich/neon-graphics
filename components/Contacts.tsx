@@ -67,14 +67,14 @@ export default function Contacts({ contacts }: ContactsProps) {
             <h2 className="font-heading text-[26px]">{contacts.title}</h2>
 
             <div className="mt-5 grid gap-2">
-              <a className="flex items-center gap-4 rounded-lg border border-[#242421] bg-[#181816] py-3.5 pl-5 pr-4" href={contacts.phone.href}>
+              <a className="flex items-center gap-4 rounded-xl border border-[#242421] bg-[#181816] py-3.5 pl-5 pr-4 transition hover:border-[#3c3c38] hover:bg-[#1f1f1d]" href={contacts.phone.href}>
                 <Icon path={iconPaths.phone} />
                 <span>
                   <span className="block text-[11px] font-bold text-[#777777]">{contacts.phone.label}</span>
                   <span className="mt-1 block text-[19px] font-extrabold">{contacts.phone.value}</span>
                 </span>
               </a>
-              <a className="flex items-center gap-4 rounded-lg border border-[#242421] bg-[#181816] py-3.5 pl-5 pr-4" href={contacts.email.href}>
+              <a className="flex items-center gap-4 rounded-xl border border-[#242421] bg-[#181816] py-3.5 pl-5 pr-4 transition hover:border-[#3c3c38] hover:bg-[#1f1f1d]" href={contacts.email.href}>
                 <Icon path={iconPaths.mail} />
                 <span>
                   <span className="block text-[11px] font-bold text-[#777777]">{contacts.email.label}</span>
@@ -105,7 +105,7 @@ export default function Contacts({ contacts }: ContactsProps) {
             <div className="mt-6 flex flex-wrap gap-2.5">
               {contacts.mapButtons.map((button) => (
                 <a
-                  className="inline-flex items-center gap-2.5 rounded-lg border border-[#2e2e2b] bg-[#1d1d1b] px-4 py-2.5 text-[13px] font-bold text-white transition hover:border-[#4a4a46] hover:bg-[#242422]"
+                  className="inline-flex items-center gap-2.5 rounded-xl border border-[#2e2e2b] bg-[#1d1d1b] px-4 py-2.5 text-[13px] font-bold text-white transition hover:border-[#4a4a46] hover:bg-[#242422]"
                   href={button.href}
                   key={button.label}
                   rel="noreferrer"

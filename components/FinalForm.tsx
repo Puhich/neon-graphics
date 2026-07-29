@@ -36,19 +36,19 @@ export default function FinalForm({ form }: FinalFormProps) {
           </ul>
         </div>
 
-        <form className="rounded-lg bg-[#f8f8f8] p-6 sm:p-8">
+        <form className="rounded-2xl bg-[#f8f8f8] p-6 sm:p-8">
           <div className="grid gap-5">
             {form.fields.map((field) => (
               <label className="grid gap-1.5 text-[13px] text-[#666666]" key={field.label}>
                 <span>{field.label}</span>
                 {field.type === "textarea" ? (
                   <textarea
-                    className="min-h-[118px] resize-y rounded bg-[#e8e8e8] px-4 py-3 text-[15px] text-brand-ink outline-none transition placeholder:text-[#999999] focus:ring-2 focus:ring-brand-accent/35"
+                    className="min-h-[118px] resize-y rounded-xl bg-[#e8e8e8] px-4 py-3 text-[15px] text-brand-ink outline-none transition placeholder:text-[#999999] focus:ring-2 focus:ring-brand-accent/35"
                     placeholder={field.placeholder}
                   />
                 ) : (
                   <input
-                    className="h-11 rounded bg-[#e8e8e8] px-4 text-[15px] text-brand-ink outline-none transition placeholder:text-[#999999] focus:ring-2 focus:ring-brand-accent/35"
+                    className="h-11 rounded-xl bg-[#e8e8e8] px-4 text-[15px] text-brand-ink outline-none transition placeholder:text-[#999999] focus:ring-2 focus:ring-brand-accent/35"
                     placeholder={field.placeholder}
                     type={field.type}
                   />
@@ -58,7 +58,7 @@ export default function FinalForm({ form }: FinalFormProps) {
           </div>
 
           <button
-            className="mt-6 h-12 w-full rounded bg-brand-accent px-5 text-[15px] font-bold text-white transition hover:bg-red-700"
+            className="mt-6 h-12 w-full rounded-xl bg-brand-accent px-5 text-[15px] font-bold text-white transition hover:bg-red-700"
             type="button"
           >
             {form.submitText}

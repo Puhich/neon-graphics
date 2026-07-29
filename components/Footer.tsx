@@ -95,7 +95,7 @@ export default function Footer({ footer }: FooterProps) {
           </div>
         </div>
 
-        <div className="mt-12 h-px bg-[#333333]" />
+        <div className="mt-12 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
 
         <div className="mt-6 flex flex-col gap-4 text-[12px] text-[#666666] xl:flex-row xl:items-center xl:justify-between">
           <p className="text-[11px] xl:whitespace-nowrap xl:text-[12px]">{footer.copyright}</p>

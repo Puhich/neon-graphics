@@ -32,12 +32,16 @@ export default function Portfolio({ portfolio }: PortfolioProps) {
 
   const scrollMobile = (direction: "left" | "right") => {
     const scroller = mobileScrollerRef.current;
-    if (!scroller) {
+    const card = scroller?.firstElementChild;
+    if (!scroller || !card) {
       return;
     }
 
+    const gap = parseFloat(getComputedStyle(scroller).columnGap) || 16;
+    const step = card.getBoundingClientRect().width + gap;
+
     scroller.scrollBy({
-      left: scroller.clientWidth * 0.9 * (direction === "left" ? -1 : 1),
+      left: step * (direction === "left" ? -1 : 1),
       behavior: "smooth"
     });
   };
@@ -63,7 +67,7 @@ export default function Portfolio({ portfolio }: PortfolioProps) {
         >
           {slides.map((slide) => (
             <div
-              className="relative h-[62vw] max-h-[360px] min-h-[250px] min-w-[calc(100vw-84px)] snap-start overflow-hidden rounded-[18px] bg-zinc-100 sm:h-[420px] sm:min-w-[calc(100vw-104px)]"
+              className="relative h-[62vw] max-h-[360px] min-h-[250px] min-w-[calc(100vw-64px)] snap-start overflow-hidden rounded-[18px] bg-zinc-100 sm:h-[420px] sm:min-w-[calc(100vw-88px)]"
               key={slide.src}
             >
               <Image
@@ -139,7 +143,7 @@ export default function Portfolio({ portfolio }: PortfolioProps) {
           {slides.map((image, index) => (
             <button
               aria-label={image.alt}
-              className={`relative h-[50px] w-[75px] shrink-0 overflow-hidden rounded border-2 transition ${
+              className={`relative h-[50px] w-[75px] shrink-0 overflow-hidden rounded-md border-2 transition ${
                 index === activeIndex ? "border-brand-accent" : "border-transparent opacity-70 hover:opacity-100"
               }`}
               key={`${image.src}-${index}`}

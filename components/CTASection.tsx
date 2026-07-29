@@ -30,7 +30,7 @@ export default function CTASection({ cta }: CTASectionProps) {
         <p className="relative z-10 mx-auto mt-5 max-w-[600px] text-sm leading-[1.5] text-[#999999] sm:text-base">{cta.subtitle}</p>
 
         <a
-          className="relative z-10 mt-7 inline-flex rounded bg-brand-accent px-9 py-4 text-[16px] font-bold text-white transition hover:bg-red-700"
+          className="relative z-10 mt-7 inline-flex rounded-xl bg-brand-accent px-9 py-4 text-[16px] font-bold text-white transition hover:bg-red-700"
           href={cta.button.href}
         >
           {cta.button.label}
