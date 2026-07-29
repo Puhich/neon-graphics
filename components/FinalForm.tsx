@@ -1,3 +1,5 @@
+import SectionWatermark from "@/components/SectionWatermark";
+
 type FinalFormContent = typeof import("@/data/content.json")["finalForm"];
 
 type FinalFormProps = {
@@ -14,7 +16,8 @@ function CheckIcon() {
 
 export default function FinalForm({ form }: FinalFormProps) {
   return (
-    <section className="bg-white px-5 py-16 text-brand-ink sm:px-6 lg:px-0 lg:py-20" id={form.id}>
+    <section className="relative isolate bg-white px-5 py-16 text-brand-ink [clip-path:inset(0)] sm:px-6 lg:px-0 lg:py-20" id={form.id}>
+      <SectionWatermark />
       <div className="reveal mx-auto grid max-w-[1200px] gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.15em] text-brand-accent">{form.eyebrow}</p>

@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import SectionWatermark from "@/components/SectionWatermark";
+
 type DirectorQuoteContent = typeof import("@/data/content.json")["directorQuote"];
 
 type DirectorQuoteProps = {
@@ -8,7 +10,8 @@ type DirectorQuoteProps = {
 
 export default function DirectorQuote({ quote }: DirectorQuoteProps) {
   return (
-    <section className="bg-[linear-gradient(to_bottom,#ffffff_0%,#ffffff_50%,#f8f8f8_50%,#f8f8f8_100%)] px-5 py-16 text-white sm:px-6 lg:px-0 lg:py-20">
+    <section className="relative isolate bg-[linear-gradient(to_bottom,#ffffff_0%,#ffffff_50%,#f8f8f8_50%,#f8f8f8_100%)] px-5 py-16 text-white [clip-path:inset(0)] sm:px-6 lg:px-0 lg:py-20">
+      <SectionWatermark />
       <div className="reveal relative mx-auto grid max-w-[1200px] overflow-hidden rounded-2xl bg-brand-ink shadow-[0_8px_40px_rgba(0,0,0,0.07)] lg:grid-cols-[320px_1fr]">
         <div className="pointer-events-none absolute left-[15rem] top-[-6rem] h-72 w-[34rem] rounded-full bg-brand-blue/34 blur-[86px]" />
         <div className="pointer-events-none absolute bottom-[-5rem] right-[6rem] h-72 w-[34rem] rounded-full bg-brand-accent/58 blur-[90px]" />

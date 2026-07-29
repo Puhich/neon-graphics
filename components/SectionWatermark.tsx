@@ -1,17 +1,45 @@
 import Image from "next/image";
 
-export default function SectionWatermark() {
+type SectionWatermarkProps = {
+  variant?: "hero" | "grey";
+};
+
+const boxClasses =
+  "pointer-events-none fixed -z-10 select-none right-[-70px] top-[18vh] h-[20rem] w-[16rem] sm:h-[26rem] sm:w-[21rem] lg:right-[7.5rem] lg:top-[8.2rem] lg:h-[31.8rem] lg:w-[25.8rem]";
+
+export default function SectionWatermark({ variant = "grey" }: SectionWatermarkProps) {
+  if (variant === "hero") {
+    return (
+      <div aria-hidden className={`${boxClasses} hidden lg:block`}>
+        <Image
+          className="absolute inset-[-5.5rem] h-[calc(100%+11rem)] w-[calc(100%+11rem)] object-contain opacity-75 blur-[88px] saturate-150"
+          src="/logo-mark.svg"
+          alt=""
+          fill
+          priority
+          sizes="540px"
+        />
+        <div className="absolute inset-[-8rem] bg-[radial-gradient(circle_at_center,rgba(204,26,44,0.2),rgba(22,140,205,0.18)_58%,rgba(15,15,13,0)_76%)] blur-[72px]" />
+        <Image
+          className="absolute inset-0 h-full w-full object-contain opacity-[0.72] brightness-0"
+          src="/logo-mark.svg"
+          alt=""
+          fill
+          priority
+          sizes="420px"
+        />
+      </div>
+    );
+  }
+
   return (
-    <div
-      aria-hidden
-      className="pointer-events-none fixed right-[-40px] top-1/2 z-[1] -translate-y-1/2 select-none sm:right-[-60px] lg:right-[-80px]"
-    >
+    <div aria-hidden className={boxClasses}>
       <Image
-        className="h-[320px] w-auto brightness-0 opacity-[0.05] sm:h-[440px] lg:h-[560px]"
+        className="absolute inset-0 h-full w-full object-contain brightness-0 opacity-[0.06]"
         src="/logo-mark.svg"
         alt=""
-        width={560}
-        height={560}
+        fill
+        sizes="420px"
       />
     </div>
   );

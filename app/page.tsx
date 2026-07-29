@@ -8,7 +8,6 @@ import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import Portfolio from "@/components/Portfolio";
 import Reviews from "@/components/Reviews";
-import SectionWatermark from "@/components/SectionWatermark";
 import Services from "@/components/Services";
 import Stages from "@/components/Stages";
 import WhyUs from "@/components/WhyUs";
@@ -17,7 +16,6 @@ import content from "@/data/content.json";
 export default function Home() {
   return (
     <main className="min-h-screen bg-brand-bg">
-      <SectionWatermark />
       <Hero content={content} />
       <ClientsLogos clientsLogos={content.clientsLogos} />
       <Services services={content.services} />

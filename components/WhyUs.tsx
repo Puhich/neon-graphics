@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import SectionWatermark from "@/components/SectionWatermark";
+
 type WhyUsContent = typeof import("@/data/content.json")["whyUs"];
 
 type WhyUsProps = {
@@ -26,15 +28,15 @@ function TextCard({ card }: { card: WhyUsContent["rows"][number]["card"] }) {
     <article className="flex min-h-[400px] flex-col justify-between rounded-[16px] bg-[#f8f8f8] p-8 lg:h-full lg:min-h-0">
       <div>
         <p className="text-[13px] font-bold uppercase tracking-[0.15em] text-brand-accent">{card.eyebrow}</p>
-        <h3 className="mt-3 font-heading text-[30px] leading-[1.2] text-brand-ink">{card.title}</h3>
-        <p className="mt-4 text-[15px] leading-[1.6] text-[#666666]">{card.description}</p>
+        <h3 className="mt-3 font-heading text-[28px] leading-[1.2] text-brand-ink">{card.title}</h3>
+        <p className="mt-4 text-sm leading-[1.6] text-[#666666]">{card.description}</p>
       </div>
 
-      <dl className="mt-8 grid grid-cols-2 gap-6">
+      <dl className="mt-6 grid grid-cols-2 gap-x-8 gap-y-5">
         {card.metrics.map((metric) => (
           <div className="min-w-[110px]" key={metric.label}>
-            <dt className="font-heading text-[34px] leading-none text-brand-accent">{metric.value}</dt>
-            <dd className="mt-1.5 text-[14px] text-[#999999]">{metric.label}</dd>
+            <dt className="font-heading text-[30px] leading-none tracking-wide text-brand-accent">{metric.value}</dt>
+            <dd className="mt-2 text-[13px] text-[#999999]">{metric.label}</dd>
           </div>
         ))}
       </dl>
@@ -44,7 +46,8 @@ function TextCard({ card }: { card: WhyUsContent["rows"][number]["card"] }) {
 
 export default function WhyUs({ whyUs }: WhyUsProps) {
   return (
-    <section className="bg-white px-5 py-16 text-brand-ink sm:px-6 lg:px-0 lg:py-20" id={whyUs.id}>
+    <section className="relative isolate bg-white px-5 py-16 text-brand-ink [clip-path:inset(0)] sm:px-6 lg:px-0 lg:py-20" id={whyUs.id}>
+      <SectionWatermark />
       <div className="reveal mx-auto max-w-[1200px]">
         <div className="mx-auto max-w-[880px] text-center">
           <p className="text-[13px] font-bold uppercase tracking-[0.15em] text-brand-accent sm:text-sm">{whyUs.eyebrow}</p>

@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import SectionWatermark from "@/components/SectionWatermark";
+
 type ClientsLogosContent = typeof import("@/data/content.json")["clientsLogos"];
 
 type ClientsLogosProps = {
@@ -8,7 +10,8 @@ type ClientsLogosProps = {
 
 export default function ClientsLogos({ clientsLogos }: ClientsLogosProps) {
   return (
-    <section className="bg-white pb-8 pt-16 text-brand-bg md:pb-10 md:pt-18" id={clientsLogos.id}>
+    <section className="relative isolate bg-white pb-8 pt-16 text-brand-bg [clip-path:inset(0)] md:pb-10 md:pt-18" id={clientsLogos.id}>
+      <SectionWatermark />
       <div className="reveal mx-auto max-w-[1240px] px-5 sm:px-6">
         <div className="mx-auto max-w-[760px] text-center">
           <h2 className="font-heading text-[28px] leading-[1.08] md:text-[40px]">
