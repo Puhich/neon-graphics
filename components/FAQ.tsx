@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import SectionWatermark from "@/components/SectionWatermark";
+
 type FAQContent = typeof import("@/data/content.json")["faq"];
 
 type FAQProps = {
@@ -12,7 +14,8 @@ export default function FAQ({ faq }: FAQProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="bg-[#f8f8f8] px-5 py-16 text-brand-ink sm:px-6 lg:px-0 lg:py-20" id={faq.id}>
+    <section className="relative isolate overflow-hidden bg-[#f8f8f8] px-5 py-16 text-brand-ink sm:px-6 lg:px-0 lg:py-20" id={faq.id}>
+      <SectionWatermark side="right" />
       <div className="reveal mx-auto grid max-w-[1200px] gap-10 lg:grid-cols-[360px_1fr] lg:justify-between lg:gap-12">
         <div>
           <h2 className="font-heading text-[34px] leading-[1.1] sm:text-[42px]">{faq.title}</h2>

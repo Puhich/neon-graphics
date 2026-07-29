@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import SectionWatermark from "@/components/SectionWatermark";
+
 type WhyUsContent = typeof import("@/data/content.json")["whyUs"];
 
 type WhyUsProps = {
@@ -15,7 +17,7 @@ const iconPaths: Record<string, string> = {
 
 function AdvantageIcon({ icon }: { icon: string }) {
   return (
-    <svg aria-hidden="true" className="h-7 w-7 text-brand-accent" fill="none" viewBox="0 0 24 24">
+    <svg aria-hidden="true" className="h-8 w-8 text-brand-accent" fill="none" viewBox="0 0 24 24">
       <path d={iconPaths[icon] ?? iconPaths["shield-check"]} stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.9" />
     </svg>
   );
@@ -25,16 +27,16 @@ function TextCard({ card }: { card: WhyUsContent["rows"][number]["card"] }) {
   return (
     <article className="flex min-h-[400px] flex-col justify-between rounded-[16px] bg-[#f8f8f8] p-8 lg:h-full lg:min-h-0">
       <div>
-        <p className="text-xs font-bold uppercase tracking-[0.15em] text-brand-accent">{card.eyebrow}</p>
-        <h3 className="mt-3 font-heading text-[26px] leading-[1.2] text-brand-ink">{card.title}</h3>
-        <p className="mt-4 text-sm leading-[1.6] text-[#666666]">{card.description}</p>
+        <p className="text-[13px] font-bold uppercase tracking-[0.15em] text-brand-accent">{card.eyebrow}</p>
+        <h3 className="mt-3 font-heading text-[30px] leading-[1.2] text-brand-ink">{card.title}</h3>
+        <p className="mt-4 text-[15px] leading-[1.6] text-[#666666]">{card.description}</p>
       </div>
 
       <dl className="mt-8 grid grid-cols-2 gap-6">
         {card.metrics.map((metric) => (
           <div className="min-w-[110px]" key={metric.label}>
-            <dt className="font-heading text-[28px] leading-none text-brand-accent">{metric.value}</dt>
-            <dd className="mt-1 text-[13px] text-[#999999]">{metric.label}</dd>
+            <dt className="font-heading text-[34px] leading-none text-brand-accent">{metric.value}</dt>
+            <dd className="mt-1.5 text-[14px] text-[#999999]">{metric.label}</dd>
           </div>
         ))}
       </dl>
@@ -44,14 +46,15 @@ function TextCard({ card }: { card: WhyUsContent["rows"][number]["card"] }) {
 
 export default function WhyUs({ whyUs }: WhyUsProps) {
   return (
-    <section className="bg-white px-5 py-16 text-brand-ink sm:px-6 lg:px-0 lg:py-20" id={whyUs.id}>
+    <section className="relative isolate overflow-hidden bg-white px-5 py-16 text-brand-ink sm:px-6 lg:px-0 lg:py-20" id={whyUs.id}>
+      <SectionWatermark side="left" />
       <div className="reveal mx-auto max-w-[1200px]">
-        <div className="mx-auto max-w-[800px] text-center">
-          <p className="text-xs font-bold uppercase tracking-[0.15em] text-brand-accent">{whyUs.eyebrow}</p>
-          <h2 className="mt-3 font-heading text-[34px] leading-[1.15] sm:text-[42px] lg:text-[48px]">
+        <div className="mx-auto max-w-[880px] text-center">
+          <p className="text-[13px] font-bold uppercase tracking-[0.15em] text-brand-accent sm:text-sm">{whyUs.eyebrow}</p>
+          <h2 className="mt-3 font-heading text-[38px] leading-[1.15] sm:text-[48px] lg:text-[56px]">
             {whyUs.title}
           </h2>
-          <p className="mx-auto mt-4 max-w-[600px] text-sm leading-[1.55] text-[#666666] sm:text-base sm:leading-[1.55]">
+          <p className="mx-auto mt-5 max-w-[680px] text-[15px] leading-[1.6] text-[#666666] sm:text-lg sm:leading-[1.6]">
             {whyUs.subtitle}
           </p>
         </div>
@@ -91,12 +94,12 @@ export default function WhyUs({ whyUs }: WhyUsProps) {
 
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {whyUs.advantages.map((advantage) => (
-            <article className="rounded-[18px] bg-[#f8f8f8] p-5 text-center" key={advantage.title}>
-              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-white">
+            <article className="rounded-[18px] bg-[#f8f8f8] p-6 text-center" key={advantage.title}>
+              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-white">
                 <AdvantageIcon icon={advantage.icon} />
               </div>
-              <h3 className="mt-3 text-[15px] font-bold">{advantage.title}</h3>
-              <p className="mx-auto mt-2 max-w-[210px] text-[13px] leading-[1.4] text-[#999999]">{advantage.description}</p>
+              <h3 className="mt-4 text-[17px] font-bold">{advantage.title}</h3>
+              <p className="mx-auto mt-2 max-w-[230px] text-[14px] leading-[1.45] text-[#999999]">{advantage.description}</p>
             </article>
           ))}
         </div>

@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import SectionWatermark from "@/components/SectionWatermark";
+
 type ServicesContent = typeof import("@/data/content.json")["services"];
 
 type ServicesProps = {
@@ -19,6 +21,7 @@ const iconPaths: Record<string, string> = {
   roof: "M3 11 12 4l9 7M5 10v10h14V10",
   scissors: "m14 14 7 7M14 10l7-7M5 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm0 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm3-5 6-6M8 8l6 6",
   sign: "M4 7h16v10H4V7Zm4 14v-4m8 4v-4M8 11h8",
+  wrench: "M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76Z",
   steel: "M4 7h16M6 7l2 14h8l2-14M9 11h6m-5 4h4",
   zap: "M13 2 4 14h7l-1 8 10-13h-7l1-7Z"
 };
@@ -33,7 +36,8 @@ function ServiceIcon({ icon }: { icon: string }) {
 
 export default function Services({ services }: ServicesProps) {
   return (
-    <section className="bg-white px-5 py-16 text-brand-ink sm:px-6 lg:px-0 lg:py-20" id={services.id}>
+    <section className="relative isolate overflow-hidden bg-white px-5 py-16 text-brand-ink sm:px-6 lg:px-0 lg:py-20" id={services.id}>
+      <SectionWatermark side="left" />
       <div className="reveal mx-auto max-w-[1200px]">
         <div className="mx-auto max-w-[820px] text-center">
           <h2 className="font-heading text-[34px] leading-tight sm:text-[42px] lg:text-[48px]">{services.title}</h2>
