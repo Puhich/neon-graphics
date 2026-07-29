@@ -102,7 +102,7 @@ export default function Contacts({ contacts }: ContactsProps) {
               </div>
             </div>
 
-            <div className="mt-6 flex flex-wrap gap-2.5">
+            <div className="mt-8 flex flex-wrap gap-2.5">
               {contacts.mapButtons.map((button) => (
                 <a
                   className="inline-flex items-center gap-2.5 rounded-xl border border-[#2e2e2b] bg-[#1d1d1b] px-4 py-2.5 text-[13px] font-bold text-white transition hover:border-[#4a4a46] hover:bg-[#242422]"

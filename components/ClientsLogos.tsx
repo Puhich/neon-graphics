@@ -10,7 +10,7 @@ type ClientsLogosProps = {
 
 export default function ClientsLogos({ clientsLogos }: ClientsLogosProps) {
   return (
-    <section className="relative isolate bg-white pb-8 pt-16 text-brand-bg [clip-path:inset(0)] md:pb-10 md:pt-18" id={clientsLogos.id}>
+    <section className="relative isolate bg-white py-16 text-brand-bg [clip-path:inset(0)] lg:py-20" id={clientsLogos.id}>
       <SectionWatermark />
       <div className="reveal mx-auto max-w-[1240px] px-5 sm:px-6">
         <div className="mx-auto max-w-[760px] text-center">

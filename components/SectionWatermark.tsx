@@ -14,14 +14,14 @@ export default function SectionWatermark({ variant = "grey" }: SectionWatermarkP
     return (
       <div aria-hidden className={boxClasses}>
         <Image
-          className="absolute inset-[-5.5rem] h-[calc(100%+11rem)] w-[calc(100%+11rem)] object-contain opacity-75 blur-[44px] saturate-150 lg:blur-[88px]"
+          className="absolute inset-[-5.5rem] hidden h-[calc(100%+11rem)] w-[calc(100%+11rem)] object-contain opacity-75 blur-[88px] saturate-150 lg:block"
           src="/logo-mark.svg"
           alt=""
           fill
           priority
           sizes="540px"
         />
-        <div className="absolute inset-[-8rem] bg-[radial-gradient(circle_at_center,rgba(204,26,44,0.2),rgba(22,140,205,0.18)_58%,rgba(15,15,13,0)_76%)] blur-[36px] lg:blur-[72px]" />
+        <div className="absolute inset-[-8rem] bg-[radial-gradient(circle_at_center,rgba(204,26,44,0.2),rgba(22,140,205,0.18)_58%,rgba(15,15,13,0)_76%)] lg:blur-[72px]" />
         <Image
           className="absolute inset-0 h-full w-full object-contain opacity-[0.72] brightness-0"
           src="/logo-mark.svg"
