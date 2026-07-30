@@ -31,14 +31,12 @@ a {
   text-decoration: none;
 }
 
-/* Пока внизу висит полоса про cookie, кнопка звонка поднимается над ней. */
-body.cookie-notice-open .call-fab {
-  bottom: 7.5rem;
-}
-
-@media (min-width: 640px) {
+/* На телефоне плашка про cookie занимает всю ширину — кнопка звонка
+   поднимается над ней. На больших экранах плашка слева, кнопка справа,
+   и двигать ничего не нужно. */
+@media (max-width: 639.98px) {
   body.cookie-notice-open .call-fab {
-    bottom: 6rem;
+    bottom: 8.5rem;
   }
 }
 
