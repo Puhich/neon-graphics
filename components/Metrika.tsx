@@ -1,24 +1,10 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect, useState } from "react";
 
-import { onConsentChange, readConsent } from "@/lib/consent";
-
-// Счётчик подключается только если он задан в админке и посетитель не
-// отказался от cookie.
+// Счётчик подключается, только если он задан в админке.
 export default function Metrika({ counterId }: { counterId: string }) {
-  const [isAllowed, setIsAllowed] = useState(false);
-
-  useEffect(() => {
-    const check = (value: "accepted" | "declined" | null) => setIsAllowed(value !== "declined");
-
-    check(readConsent());
-
-    return onConsentChange(check);
-  }, []);
-
-  if (!counterId || !isAllowed) {
+  if (!counterId) {
     return null;
   }
 

@@ -230,8 +230,6 @@ export const contentSchema = z.object({
     mapWidgetCenter: z.tuple([z.number(), z.number()]),
     mapZoom: z.number().min(1).max(21),
     mapAlt: text,
-    mapLoadLabel: requiredText,
-    mapNote: text,
     mapButtons: z.array(
       z.object({
         label: requiredText,
@@ -274,8 +272,7 @@ export const contentSchema = z.object({
     enabled: z.boolean(),
     text: requiredText,
     linkText: requiredText,
-    acceptLabel: requiredText,
-    declineLabel: requiredText
+    acceptLabel: requiredText
   }),
 
   notFound: z.object({

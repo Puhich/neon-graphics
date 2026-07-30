@@ -31,6 +31,17 @@ a {
   text-decoration: none;
 }
 
+/* Пока внизу висит полоса про cookie, кнопка звонка поднимается над ней. */
+body.cookie-notice-open .call-fab {
+  bottom: 7.5rem;
+}
+
+@media (min-width: 640px) {
+  body.cookie-notice-open .call-fab {
+    bottom: 6rem;
+  }
+}
+
 @keyframes reveal-up {
   from {
     opacity: 0;

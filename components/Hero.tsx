@@ -372,7 +372,7 @@ export default function Hero({ content }: HeroProps) {
 
       </section>
       <a
-        className="fixed bottom-20 right-5 z-[2147483647] flex h-14 w-14 items-center justify-center rounded-full bg-brand-accent text-xl text-white shadow-[0_0_24px_rgba(204,26,44,0.6)] transition hover:bg-red-700 sm:bottom-6 sm:right-6 lg:h-16 lg:w-16"
+        className="call-fab fixed bottom-20 right-5 z-[2147483647] flex h-14 w-14 items-center justify-center rounded-full bg-brand-accent text-xl text-white shadow-[0_0_24px_rgba(204,26,44,0.6)] transition hover:bg-red-700 sm:bottom-6 sm:right-6 lg:h-16 lg:w-16"
         href={telHref(company.phone)}
         aria-label={nav.callLabel}
       >

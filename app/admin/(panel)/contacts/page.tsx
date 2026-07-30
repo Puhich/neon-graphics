@@ -108,22 +108,6 @@ export default function ContactsPage() {
             value={contacts.mapAlt}
           />
         </Row>
-        <Row>
-          <Field
-            hint="Кнопка показывается, если посетитель отказался от cookie."
-            label="Кнопка «показать карту»"
-            onChange={(value) => update((draft) => void (draft.contacts.mapLoadLabel = value))}
-            path="contacts.mapLoadLabel"
-            value={contacts.mapLoadLabel}
-          />
-          <Field
-            label="Пояснение к кнопке"
-            onChange={(value) => update((draft) => void (draft.contacts.mapNote = value))}
-            path="contacts.mapNote"
-            rows={2}
-            value={contacts.mapNote}
-          />
-        </Row>
       </Card>
 
       <Card title="Кнопки карт" description="Ссылки на карточки компании в Яндекс.Картах и 2ГИС.">

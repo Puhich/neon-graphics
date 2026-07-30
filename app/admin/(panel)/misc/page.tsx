@@ -30,24 +30,13 @@ export default function MiscPage() {
           path="cookieBanner.linkText"
           value={banner.linkText}
         />
-        <Row>
-          <Field
-            label="Кнопка согласия"
-            onChange={(value) => update((draft) => void (draft.cookieBanner.acceptLabel = value))}
-            path="cookieBanner.acceptLabel"
-            value={banner.acceptLabel}
-          />
-          <Field
-            label="Кнопка отказа"
-            onChange={(value) => update((draft) => void (draft.cookieBanner.declineLabel = value))}
-            path="cookieBanner.declineLabel"
-            value={banner.declineLabel}
-          />
-        </Row>
-        <Note>
-          При отказе сайт не подключает Яндекс.Метрику и не грузит карту Яндекса — вместо карты появляется кнопка
-          «показать карту».
-        </Note>
+        <Field
+          label="Кнопка"
+          onChange={(value) => update((draft) => void (draft.cookieBanner.acceptLabel = value))}
+          path="cookieBanner.acceptLabel"
+          value={banner.acceptLabel}
+        />
+        <Note>Полоса внизу экрана: строка текста и одна кнопка. Нажали — больше не показывается.</Note>
       </Card>
 
       <Card title="Страница 404" description="Что видит посетитель, если открыл несуществующий адрес.">

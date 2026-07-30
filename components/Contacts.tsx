@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 import type { SiteContent } from "@/lib/content-schema";
-import { onConsentChange, readConsent } from "@/lib/consent";
 import { mailtoHref, telHref } from "@/lib/site";
 
 type ContactsContent = SiteContent["contacts"];
@@ -51,17 +50,9 @@ function getMapUrls(contacts: ContactsContent) {
 export default function Contacts({ contacts, company }: ContactsProps) {
   const mapUrls = getMapUrls(contacts);
   const sectionRef = useRef<HTMLElement>(null);
-  // Карта — сторонний iframe: грузим её только когда секция подъезжает к
-  // экрану, и не грузим совсем, если пользователь отказался от cookie.
+  // Карта — тяжёлый сторонний iframe: грузим, только когда секция подъезжает
+  // к экрану.
   const [isNear, setIsNear] = useState(false);
-  const [isDeclined, setIsDeclined] = useState(false);
-  const [isForced, setIsForced] = useState(false);
-
-  useEffect(() => {
-    setIsDeclined(readConsent() === "declined");
-
-    return onConsentChange((value) => setIsDeclined(value === "declined"));
-  }, []);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -86,7 +77,7 @@ export default function Contacts({ contacts, company }: ContactsProps) {
     return () => observer.disconnect();
   }, []);
 
-  const showMap = isNear && (!isDeclined || isForced);
+  const showMap = isNear;
 
   return (
     <section className="relative z-20 bg-brand-bg text-white" id={contacts.id} ref={sectionRef}>
@@ -109,20 +100,7 @@ export default function Contacts({ contacts, company }: ContactsProps) {
             />
           </>
         ) : (
-          <div className="absolute inset-0 bg-[#141412]">
-            {isDeclined ? (
-              <div className="absolute inset-x-5 bottom-10 flex flex-col items-center gap-3 text-center md:inset-x-0 md:bottom-16">
-                <p className="max-w-[420px] text-[13px] leading-[1.45] text-[#8a8a8a]">{contacts.mapNote}</p>
-                <button
-                  className="rounded-xl border border-[#2e2e2b] bg-[#1d1d1b] px-5 py-2.5 text-[13px] font-bold text-white transition hover:border-[#4a4a46] hover:bg-[#242422]"
-                  onClick={() => setIsForced(true)}
-                  type="button"
-                >
-                  {contacts.mapLoadLabel}
-                </button>
-              </div>
-            ) : null}
-          </div>
+          <div className="absolute inset-0 bg-[#141412]" />
         )}
         <div className="pointer-events-none absolute inset-0 bg-[#0f0f0d]/48" />
 
