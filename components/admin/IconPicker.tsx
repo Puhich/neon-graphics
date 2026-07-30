@@ -67,7 +67,7 @@ export default function IconPicker({
       <span className="text-[13px] font-semibold text-[var(--adm-text-2)]">{label}</span>
 
       <button
-        className="flex items-center gap-3 rounded-xl border border-[var(--adm-border)] bg-[var(--adm-sunken)] px-4 py-2.5 text-left transition hover:border-[var(--adm-border-hover)]"
+        className="flex items-center gap-3 rounded-xl border border-[var(--adm-field-border)] bg-[var(--adm-field)] px-4 py-2.5 text-left transition hover:border-[var(--adm-border-hover)]"
         onClick={() => setIsOpen(true)}
         type="button"
       >
@@ -89,7 +89,7 @@ export default function IconPicker({
             <div className="flex items-center gap-3 border-b border-[var(--adm-border)] p-4">
               <input
                 autoFocus
-                className="h-11 flex-1 rounded-xl border border-[var(--adm-border)] bg-[var(--adm-sunken)] px-4 text-[15px] text-[var(--adm-text)] outline-none transition placeholder:text-[var(--adm-faint)] focus:border-brand-accent/60"
+                className="h-11 flex-1 rounded-xl border border-[var(--adm-field-border)] bg-[var(--adm-field)] px-4 text-[15px] text-[var(--adm-text)] outline-none transition placeholder:text-[var(--adm-faint)] focus:border-brand-accent/60"
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder="Поиск: shield, truck, zap…"
                 value={query}

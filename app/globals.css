@@ -41,6 +41,9 @@ a {
   --adm-sunken: #0f0f0d;
   --adm-note: #1a1a18;
   --adm-hover: #191917;
+  /* Поля ввода светлее карточки, а не темнее: так их видно как поля. */
+  --adm-field: #202020;
+  --adm-field-border: rgb(255 255 255 / 0.16);
   --adm-chip: rgb(255 255 255 / 0.05);
   --adm-border: rgb(255 255 255 / 0.1);
   --adm-border-strong: rgb(255 255 255 / 0.15);
@@ -64,6 +67,8 @@ html[data-admin-theme="light"] {
   --adm-sunken: #f5f5f3;
   --adm-note: #f5f5f3;
   --adm-hover: #eeeeec;
+  --adm-field: #ffffff;
+  --adm-field-border: rgb(0 0 0 / 0.2);
   --adm-chip: rgb(0 0 0 / 0.05);
   --adm-border: rgb(0 0 0 / 0.11);
   --adm-border-strong: rgb(0 0 0 / 0.17);

@@ -55,7 +55,7 @@ export function Row({ children }: { children: React.ReactNode }) {
 }
 
 const controlClass =
-  "w-full rounded-xl border border-[var(--adm-border)] bg-[var(--adm-sunken)] px-4 text-[15px] text-[var(--adm-text)] outline-none transition placeholder:text-[var(--adm-faint)] focus:border-brand-accent/60 focus:ring-2 focus:ring-brand-accent/20";
+  "w-full rounded-xl border border-[var(--adm-field-border)] bg-[var(--adm-field)] px-4 text-[15px] text-[var(--adm-text)] outline-none transition placeholder:text-[var(--adm-faint)] focus:border-brand-accent/60 focus:ring-2 focus:ring-brand-accent/20";
 
 export function useFieldError(path: string): string | undefined {
   const { issues } = useContentStore();
