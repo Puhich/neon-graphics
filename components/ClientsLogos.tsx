@@ -22,12 +22,12 @@ export default function ClientsLogos({ clientsLogos }: ClientsLogosProps) {
         <div className="mt-10 grid grid-cols-2 items-center justify-items-center gap-x-8 gap-y-8 sm:grid-cols-3 lg:grid-cols-4">
           {clientsLogos.items.map((logo) => (
             <div
-              className="relative h-14 w-full max-w-[230px] opacity-80 md:h-16"
+              className="relative h-14 w-full max-w-[230px] overflow-hidden rounded-xl opacity-80 md:h-16"
               key={logo.src}
             >
               <Image
                 alt={logo.alt}
-                className="object-contain"
+                className="object-contain mix-blend-multiply"
                 fill
                 sizes="(min-width: 1024px) 230px, (min-width: 640px) 30vw, 45vw"
                 src={logo.src}
@@ -35,7 +35,7 @@ export default function ClientsLogos({ clientsLogos }: ClientsLogosProps) {
             </div>
           ))}
         </div>
-        <p className="mx-auto mt-6 max-w-[600px] text-center text-[13px] font-medium leading-[1.55] text-[#666666] sm:text-sm">
+        <p className="mx-auto mt-6 max-w-[600px] text-center text-[13px] font-medium leading-[1.55] text-[#666666] [text-wrap:balance] sm:text-sm">
           {clientsLogos.note}
         </p>
       </div>
