@@ -12,6 +12,7 @@ import {
 import { recentCommits } from "@/lib/publisher";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 // Никаких значений секретов наружу — только «настроено / не настроено».
 export async function GET() {

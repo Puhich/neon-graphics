@@ -9,6 +9,7 @@ import Hero from "@/components/Hero";
 import Portfolio from "@/components/Portfolio";
 import Reviews from "@/components/Reviews";
 import Services from "@/components/Services";
+import SiteChrome from "@/components/SiteChrome";
 import Stages from "@/components/Stages";
 import WhyUs from "@/components/WhyUs";
 import content from "@/lib/content";
@@ -33,6 +34,7 @@ export default function Home() {
       />
       <Contacts company={content.company} contacts={content.contacts} />
       <Footer company={content.company} footer={content.footer} />
+      <SiteChrome withJsonLd />
     </main>
   );
 }

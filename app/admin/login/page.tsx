@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Suspense } from "react";
 
 import LoginForm from "@/components/admin/LoginForm";
 import { isAuthConfigured, isDev } from "@/lib/env";
@@ -24,7 +25,9 @@ export default function AdminLoginPage() {
           Управление содержимым сайта: тексты, фотографии, контакты.
         </p>
 
-        <LoginForm />
+        <Suspense fallback={<div className="mt-7 h-[320px] rounded-2xl border border-white/10 bg-[#151513]" />}>
+          <LoginForm />
+        </Suspense>
 
         {!isAuthConfigured ? (
           <p className="mt-5 rounded-xl border border-brand-accent/30 bg-brand-accent/10 p-4 text-[13px] leading-[1.5] text-[#ffb3ba]">
