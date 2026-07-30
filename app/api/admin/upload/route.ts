@@ -95,8 +95,8 @@ async function buildFiles(kind: UploadKind, buffer: Buffer, slug: string): Promi
   return {
     src: "/icon.png",
     files: [
-      { path: "app/icon.png", content: icon.toString("base64"), encoding: "base64" },
-      { path: "app/apple-icon.png", content: appleIcon.toString("base64"), encoding: "base64" }
+      { path: "public/icon.png", content: icon.toString("base64"), encoding: "base64" },
+      { path: "public/apple-icon.png", content: appleIcon.toString("base64"), encoding: "base64" }
     ]
   };
 }

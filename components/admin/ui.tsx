@@ -154,6 +154,38 @@ export function NumberField({
   );
 }
 
+export function Select({
+  label,
+  value,
+  options,
+  onChange,
+  hint
+}: {
+  label: string;
+  value: string;
+  options: { value: string; label: string }[];
+  onChange: (value: string) => void;
+  hint?: string;
+}) {
+  return (
+    <label className="grid gap-1.5">
+      <span className="text-[13px] font-semibold text-[#c9c9c4]">{label}</span>
+      <select
+        className={`${controlClass} h-11`}
+        onChange={(event) => onChange(event.target.value)}
+        value={value}
+      >
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+      {hint ? <span className="text-[12px] leading-[1.45] text-[#6f6f6a]">{hint}</span> : null}
+    </label>
+  );
+}
+
 export function Toggle({
   label,
   hint,
