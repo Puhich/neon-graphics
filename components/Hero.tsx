@@ -188,7 +188,7 @@ export default function Hero({ content }: HeroProps) {
         } as React.CSSProperties}
       >
         <div
-          className="pointer-events-none absolute inset-0 bg-[rgb(7_7_6_/_var(--nav-bg-opacity))] shadow-[0_10px_34px_rgb(0_0_0_/_var(--nav-shadow-opacity))] lg:backdrop-blur-[var(--nav-blur)]"
+          className="nav-backdrop pointer-events-none absolute inset-0 bg-[rgb(7_7_6_/_var(--nav-bg-opacity))] shadow-[0_10px_34px_rgb(0_0_0_/_var(--nav-shadow-opacity))] lg:backdrop-blur-[var(--nav-blur)]"
         />
         <div className="relative mx-auto flex max-w-[1200px] items-center justify-between px-5 py-2 sm:px-6 lg:px-0">
           <Image

@@ -88,3 +88,35 @@ a {
     transform: none;
   }
 }
+
+/* Touch devices run mobile WebKit regardless of viewport width — an iPad
+   lands in the lg breakpoint but has every iOS Safari quirk (black flashes
+   from blur() on fixed layers, janky backdrop-filter, late reveals). Gate the
+   heavy effects by pointer capability, not width: any hover-less device gets
+   the safe rendering, desktops with a mouse keep the full effects. */
+@media (hover: none) {
+  .reveal,
+  .reveal-fade {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .nav-backdrop {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .fish-glow-img {
+    display: none !important;
+  }
+
+  .fish-glow-grad {
+    filter: none !important;
+    background: radial-gradient(48% 42% at 38% 36%, rgba(204, 26, 44, 0.34), transparent 100%),
+      radial-gradient(38% 36% at 58% 58%, rgba(22, 140, 205, 0.28), transparent 100%),
+      radial-gradient(34% 30% at 48% 46%, rgba(204, 26, 44, 0.18), transparent 100%) !important;
+    -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 98%) !important;
+    mask-image: radial-gradient(closest-side, #000 55%, transparent 98%) !important;
+  }
+}
