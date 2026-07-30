@@ -11,7 +11,7 @@ import Reviews from "@/components/Reviews";
 import Services from "@/components/Services";
 import Stages from "@/components/Stages";
 import WhyUs from "@/components/WhyUs";
-import content from "@/data/content.json";
+import content from "@/lib/content";
 
 export default function Home() {
   return (
@@ -26,9 +26,13 @@ export default function Home() {
       <Reviews reviews={content.reviews} />
       <DirectorQuote quote={content.directorQuote} />
       <FAQ faq={content.faq} />
-      <FinalForm form={content.finalForm} privacyHref={content.footer.privacyHref} />
-      <Contacts contacts={content.contacts} />
-      <Footer footer={content.footer} />
+      <FinalForm
+        form={content.finalForm}
+        metrikaId={content.meta.yandexMetrikaId}
+        privacyHref={content.footer.privacyHref}
+      />
+      <Contacts company={content.company} contacts={content.contacts} />
+      <Footer company={content.company} footer={content.footer} />
     </main>
   );
 }

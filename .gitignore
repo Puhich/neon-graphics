@@ -37,3 +37,6 @@ _references/
 
 # Vercel
 .vercel
+
+# typescript
+*.tsbuildinfo

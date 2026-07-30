@@ -5,7 +5,9 @@ import { useCallback, useMemo, useRef, useState } from "react";
 
 import SectionWatermark from "@/components/SectionWatermark";
 
-type PortfolioContent = typeof import("@/data/content.json")["portfolio"];
+import type { SiteContent } from "@/lib/content-schema";
+
+type PortfolioContent = SiteContent["portfolio"];
 
 type PortfolioProps = {
   portfolio: PortfolioContent;

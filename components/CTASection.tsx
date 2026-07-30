@@ -1,6 +1,8 @@
 import SectionWatermark from "@/components/SectionWatermark";
 
-type CTAContent = typeof import("@/data/content.json")["cta"];
+import type { SiteContent } from "@/lib/content-schema";
+
+type CTAContent = SiteContent["cta"];
 
 type CTASectionProps = {
   cta: CTAContent;

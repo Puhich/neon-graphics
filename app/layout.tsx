@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope, Russo_One } from "next/font/google";
-import content from "@/data/content.json";
+import content from "@/lib/content";
 import "./globals.css";
 
 const russoOne = Russo_One({

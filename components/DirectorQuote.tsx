@@ -2,7 +2,9 @@ import Image from "next/image";
 
 import SectionWatermark from "@/components/SectionWatermark";
 
-type DirectorQuoteContent = typeof import("@/data/content.json")["directorQuote"];
+import type { SiteContent } from "@/lib/content-schema";
+
+type DirectorQuoteContent = SiteContent["directorQuote"];
 
 type DirectorQuoteProps = {
   quote: DirectorQuoteContent;

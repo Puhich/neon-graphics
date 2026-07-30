@@ -1,11 +1,12 @@
 import Image from "next/image";
 
 import SectionWatermark from "@/components/SectionWatermark";
-
-type FooterContent = typeof import("@/data/content.json")["footer"];
+import type { SiteContent } from "@/lib/content-schema";
+import { copyrightLine, footerContactLinks } from "@/lib/site";
 
 type FooterProps = {
-  footer: FooterContent;
+  footer: SiteContent["footer"];
+  company: SiteContent["company"];
 };
 
 const socialIconFiles: Record<string, string> = {
@@ -26,7 +27,9 @@ function SocialIcon({ icon }: { icon: string }) {
   );
 }
 
-export default function Footer({ footer }: FooterProps) {
+export default function Footer({ footer, company }: FooterProps) {
+  const contacts = footerContactLinks(company);
+
   return (
     <footer className="relative isolate z-20 overflow-hidden bg-brand-bg px-5 py-16 text-white [clip-path:inset(0)] sm:px-6 lg:px-8 xl:px-0 lg:py-20">
       <SectionWatermark variant="hero" touchHidden />
@@ -80,9 +83,9 @@ export default function Footer({ footer }: FooterProps) {
           <div>
             <h2 className="text-sm font-bold uppercase tracking-[0.08em] text-[#777777]">{footer.contactsTitle}</h2>
             <ul className="mt-4 grid gap-3 text-[14px]">
-              {footer.contacts.map((contact) => (
+              {contacts.map((contact) => (
                 <li key={contact.label}>
-                  {"href" in contact && contact.href ? (
+                  {contact.href ? (
                     <a className="text-[#bbbbbb] transition hover:text-white" href={contact.href}>
                       {contact.label}
                     </a>
@@ -98,7 +101,7 @@ export default function Footer({ footer }: FooterProps) {
         <div className="mt-12 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
 
         <div className="mt-6 flex flex-col gap-4 text-[12px] text-[#666666] xl:flex-row xl:items-center xl:justify-between">
-          <p className="text-[11px] xl:whitespace-nowrap xl:text-[12px]">{footer.copyright}</p>
+          <p className="text-[11px] xl:whitespace-nowrap xl:text-[12px]">{copyrightLine(company)}</p>
           <a className="text-[#999999] transition hover:text-white" href={footer.privacyHref}>
             {footer.privacy}
           </a>

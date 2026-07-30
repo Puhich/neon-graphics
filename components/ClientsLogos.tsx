@@ -2,7 +2,9 @@ import Image from "next/image";
 
 import SectionWatermark from "@/components/SectionWatermark";
 
-type ClientsLogosContent = typeof import("@/data/content.json")["clientsLogos"];
+import type { SiteContent } from "@/lib/content-schema";
+
+type ClientsLogosContent = SiteContent["clientsLogos"];
 
 type ClientsLogosProps = {
   clientsLogos: ClientsLogosContent;

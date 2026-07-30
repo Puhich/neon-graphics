@@ -1,6 +1,8 @@
 import SectionWatermark from "@/components/SectionWatermark";
 
-type StagesContent = typeof import("@/data/content.json")["stages"];
+import type { SiteContent } from "@/lib/content-schema";
+
+type StagesContent = SiteContent["stages"];
 
 type StagesProps = {
   stages: StagesContent;

@@ -5,7 +5,9 @@ import { useRef } from "react";
 
 import SectionWatermark from "@/components/SectionWatermark";
 
-type ReviewsContent = typeof import("@/data/content.json")["reviews"];
+import type { SiteContent } from "@/lib/content-schema";
+
+type ReviewsContent = SiteContent["reviews"];
 
 type ReviewsProps = {
   reviews: ReviewsContent;

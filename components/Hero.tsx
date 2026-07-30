@@ -4,8 +4,8 @@ import Image from "next/image";
 import { useEffect, useMemo, useRef, useState, type PointerEvent } from "react";
 
 import SectionWatermark from "@/components/SectionWatermark";
-
-type SiteContent = typeof import("@/data/content.json");
+import type { SiteContent } from "@/lib/content-schema";
+import { telHref, topBarItems } from "@/lib/site";
 
 type HeroProps = {
   content: SiteContent;
@@ -81,7 +81,8 @@ function PhoneFillIcon() {
 }
 
 export default function Hero({ content }: HeroProps) {
-  const { topBar, nav, hero, title, subtitle, ctaText, stats } = content;
+  const { company, nav, hero } = content;
+  const topBar = useMemo(() => topBarItems(company), [company]);
   const carouselRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
@@ -290,13 +291,13 @@ export default function Hero({ content }: HeroProps) {
       <div className="reveal relative z-10 mx-auto max-w-[1440px] px-5 pb-8 pt-28 sm:px-6 md:pt-32 lg:px-[120px]">
         <div className="max-w-[860px]">
           <h1 className="font-heading text-[34px] leading-[1.08] sm:text-[46px] lg:text-[52px]">
-            <span className="block">{title}</span>
+            <span className="block">{hero.title}</span>
             <span className="block text-brand-accent drop-shadow-[0_0_10px_rgba(204,26,44,0.42)]">
               {hero.highlight}
             </span>
           </h1>
           <p className="mt-5 max-w-[700px] text-[15px] leading-[1.6] text-[#999999] sm:text-[16px] lg:text-[17px]">
-            {subtitle}
+            {hero.subtitle}
           </p>
 
           <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:gap-5">
@@ -304,7 +305,7 @@ export default function Hero({ content }: HeroProps) {
               className="rounded-xl bg-brand-accent px-9 py-4 text-center text-[16px] font-bold text-white shadow-[0_0_22px_rgba(204,26,44,0.42)] transition hover:bg-red-700"
               href={hero.primaryCta.href}
             >
-              {ctaText}
+              {hero.primaryCta.label}
             </a>
             <a
               className="rounded-xl border border-[#444444] px-9 py-4 text-center text-[16px] font-semibold text-white transition hover:border-white"
@@ -361,7 +362,7 @@ export default function Hero({ content }: HeroProps) {
       </div>
 
       <dl className="relative z-10 mx-auto grid max-w-[1200px] grid-cols-2 gap-y-8 px-5 pb-12 pt-3 sm:px-6 lg:grid-cols-4 lg:px-8 xl:px-0 lg:pb-16">
-        {stats.map((stat) => (
+        {hero.stats.map((stat) => (
           <div className="border-white/10 text-center lg:border-l lg:first:border-l-0" key={stat.label}>
             <dt className="font-heading text-[36px] leading-none text-brand-accent sm:text-[48px]">{stat.value}</dt>
             <dd className="mt-3 text-[15px] font-medium text-[#999999]">{stat.label}</dd>
@@ -372,8 +373,8 @@ export default function Hero({ content }: HeroProps) {
       </section>
       <a
         className="fixed bottom-20 right-5 z-[2147483647] flex h-14 w-14 items-center justify-center rounded-full bg-brand-accent text-xl text-white shadow-[0_0_24px_rgba(204,26,44,0.6)] transition hover:bg-red-700 sm:bottom-6 sm:right-6 lg:h-16 lg:w-16"
-        href="tel:+78482270999"
-        aria-label={nav.cta.label}
+        href={telHref(company.phone)}
+        aria-label={nav.callLabel}
       >
         <PhoneFillIcon />
       </a>

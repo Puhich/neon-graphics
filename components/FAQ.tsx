@@ -4,7 +4,9 @@ import { useState } from "react";
 
 import SectionWatermark from "@/components/SectionWatermark";
 
-type FAQContent = typeof import("@/data/content.json")["faq"];
+import type { SiteContent } from "@/lib/content-schema";
+
+type FAQContent = SiteContent["faq"];
 
 type FAQProps = {
   faq: FAQContent;

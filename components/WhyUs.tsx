@@ -1,27 +1,14 @@
 import Image from "next/image";
 
+import Icon from "@/components/Icon";
 import SectionWatermark from "@/components/SectionWatermark";
+import type { SiteContent } from "@/lib/content-schema";
 
-type WhyUsContent = typeof import("@/data/content.json")["whyUs"];
+type WhyUsContent = SiteContent["whyUs"];
 
 type WhyUsProps = {
   whyUs: WhyUsContent;
 };
-
-const iconPaths: Record<string, string> = {
-  "shield-check": "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Zm-3-10 2 2 4-5",
-  timer: "M10 2h4M12 14l3-3m5 3a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z",
-  "plug-zap": "M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46L12 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46L11 14H4Z",
-  truck: "M10 17h4V5H2v12h3m5 0a2 2 0 1 1-4 0m4 0a2 2 0 0 0-4 0m8 0h2m0 0a2 2 0 1 0 4 0m-4 0a2 2 0 0 1 4 0m0 0h2v-5l-3-4h-5"
-};
-
-function AdvantageIcon({ icon }: { icon: string }) {
-  return (
-    <svg aria-hidden="true" className="h-8 w-8 text-brand-accent" fill="none" viewBox="0 0 24 24">
-      <path d={iconPaths[icon] ?? iconPaths["shield-check"]} stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.9" />
-    </svg>
-  );
-}
 
 function TextCard({ card }: { card: WhyUsContent["rows"][number]["card"] }) {
   return (
@@ -96,7 +83,7 @@ export default function WhyUs({ whyUs }: WhyUsProps) {
           {whyUs.advantages.map((advantage) => (
             <article className="rounded-2xl bg-[#f8f8f8] p-6 text-center" key={advantage.title}>
               <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-white">
-                <AdvantageIcon icon={advantage.icon} />
+                <Icon className="h-8 w-8 text-brand-accent" name={advantage.icon} />
               </div>
               <h3 className="mt-4 text-[17px] font-bold">{advantage.title}</h3>
               <p className="mx-auto mt-2 max-w-[230px] text-[14px] leading-[1.45] text-[#999999]">{advantage.description}</p>
