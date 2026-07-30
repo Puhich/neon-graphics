@@ -25,11 +25,11 @@ export default function IconPicker({
   useEffect(() => {
     let cancelled = false;
 
-    fetch(`/api/admin/icons?q=${encodeURIComponent(value)}&limit=1`)
+    fetch(`/api/admin/icons?name=${encodeURIComponent(value)}`)
       .then((response) => response.json())
       .then((data: { items: IconItem[] }) => {
         if (!cancelled) {
-          setCurrent(data.items.find((item) => item.name === value)?.svg ?? "");
+          setCurrent(data.items[0]?.svg ?? "");
         }
       })
       .catch(() => setCurrent(""));
@@ -103,7 +103,7 @@ export default function IconPicker({
               </button>
             </div>
 
-            <div className="grid flex-1 grid-cols-4 gap-2 overflow-y-auto p-4 sm:grid-cols-6">
+            <div className="grid flex-1 auto-rows-min content-start grid-cols-4 gap-2 overflow-y-auto p-4 sm:grid-cols-6">
               {items.map((item) => (
                 <button
                   className={`flex flex-col items-center gap-1.5 rounded-xl border p-2.5 transition ${
