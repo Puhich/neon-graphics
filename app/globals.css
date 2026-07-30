@@ -111,12 +111,13 @@ a {
     display: none !important;
   }
 
+  /* Glow blobs + vignette pre-baked into a bitmap (public/fish-glow-touch.webp):
+     procedural gradients under a mask were re-rasterized on every scroll frame
+     inside the fixed fish layer, which iPads could not keep up with. */
   .fish-glow-grad {
     filter: none !important;
-    background: radial-gradient(48% 42% at 38% 36%, rgba(204, 26, 44, 0.34), transparent 100%),
-      radial-gradient(38% 36% at 58% 58%, rgba(22, 140, 205, 0.28), transparent 100%),
-      radial-gradient(34% 30% at 48% 46%, rgba(204, 26, 44, 0.18), transparent 100%) !important;
-    -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 98%) !important;
-    mask-image: radial-gradient(closest-side, #000 55%, transparent 98%) !important;
+    background: url("/fish-glow-touch.webp") center / 100% 100% no-repeat !important;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
   }
 }
