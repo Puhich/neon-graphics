@@ -31,11 +31,60 @@ a {
   text-decoration: none;
 }
 
+/* Палитра админки. По умолчанию тёмная, светлая включается атрибутом на
+   <html> — переключатель ставит его до первой отрисовки, поэтому тема не
+   мигает при загрузке. Публичный сайт этих переменных не использует. */
+:root {
+  --adm-bg: #0f0f0d;
+  --adm-surface: #151513;
+  --adm-sidebar: #121210;
+  --adm-sunken: #0f0f0d;
+  --adm-note: #1a1a18;
+  --adm-hover: #191917;
+  --adm-chip: rgb(255 255 255 / 0.05);
+  --adm-border: rgb(255 255 255 / 0.1);
+  --adm-border-strong: rgb(255 255 255 / 0.15);
+  --adm-border-hover: rgb(255 255 255 / 0.3);
+  --adm-text: #ffffff;
+  --adm-text-2: #c9c9c4;
+  --adm-nav-text: #a6a6a1;
+  --adm-muted: #8a8a8a;
+  --adm-faint: #6f6f6a;
+  --adm-ok: #3fb950;
+  --adm-warn: #f0c274;
+  --adm-info: #9dd3f5;
+  --adm-scroll-thumb: rgb(255 255 255 / 0.13);
+  --adm-scroll-thumb-hover: rgb(255 255 255 / 0.24);
+}
+
+html[data-admin-theme="light"] {
+  --adm-bg: #f1f1ef;
+  --adm-surface: #ffffff;
+  --adm-sidebar: #ffffff;
+  --adm-sunken: #f5f5f3;
+  --adm-note: #f5f5f3;
+  --adm-hover: #eeeeec;
+  --adm-chip: rgb(0 0 0 / 0.05);
+  --adm-border: rgb(0 0 0 / 0.11);
+  --adm-border-strong: rgb(0 0 0 / 0.17);
+  --adm-border-hover: rgb(0 0 0 / 0.32);
+  --adm-text: #1a1a18;
+  --adm-text-2: #3d3d3a;
+  --adm-nav-text: #55554f;
+  --adm-muted: #6b6b66;
+  --adm-faint: #8d8d87;
+  --adm-ok: #1a7f37;
+  --adm-warn: #a35c00;
+  --adm-info: #0f6fa8;
+  --adm-scroll-thumb: rgb(0 0 0 / 0.16);
+  --adm-scroll-thumb-hover: rgb(0 0 0 / 0.28);
+}
+
 /* Тонкие ненавязчивые полосы прокрутки внутри админки: системные на маке
    с включённым «всегда показывать» выглядят грубо. */
 .adm-scroll {
   scrollbar-width: thin;
-  scrollbar-color: rgb(255 255 255 / 0.14) transparent;
+  scrollbar-color: var(--adm-scroll-thumb) transparent;
 }
 
 .adm-scroll::-webkit-scrollbar {
@@ -50,12 +99,12 @@ a {
 .adm-scroll::-webkit-scrollbar-thumb {
   border: 3px solid transparent;
   border-radius: 999px;
-  background: rgb(255 255 255 / 0.13);
+  background: var(--adm-scroll-thumb);
   background-clip: content-box;
 }
 
 .adm-scroll:hover::-webkit-scrollbar-thumb {
-  background: rgb(255 255 255 / 0.24);
+  background: var(--adm-scroll-thumb-hover);
   background-clip: content-box;
 }
 

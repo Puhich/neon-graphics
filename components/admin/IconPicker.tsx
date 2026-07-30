@@ -64,38 +64,38 @@ export default function IconPicker({
 
   return (
     <div className="grid gap-1.5">
-      <span className="text-[13px] font-semibold text-[#c9c9c4]">{label}</span>
+      <span className="text-[13px] font-semibold text-[var(--adm-text-2)]">{label}</span>
 
       <button
-        className="flex items-center gap-3 rounded-xl border border-white/10 bg-[#0f0f0d] px-4 py-2.5 text-left transition hover:border-white/25"
+        className="flex items-center gap-3 rounded-xl border border-[var(--adm-border)] bg-[var(--adm-sunken)] px-4 py-2.5 text-left transition hover:border-[var(--adm-border-hover)]"
         onClick={() => setIsOpen(true)}
         type="button"
       >
         <span
-          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/5 text-brand-accent [&>svg]:h-5 [&>svg]:w-5"
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[var(--adm-chip)] text-brand-accent [&>svg]:h-5 [&>svg]:w-5"
           dangerouslySetInnerHTML={{ __html: current }}
         />
         <span className="min-w-0 flex-1">
-          <span className="block truncate text-[14px] text-white">{value || "иконка не выбрана"}</span>
-          <span className="block text-[12px] text-[#6f6f6a]">Нажмите, чтобы выбрать другую</span>
+          <span className="block truncate text-[14px] text-[var(--adm-text)]">{value || "иконка не выбрана"}</span>
+          <span className="block text-[12px] text-[var(--adm-faint)]">Нажмите, чтобы выбрать другую</span>
         </span>
       </button>
 
-      {hint ? <span className="text-[12px] leading-[1.45] text-[#6f6f6a]">{hint}</span> : null}
+      {hint ? <span className="text-[12px] leading-[1.45] text-[var(--adm-faint)]">{hint}</span> : null}
 
       {isOpen ? (
         <div className="fixed inset-0 z-[100] flex items-end justify-center bg-black/70 p-0 sm:items-center sm:p-6">
-          <div className="flex h-[80vh] w-full max-w-[620px] flex-col rounded-t-2xl border border-white/10 bg-[#151513] sm:h-[560px] sm:rounded-2xl">
-            <div className="flex items-center gap-3 border-b border-white/10 p-4">
+          <div className="flex h-[80vh] w-full max-w-[620px] flex-col rounded-t-2xl border border-[var(--adm-border)] bg-[var(--adm-surface)] sm:h-[560px] sm:rounded-2xl">
+            <div className="flex items-center gap-3 border-b border-[var(--adm-border)] p-4">
               <input
                 autoFocus
-                className="h-11 flex-1 rounded-xl border border-white/10 bg-[#0f0f0d] px-4 text-[15px] text-white outline-none transition placeholder:text-[#5f5f5b] focus:border-brand-accent/60"
+                className="h-11 flex-1 rounded-xl border border-[var(--adm-border)] bg-[var(--adm-sunken)] px-4 text-[15px] text-[var(--adm-text)] outline-none transition placeholder:text-[var(--adm-faint)] focus:border-brand-accent/60"
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder="Поиск: shield, truck, zap…"
                 value={query}
               />
               <button
-                className="rounded-xl border border-white/15 px-3.5 py-2.5 text-[13px] font-semibold text-[#c9c9c4] transition hover:text-white"
+                className="rounded-xl border border-[var(--adm-border-strong)] px-3.5 py-2.5 text-[13px] font-semibold text-[var(--adm-text-2)] transition hover:text-[var(--adm-text)]"
                 onClick={() => setIsOpen(false)}
                 type="button"
               >
@@ -109,7 +109,7 @@ export default function IconPicker({
                   className={`flex flex-col items-center gap-1.5 rounded-xl border p-2.5 transition ${
                     item.name === value
                       ? "border-brand-accent/60 bg-brand-accent/10"
-                      : "border-white/10 bg-[#0f0f0d] hover:border-white/30"
+                      : "border-[var(--adm-border)] bg-[var(--adm-sunken)] hover:border-[var(--adm-border-hover)]"
                   }`}
                   key={item.name}
                   onClick={() => {
@@ -123,7 +123,7 @@ export default function IconPicker({
                     className="text-brand-accent [&>svg]:h-6 [&>svg]:w-6"
                     dangerouslySetInnerHTML={{ __html: item.svg }}
                   />
-                  <span className="w-full truncate text-center text-[10px] text-[#6f6f6a]">{item.name}</span>
+                  <span className="w-full truncate text-center text-[10px] text-[var(--adm-faint)]">{item.name}</span>
                 </button>
               ))}
             </div>

@@ -68,8 +68,8 @@ export default function WhyUsPage() {
                 value={item.card.description}
               />
 
-              <div className="rounded-xl border border-white/10 p-4">
-                <p className="mb-3 text-[13px] font-semibold text-[#c9c9c4]">Цифры в блоке</p>
+              <div className="rounded-xl border border-[var(--adm-border)] p-4">
+                <p className="mb-3 text-[13px] font-semibold text-[var(--adm-text-2)]">Цифры в блоке</p>
                 <ListEditor
                   addLabel="Добавить цифру"
                   createItem={() => ({ value: "100%", label: "подпись" })}

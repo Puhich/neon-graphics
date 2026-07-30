@@ -5,6 +5,15 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false }
 };
 
+// Тема выставляется до первой отрисовки, иначе светлая админка на мгновение
+// мигает тёмной. Скрипт крошечный и работает синхронно.
+const themeScript = `(function(){try{var t=localStorage.getItem("ng-admin-theme");document.documentElement.dataset.adminTheme=t==="light"?"light":"dark";}catch(e){}})();`;
+
 export default function AdminRootLayout({ children }: { children: React.ReactNode }) {
-  return <div className="min-h-screen bg-[#0f0f0d] text-white">{children}</div>;
+  return (
+    <>
+      <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      <div className="min-h-screen bg-[var(--adm-bg)] text-[var(--adm-text)]">{children}</div>
+    </>
+  );
 }

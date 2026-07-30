@@ -14,13 +14,13 @@ type Status = {
 
 function StatusRow({ label, ok, hint }: { label: string; ok: boolean; hint: string }) {
   return (
-    <div className="flex items-start gap-3 rounded-xl border border-white/10 bg-[#0f0f0d] px-4 py-3">
-      <span className={`mt-1.5 h-2 w-2 shrink-0 rounded-full ${ok ? "bg-[#3fb950]" : "bg-[#f3a40d]"}`} />
+    <div className="flex items-start gap-3 rounded-xl border border-[var(--adm-border)] bg-[var(--adm-sunken)] px-4 py-3">
+      <span className={`mt-1.5 h-2 w-2 shrink-0 rounded-full ${ok ? "bg-[var(--adm-ok)]" : "bg-[#f3a40d]"}`} />
       <span>
-        <span className="block text-[14px] text-white">{label}</span>
-        <span className="mt-0.5 block text-[12px] leading-[1.45] text-[#6f6f6a]">{hint}</span>
+        <span className="block text-[14px] text-[var(--adm-text)]">{label}</span>
+        <span className="mt-0.5 block text-[12px] leading-[1.45] text-[var(--adm-faint)]">{hint}</span>
       </span>
-      <span className={`ml-auto text-[12px] font-bold ${ok ? "text-[#3fb950]" : "text-[#f3a40d]"}`}>
+      <span className={`ml-auto text-[12px] font-bold ${ok ? "text-[var(--adm-ok)]" : "text-[#f3a40d]"}`}>
         {ok ? "настроено" : "не настроено"}
       </span>
     </div>
@@ -97,13 +97,13 @@ export default function SettingsPage() {
             {status.isDev ? <Note>Локальный режим разработки: публикация пишет файлы на диск.</Note> : null}
           </>
         ) : (
-          <p className="text-[13px] text-[#6f6f6a]">Загружаем…</p>
+          <p className="text-[13px] text-[var(--adm-faint)]">Загружаем…</p>
         )}
       </Card>
 
       <Card title="Тестовая заявка" description="Отправит в те же каналы, что и форма на сайте.">
         <button
-          className="justify-self-start rounded-xl border border-white/15 px-4 py-2.5 text-[13px] font-semibold text-[#c9c9c4] transition hover:border-brand-accent/60 hover:text-white disabled:opacity-50"
+          className="justify-self-start rounded-xl border border-[var(--adm-border-strong)] px-4 py-2.5 text-[13px] font-semibold text-[var(--adm-text-2)] transition hover:border-brand-accent/60 hover:text-[var(--adm-text)] disabled:opacity-50"
           disabled={testState.status === "sending"}
           onClick={sendTestLead}
           type="button"
@@ -112,7 +112,7 @@ export default function SettingsPage() {
         </button>
         {testState.message ? (
           <p
-            className={`text-[13px] ${testState.status === "error" ? "text-brand-accent" : "text-[#3fb950]"}`}
+            className={`text-[13px] ${testState.status === "error" ? "text-brand-accent" : "text-[var(--adm-ok)]"}`}
           >
             {testState.message}
           </p>
@@ -125,13 +125,13 @@ export default function SettingsPage() {
             {status.history.map((item) => (
               <li key={item.url}>
                 <a
-                  className="block rounded-xl border border-white/10 bg-[#0f0f0d] px-4 py-3 transition hover:border-white/25"
+                  className="block rounded-xl border border-[var(--adm-border)] bg-[var(--adm-sunken)] px-4 py-3 transition hover:border-[var(--adm-border-hover)]"
                   href={item.url}
                   rel="noreferrer"
                   target="_blank"
                 >
-                  <span className="block truncate text-[14px] text-white">{item.message}</span>
-                  <span className="mt-0.5 block text-[12px] text-[#6f6f6a]">
+                  <span className="block truncate text-[14px] text-[var(--adm-text)]">{item.message}</span>
+                  <span className="mt-0.5 block text-[12px] text-[var(--adm-faint)]">
                     {new Date(item.date).toLocaleString("ru-RU")}
                   </span>
                 </a>

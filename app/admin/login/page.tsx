@@ -6,7 +6,7 @@ import { isAuthConfigured, isDev } from "@/lib/env";
 
 export default function AdminLoginPage() {
   return (
-    <main className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 py-12">
+    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#0f0f0d] px-5 py-12 text-white">
       <div className="pointer-events-none absolute left-[8%] top-[-6rem] h-72 w-[30rem] rounded-full bg-brand-blue/15 blur-[110px]" />
       <div className="pointer-events-none absolute bottom-[-8rem] right-[6%] h-72 w-[32rem] rounded-full bg-brand-accent/20 blur-[120px]" />
       <Image

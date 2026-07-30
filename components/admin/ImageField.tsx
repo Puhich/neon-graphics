@@ -84,11 +84,11 @@ export default function ImageField({
 
   return (
     <div className="grid gap-2">
-      <span className="text-[13px] font-semibold text-[#c9c9c4]">{label}</span>
+      <span className="text-[13px] font-semibold text-[var(--adm-text-2)]">{label}</span>
 
       <div
         className={`relative overflow-hidden rounded-xl border border-dashed transition ${
-          isDragOver ? "border-brand-accent bg-brand-accent/5" : "border-white/15 bg-[#0f0f0d]"
+          isDragOver ? "border-brand-accent bg-brand-accent/5" : "border-[var(--adm-border-strong)] bg-[var(--adm-sunken)]"
         } ${ratioClass[ratio]}`}
         onDragLeave={() => setIsDragOver(false)}
         onDragOver={(event) => {
@@ -101,7 +101,7 @@ export default function ImageField({
           // eslint-disable-next-line @next/next/no-img-element
           <img alt="" className="h-full w-full object-contain" src={assetPreviewUrl(value)} />
         ) : (
-          <span className="absolute inset-0 flex items-center justify-center text-[13px] text-[#5f5f5b]">
+          <span className="absolute inset-0 flex items-center justify-center text-[13px] text-[var(--adm-faint)]">
             Перетащите файл сюда
           </span>
         )}
@@ -115,14 +115,14 @@ export default function ImageField({
 
       <div className="flex flex-wrap items-center gap-2">
         <button
-          className="rounded-xl border border-white/15 px-3.5 py-2 text-[13px] font-semibold text-[#c9c9c4] transition hover:border-white/35 hover:text-white disabled:opacity-50"
+          className="rounded-xl border border-[var(--adm-border-strong)] px-3.5 py-2 text-[13px] font-semibold text-[var(--adm-text-2)] transition hover:border-[var(--adm-border-hover)] hover:text-[var(--adm-text)] disabled:opacity-50"
           disabled={isUploading}
           onClick={() => inputRef.current?.click()}
           type="button"
         >
           {value ? "Заменить" : "Выбрать файл"}
         </button>
-        <span className="truncate text-[12px] text-[#5f5f5b]">{value || "файл не выбран"}</span>
+        <span className="truncate text-[12px] text-[var(--adm-faint)]">{value || "файл не выбран"}</span>
       </div>
 
       <input
@@ -142,7 +142,7 @@ export default function ImageField({
       />
 
       {error ? <span className="text-[12px] font-semibold text-brand-accent">{error}</span> : null}
-      {hint && !error ? <span className="text-[12px] leading-[1.45] text-[#6f6f6a]">{hint}</span> : null}
+      {hint && !error ? <span className="text-[12px] leading-[1.45] text-[var(--adm-faint)]">{hint}</span> : null}
     </div>
   );
 }

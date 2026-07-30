@@ -61,24 +61,24 @@ function SortableRow({
 
   return (
     <div
-      className={`rounded-2xl border border-white/10 bg-[#0f0f0d] ${isDragging ? "opacity-70 ring-1 ring-brand-accent/40" : ""}`}
+      className={`rounded-2xl border border-[var(--adm-border)] bg-[var(--adm-sunken)] ${isDragging ? "opacity-70 ring-1 ring-brand-accent/40" : ""}`}
       ref={setNodeRef}
       style={{ transform: CSS.Transform.toString(transform), transition }}
     >
-      <div className="flex items-center gap-2 border-b border-white/10 px-3 py-2.5">
+      <div className="flex items-center gap-2 border-b border-[var(--adm-border)] px-3 py-2.5">
         <button
           aria-label="Перетащить"
-          className="cursor-grab touch-none rounded-lg p-1.5 text-[#6f6f6a] transition hover:text-white active:cursor-grabbing"
+          className="cursor-grab touch-none rounded-lg p-1.5 text-[var(--adm-faint)] transition hover:text-[var(--adm-text)] active:cursor-grabbing"
           type="button"
           {...attributes}
           {...listeners}
         >
           <ClientIcon className="h-4 w-4" node={GripVertical as IconNode} />
         </button>
-        <span className="min-w-0 flex-1 truncate text-[13px] font-semibold text-[#c9c9c4]">{title}</span>
+        <span className="min-w-0 flex-1 truncate text-[13px] font-semibold text-[var(--adm-text-2)]">{title}</span>
         <button
           aria-label="Переместить выше"
-          className="rounded-lg p-1.5 text-[#6f6f6a] transition hover:text-white disabled:opacity-30 disabled:hover:text-[#6f6f6a]"
+          className="rounded-lg p-1.5 text-[var(--adm-faint)] transition hover:text-[var(--adm-text)] disabled:opacity-30 disabled:hover:text-[var(--adm-faint)]"
           disabled={!canMoveUp}
           onClick={() => onMove(-1)}
           type="button"
@@ -87,7 +87,7 @@ function SortableRow({
         </button>
         <button
           aria-label="Переместить ниже"
-          className="rounded-lg p-1.5 text-[#6f6f6a] transition hover:text-white disabled:opacity-30 disabled:hover:text-[#6f6f6a]"
+          className="rounded-lg p-1.5 text-[var(--adm-faint)] transition hover:text-[var(--adm-text)] disabled:opacity-30 disabled:hover:text-[var(--adm-faint)]"
           disabled={!canMoveDown}
           onClick={() => onMove(1)}
           type="button"
@@ -97,7 +97,7 @@ function SortableRow({
         {canRemove ? (
           <button
             aria-label="Удалить"
-            className="rounded-lg p-1.5 text-[#6f6f6a] transition hover:text-brand-accent"
+            className="rounded-lg p-1.5 text-[var(--adm-faint)] transition hover:text-brand-accent"
             onClick={onRemove}
             type="button"
           >
@@ -147,7 +147,7 @@ export default function ListEditor<T>({
 
   return (
     <div className="grid gap-3">
-      {items.length === 0 ? <p className="text-[13px] text-[#6f6f6a]">{emptyLabel}</p> : null}
+      {items.length === 0 ? <p className="text-[13px] text-[var(--adm-faint)]">{emptyLabel}</p> : null}
 
       <DndContext
         collisionDetection={closestCenter}
@@ -177,7 +177,7 @@ export default function ListEditor<T>({
       </DndContext>
 
       <button
-        className="justify-self-start rounded-xl border border-white/15 px-4 py-2.5 text-[13px] font-semibold text-[#c9c9c4] transition hover:border-brand-accent/60 hover:text-white"
+        className="justify-self-start rounded-xl border border-[var(--adm-border-strong)] px-4 py-2.5 text-[13px] font-semibold text-[var(--adm-text-2)] transition hover:border-brand-accent/60 hover:text-[var(--adm-text)]"
         onClick={() => onChange([...items, createItem()])}
         type="button"
       >

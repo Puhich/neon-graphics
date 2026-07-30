@@ -16,10 +16,10 @@ export default function PublishBar() {
       <div className="mr-auto flex min-w-0 items-center gap-2">
         <span
           className={`h-2 w-2 shrink-0 rounded-full ${
-            issues.length > 0 ? "bg-[#f3a40d]" : isDirty ? "bg-brand-blue" : "bg-[#3fb950]"
+            issues.length > 0 ? "bg-[#f3a40d]" : isDirty ? "bg-brand-blue" : "bg-[var(--adm-ok)]"
           }`}
         />
-        <span className="truncate text-[13px] text-[#a6a6a1]">
+        <span className="truncate text-[13px] text-[var(--adm-nav-text)]">
           {issues.length > 0
             ? `Незаполненных полей: ${issues.length}`
             : isDirty
@@ -29,7 +29,7 @@ export default function PublishBar() {
       </div>
 
       {publishState.status === "done" ? (
-        <span className="hidden max-w-[320px] truncate text-[13px] text-[#3fb950] sm:inline">{publishState.message}</span>
+        <span className="hidden max-w-[320px] truncate text-[13px] text-[var(--adm-ok)] sm:inline">{publishState.message}</span>
       ) : null}
       {publishState.status === "error" ? (
         <span className="max-w-[320px] truncate text-[13px] text-brand-accent">{publishState.message}</span>
@@ -37,10 +37,10 @@ export default function PublishBar() {
 
       {isDirty ? (
         isConfirmingReset ? (
-          <span className="flex items-center gap-2 text-[13px] text-[#a6a6a1]">
+          <span className="flex items-center gap-2 text-[13px] text-[var(--adm-nav-text)]">
             Отменить все правки?
             <button
-              className="rounded-lg border border-white/15 px-2.5 py-1 font-bold text-white transition hover:border-brand-accent hover:text-brand-accent"
+              className="rounded-lg border border-[var(--adm-border-strong)] px-2.5 py-1 font-bold text-[var(--adm-text)] transition hover:border-brand-accent hover:text-brand-accent"
               onClick={() => {
                 reset();
                 setIsConfirmingReset(false);
@@ -50,7 +50,7 @@ export default function PublishBar() {
               Да
             </button>
             <button
-              className="rounded-lg border border-white/15 px-2.5 py-1 transition hover:text-white"
+              className="rounded-lg border border-[var(--adm-border-strong)] px-2.5 py-1 transition hover:text-[var(--adm-text)]"
               onClick={() => setIsConfirmingReset(false)}
               type="button"
             >
@@ -59,7 +59,7 @@ export default function PublishBar() {
           </span>
         ) : (
           <button
-            className="rounded-xl border border-white/15 px-3.5 py-2 text-[13px] font-semibold text-[#a6a6a1] transition hover:border-white/30 hover:text-white"
+            className="rounded-xl border border-[var(--adm-border-strong)] px-3.5 py-2 text-[13px] font-semibold text-[var(--adm-nav-text)] transition hover:border-[var(--adm-border-hover)] hover:text-[var(--adm-text)]"
             onClick={() => setIsConfirmingReset(true)}
             type="button"
           >
@@ -69,7 +69,7 @@ export default function PublishBar() {
       ) : null}
 
       <button
-        className="rounded-xl bg-brand-accent px-4 py-2 text-[13px] font-bold text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-45"
+        className="rounded-xl bg-brand-accent px-4 py-2 text-[13px] font-bold text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-[var(--adm-chip)] disabled:text-[var(--adm-faint)]"
         disabled={!canPublish}
         onClick={publish}
         type="button"

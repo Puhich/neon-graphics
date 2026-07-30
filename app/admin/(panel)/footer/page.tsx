@@ -150,16 +150,16 @@ export default function FooterPage() {
           path="footer.contactsTitle"
           value={footer.contactsTitle}
         />
-        <ul className="grid gap-2 text-[14px] text-[#c9c9c4]">
+        <ul className="grid gap-2 text-[14px] text-[var(--adm-text-2)]">
           {footerContactLinks(content.company).map((item) => (
-            <li className="rounded-xl border border-white/10 bg-[#0f0f0d] px-4 py-2.5" key={item.label}>
+            <li className="rounded-xl border border-[var(--adm-border)] bg-[var(--adm-sunken)] px-4 py-2.5" key={item.label}>
               {item.label}
             </li>
           ))}
         </ul>
         <Note>
           Берутся из{" "}
-          <Link className="font-semibold text-white underline underline-offset-2" href="/admin/company">
+          <Link className="font-semibold text-[var(--adm-text)] underline underline-offset-2" href="/admin/company">
             реквизитов
           </Link>{" "}
           — одно изменение обновляет и футер, и шапку, и карточку контактов.
@@ -167,7 +167,7 @@ export default function FooterPage() {
       </Card>
 
       <Card title="Нижняя строка">
-        <p className="rounded-xl border border-white/10 bg-[#0f0f0d] px-4 py-3 text-[13px] leading-[1.5] text-[#8a8a8a]">
+        <p className="rounded-xl border border-[var(--adm-border)] bg-[var(--adm-sunken)] px-4 py-3 text-[13px] leading-[1.5] text-[var(--adm-muted)]">
           {copyrightLine(content.company)}
         </p>
         <Note>Копирайт собирается из реквизитов, год обновляется сам.</Note>

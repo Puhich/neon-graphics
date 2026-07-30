@@ -13,15 +13,15 @@ export default function ContactsPage() {
   return (
     <Page title="Контакты и карта" description="Секция с картой Яндекса и карточкой контактов.">
       <Card title="Данные в карточке">
-        <ul className="grid gap-2 text-[14px] text-[#c9c9c4]">
-          <li className="rounded-xl border border-white/10 bg-[#0f0f0d] px-4 py-2.5">{content.company.phone}</li>
-          <li className="rounded-xl border border-white/10 bg-[#0f0f0d] px-4 py-2.5">{content.company.email}</li>
-          <li className="rounded-xl border border-white/10 bg-[#0f0f0d] px-4 py-2.5">{content.company.address}</li>
-          <li className="rounded-xl border border-white/10 bg-[#0f0f0d] px-4 py-2.5">{content.company.schedule}</li>
+        <ul className="grid gap-2 text-[14px] text-[var(--adm-text-2)]">
+          <li className="rounded-xl border border-[var(--adm-border)] bg-[var(--adm-sunken)] px-4 py-2.5">{content.company.phone}</li>
+          <li className="rounded-xl border border-[var(--adm-border)] bg-[var(--adm-sunken)] px-4 py-2.5">{content.company.email}</li>
+          <li className="rounded-xl border border-[var(--adm-border)] bg-[var(--adm-sunken)] px-4 py-2.5">{content.company.address}</li>
+          <li className="rounded-xl border border-[var(--adm-border)] bg-[var(--adm-sunken)] px-4 py-2.5">{content.company.schedule}</li>
         </ul>
         <Note>
           Сами значения меняются в{" "}
-          <Link className="font-semibold text-white underline underline-offset-2" href="/admin/company">
+          <Link className="font-semibold text-[var(--adm-text)] underline underline-offset-2" href="/admin/company">
             реквизитах
           </Link>
           . Здесь настраиваются только подписи над ними.

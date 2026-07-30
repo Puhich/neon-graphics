@@ -31,10 +31,10 @@ export default function AdminDashboardPage() {
                   className="flex items-start gap-3 rounded-xl border border-[#f3a40d]/25 bg-[#f3a40d]/5 px-4 py-3 text-[13px] transition hover:border-[#f3a40d]/50"
                   href={routeForSection(issue.section)}
                 >
-                  <span className="font-semibold text-[#f0c274]">
+                  <span className="font-semibold text-[var(--adm-warn)]">
                     {sectionTitles[issue.section] ?? issue.section}
                   </span>
-                  <span className="text-[#8a8a8a]">{issue.message}</span>
+                  <span className="text-[var(--adm-muted)]">{issue.message}</span>
                 </Link>
               </li>
             ))}
@@ -45,12 +45,12 @@ export default function AdminDashboardPage() {
       <Card title="Статус">
         {isDirty ? (
           <>
-            <p className="text-[14px] text-[#c9c9c4]">Изменены разделы:</p>
+            <p className="text-[14px] text-[var(--adm-text-2)]">Изменены разделы:</p>
             <ul className="flex flex-wrap gap-2">
               {changedSections.map((section) => (
                 <li key={section}>
                   <Link
-                    className="inline-flex rounded-lg border border-brand-blue/30 bg-brand-blue/10 px-3 py-1.5 text-[13px] text-[#9dd3f5] transition hover:border-brand-blue/60"
+                    className="inline-flex rounded-lg border border-brand-blue/30 bg-brand-blue/10 px-3 py-1.5 text-[13px] text-[var(--adm-info)] transition hover:border-brand-blue/60"
                     href={routeForSection(section)}
                   >
                     {sectionTitles[section] ?? section}
@@ -64,7 +64,7 @@ export default function AdminDashboardPage() {
             </Note>
           </>
         ) : (
-          <p className="text-[14px] text-[#8a8a8a]">
+          <p className="text-[14px] text-[var(--adm-muted)]">
             {publishState.status === "done"
               ? publishState.message
               : "Черновик совпадает с сайтом — публиковать нечего."}
@@ -81,17 +81,17 @@ export default function AdminDashboardPage() {
                 .filter((item) => item.href !== "/admin")
                 .map((item) => (
                   <Link
-                    className="group flex min-h-[136px] flex-col justify-between rounded-2xl border border-white/10 bg-[#0f0f0d] p-4 transition hover:border-brand-accent/45 hover:bg-[#191917]"
+                    className="group flex min-h-[136px] flex-col justify-between rounded-2xl border border-[var(--adm-border)] bg-[var(--adm-sunken)] p-4 transition hover:border-brand-accent/45 hover:bg-[var(--adm-hover)]"
                     href={item.href}
                     key={item.href}
                   >
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 text-brand-accent transition group-hover:bg-brand-accent/15">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--adm-chip)] text-brand-accent transition group-hover:bg-brand-accent/15">
                       <ClientIcon className="h-5 w-5" node={routeIcons[item.href] ?? fallbackIcon} />
                     </span>
                     <span className="mt-4">
-                      <span className="block text-[14px] font-semibold leading-[1.3] text-white">{item.label}</span>
+                      <span className="block text-[14px] font-semibold leading-[1.3] text-[var(--adm-text)]">{item.label}</span>
                       {item.hint ? (
-                        <span className="mt-1 block text-[12px] leading-[1.4] text-[#6f6f6a]">{item.hint}</span>
+                        <span className="mt-1 block text-[12px] leading-[1.4] text-[var(--adm-faint)]">{item.hint}</span>
                       ) : null}
                     </span>
                   </Link>

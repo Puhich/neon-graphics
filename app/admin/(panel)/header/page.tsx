@@ -23,14 +23,14 @@ export default function HeaderPage() {
       <Card title="Верхняя строка" description="Телефон, адрес и режим работы над меню.">
         <ul className="grid gap-2">
           {topBarItems(content.company).map((item) => (
-            <li className="rounded-xl border border-white/10 bg-[#0f0f0d] px-4 py-2.5 text-[14px] text-[#c9c9c4]" key={item}>
+            <li className="rounded-xl border border-[var(--adm-border)] bg-[var(--adm-sunken)] px-4 py-2.5 text-[14px] text-[var(--adm-text-2)]" key={item}>
               {item}
             </li>
           ))}
         </ul>
         <Note>
           Эти три строки берутся из{" "}
-          <Link className="font-semibold text-white underline underline-offset-2" href="/admin/company">
+          <Link className="font-semibold text-[var(--adm-text)] underline underline-offset-2" href="/admin/company">
             реквизитов
           </Link>{" "}
           — там же и меняются, чтобы телефон и адрес совпадали во всех местах сайта.

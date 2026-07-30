@@ -10,6 +10,7 @@ import ClientIcon from "@/components/admin/ClientIcon";
 import PublishBar from "@/components/admin/PublishBar";
 import { useContentStore } from "@/components/admin/ContentProvider";
 import { fallbackIcon, routeIcons } from "@/components/admin/route-icons";
+import ThemeToggle from "@/components/admin/ThemeToggle";
 import { adminNav, sectionsByRoute } from "@/lib/admin-nav";
 import type { IconNode } from "@/lib/icons";
 
@@ -42,14 +43,14 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
           <Image className="h-9 w-auto" src="/logo-mark.svg" alt="" width={36} height={44} />
           <span className="font-heading text-[15px] leading-tight">
             Неон Графикс
-            <span className="block text-[11px] font-sans font-bold uppercase tracking-[0.16em] text-[#6f6f6a]">
+            <span className="block text-[11px] font-sans font-bold uppercase tracking-[0.16em] text-[var(--adm-faint)]">
               админка
             </span>
           </span>
         </Link>
         <button
           aria-label="Закрыть меню"
-          className="rounded-lg border border-white/10 p-1.5 text-[#8a8a8a] lg:hidden"
+          className="rounded-lg border border-[var(--adm-border)] p-1.5 text-[var(--adm-muted)] lg:hidden"
           onClick={() => setIsMenuOpen(false)}
           type="button"
         >
@@ -62,7 +63,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
       <nav className="adm-scroll flex-1 overflow-y-auto overflow-x-hidden overscroll-contain px-3 pb-6">
         {adminNav.map((group) => (
           <div className="mb-5" key={group.title}>
-            <p className="px-3 pb-2 text-[11px] font-bold uppercase tracking-[0.14em] text-[#5f5f5b]">
+            <p className="px-3 pb-2 text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--adm-faint)]">
               {group.title}
             </p>
             <ul className="grid min-w-0 gap-0.5">
@@ -78,13 +79,13 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
                     <Link
                       className={`flex min-w-0 items-center gap-3 rounded-xl px-3 py-2.5 text-[14px] transition ${
                         isActive
-                          ? "bg-brand-accent/15 text-white ring-1 ring-inset ring-brand-accent/40"
-                          : "text-[#a6a6a1] hover:bg-white/5 hover:text-white"
+                          ? "bg-brand-accent/15 text-[var(--adm-text)] ring-1 ring-inset ring-brand-accent/40"
+                          : "text-[var(--adm-nav-text)] hover:bg-[var(--adm-chip)] hover:text-[var(--adm-text)]"
                       }`}
                       href={item.href}
                     >
                       <ClientIcon
-                        className={`h-[18px] w-[18px] shrink-0 ${isActive ? "text-brand-accent" : "text-[#6f6f6a]"}`}
+                        className={`h-[18px] w-[18px] shrink-0 ${isActive ? "text-brand-accent" : "text-[var(--adm-faint)]"}`}
                         node={routeIcons[item.href] ?? fallbackIcon}
                       />
                       <span className="flex-1 truncate">{item.label}</span>
@@ -102,16 +103,16 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
         ))}
       </nav>
 
-      <div className="border-t border-white/10 px-5 py-4">
+      <div className="border-t border-[var(--adm-border)] px-5 py-4">
         <a
-          className="block text-[13px] text-[#8a8a8a] transition hover:text-white"
+          className="block text-[13px] text-[var(--adm-muted)] transition hover:text-[var(--adm-text)]"
           href="/"
           rel="noreferrer"
           target="_blank"
         >
           Открыть сайт →
         </a>
-        <button className="mt-3 text-[13px] text-[#8a8a8a] transition hover:text-white" onClick={logout} type="button">
+        <button className="mt-3 text-[13px] text-[var(--adm-muted)] transition hover:text-[var(--adm-text)]" onClick={logout} type="button">
           Выйти
         </button>
       </div>
@@ -120,7 +121,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
 
   return (
     <div className="min-h-screen lg:grid lg:grid-cols-[268px_1fr]">
-      <aside className="hidden border-r border-white/10 bg-[#121210] lg:sticky lg:top-0 lg:block lg:h-screen lg:overflow-hidden lg:overscroll-contain">
+      <aside className="hidden border-r border-[var(--adm-border)] bg-[var(--adm-sidebar)] lg:sticky lg:top-0 lg:block lg:h-screen lg:overflow-hidden lg:overscroll-contain">
         {sidebar}
       </aside>
 
@@ -132,24 +133,25 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
             onClick={() => setIsMenuOpen(false)}
             type="button"
           />
-          <aside className="absolute inset-y-0 left-0 w-[280px] overflow-hidden overscroll-contain border-r border-white/10 bg-[#121210]">
+          <aside className="absolute inset-y-0 left-0 w-[280px] overflow-hidden overscroll-contain border-r border-[var(--adm-border)] bg-[var(--adm-sidebar)]">
             {sidebar}
           </aside>
         </div>
       ) : null}
 
       <div className="flex min-h-screen flex-col">
-        <header className="sticky top-0 z-40 border-b border-white/10 bg-[#0f0f0d]/95 backdrop-blur">
+        <header className="sticky top-0 z-40 border-b border-[var(--adm-border)] bg-[var(--adm-bg)] backdrop-blur">
           <div className="flex items-center gap-3 px-4 py-3 sm:px-6">
             <button
               aria-label="Меню"
-              className="rounded-xl border border-white/10 p-2 text-[#a6a6a1] transition hover:text-white lg:hidden"
+              className="rounded-xl border border-[var(--adm-border)] p-2 text-[var(--adm-nav-text)] transition hover:text-[var(--adm-text)] lg:hidden"
               onClick={() => setIsMenuOpen(true)}
               type="button"
             >
               <ClientIcon className="h-5 w-5" node={Menu as IconNode} />
             </button>
             <PublishBar />
+            <ThemeToggle />
           </div>
         </header>
 
