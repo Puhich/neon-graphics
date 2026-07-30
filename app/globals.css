@@ -31,6 +31,34 @@ a {
   text-decoration: none;
 }
 
+/* Тонкие ненавязчивые полосы прокрутки внутри админки: системные на маке
+   с включённым «всегда показывать» выглядят грубо. */
+.adm-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(255 255 255 / 0.14) transparent;
+}
+
+.adm-scroll::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.adm-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.adm-scroll::-webkit-scrollbar-thumb {
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.13);
+  background-clip: content-box;
+}
+
+.adm-scroll:hover::-webkit-scrollbar-thumb {
+  background: rgb(255 255 255 / 0.24);
+  background-clip: content-box;
+}
+
 /* Логотип в футере лежит серым и оживает под курсором: короткий неоновый
    разряд, потом ровное свечение. На тач-устройствах курсора нет, поэтому
    там логотип сразу цветной и правила не применяются. */

@@ -103,7 +103,7 @@ export default function IconPicker({
               </button>
             </div>
 
-            <div className="grid flex-1 auto-rows-min content-start grid-cols-4 gap-2 overflow-y-auto p-4 sm:grid-cols-6">
+            <div className="adm-scroll grid flex-1 auto-rows-min content-start grid-cols-4 gap-2 overflow-y-auto overflow-x-hidden p-4 sm:grid-cols-6">
               {items.map((item) => (
                 <button
                   className={`flex flex-col items-center gap-1.5 rounded-xl border p-2.5 transition ${

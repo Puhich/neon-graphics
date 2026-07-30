@@ -57,13 +57,13 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
         </button>
       </div>
 
-      <nav className="flex-1 overflow-y-auto px-3 pb-6">
+      <nav className="adm-scroll flex-1 overflow-y-auto overflow-x-hidden px-3 pb-6">
         {adminNav.map((group) => (
           <div className="mb-5" key={group.title}>
             <p className="px-3 pb-2 text-[11px] font-bold uppercase tracking-[0.14em] text-[#5f5f5b]">
               {group.title}
             </p>
-            <ul className="grid gap-0.5">
+            <ul className="grid min-w-0 gap-0.5">
               {group.items.map((item) => {
                 const isActive = pathname === item.href;
                 const changed = isRouteChanged(item.href, changedSections);
@@ -72,9 +72,9 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
                 );
 
                 return (
-                  <li key={item.href}>
+                  <li className="min-w-0" key={item.href}>
                     <Link
-                      className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-[14px] transition ${
+                      className={`flex min-w-0 items-center gap-3 rounded-xl px-3 py-2.5 text-[14px] transition ${
                         isActive
                           ? "bg-brand-accent/15 text-white ring-1 ring-inset ring-brand-accent/40"
                           : "text-[#a6a6a1] hover:bg-white/5 hover:text-white"
