@@ -44,7 +44,7 @@ export default function Contacts({ contacts }: ContactsProps) {
   const mapUrls = getMapUrls(contacts);
 
   return (
-    <section className="bg-brand-bg text-white" id={contacts.id}>
+    <section className="relative z-20 bg-brand-bg text-white" id={contacts.id}>
       <div className="relative min-h-[700px] overflow-hidden">
         <iframe
           aria-label={contacts.mapAlt}

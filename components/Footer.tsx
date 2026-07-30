@@ -28,7 +28,7 @@ function SocialIcon({ icon }: { icon: string }) {
 
 export default function Footer({ footer }: FooterProps) {
   return (
-    <footer className="relative isolate overflow-hidden bg-brand-bg px-5 py-16 text-white [clip-path:inset(0)] sm:px-6 lg:px-8 xl:px-0 lg:py-20">
+    <footer className="relative isolate z-20 overflow-hidden bg-brand-bg px-5 py-16 text-white [clip-path:inset(0)] sm:px-6 lg:px-8 xl:px-0 lg:py-20">
       <SectionWatermark variant="hero" />
       <div className="pointer-events-none absolute left-[5%] top-[-5rem] h-64 w-[28rem] rounded-full bg-brand-blue/20 blur-[90px]" />
       <div className="pointer-events-none absolute bottom-[-6rem] right-[12%] h-64 w-[30rem] rounded-full bg-brand-accent/28 blur-[96px]" />

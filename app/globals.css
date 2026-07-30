@@ -111,41 +111,22 @@ a {
     display: none !important;
   }
 
-  /* Fixed-in-clip-path can't keep up on touch WebKit; sticky is moved on the
-     compositor thread, so the fish stays pinned with zero lag and no repaint.
-     overflow: clip (not hidden — hidden would break sticky) stops the box
-     poking past the right edge from adding horizontal page scroll. */
-  .fish-wrap {
+  /* Touch scheme: hide the per-section grey copies, show the single global
+     fixed grey layer (it lives outside any clip-path, so the compositor never
+     repaints it — perfectly still, zero lag), and let the colored variant
+     ride inside its dark host as that block's own artwork. */
+  .fish-desktop {
+    display: none !important;
+  }
+
+  .fish-global {
+    display: block !important;
+  }
+
+  .fish-wrap-hero {
     position: absolute !important;
-    inset: 0 !important;
-    width: auto !important;
-    height: auto !important;
-    overflow: clip;
-  }
-
-  .fish-stick {
-    position: sticky !important;
-    top: 18vh;
-    margin-left: auto;
-    margin-right: -70px;
-    width: 16rem;
-    height: 20rem;
-  }
-}
-
-@media (hover: none) and (min-width: 640px) {
-  .fish-stick {
-    width: 21rem;
-    height: 26rem;
-  }
-}
-
-@media (hover: none) and (min-width: 1024px) {
-  .fish-stick {
-    top: 8.2rem;
-    margin-right: 9.5rem;
-    width: 25.8rem;
-    height: 31.8rem;
+    top: 50% !important;
+    transform: translateY(-50%);
   }
 
   /* Glow blobs + vignette pre-baked into a bitmap (public/fish-glow-touch.webp):

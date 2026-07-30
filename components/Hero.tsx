@@ -284,7 +284,7 @@ export default function Hero({ content }: HeroProps) {
         </div>
       </header>
 
-      <section className="relative isolate overflow-hidden bg-brand-bg text-white [clip-path:inset(0)]">
+      <section className="relative isolate z-20 overflow-hidden bg-brand-bg text-white [clip-path:inset(0)]">
       <SectionWatermark variant="hero" />
 
       <div className="reveal relative z-10 mx-auto max-w-[1440px] px-5 pb-8 pt-28 sm:px-6 md:pt-32 lg:px-[120px]">
