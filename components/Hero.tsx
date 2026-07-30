@@ -167,7 +167,7 @@ export default function Hero({ content }: HeroProps) {
 
   return (
     <>
-      <div className="hidden bg-[linear-gradient(to_right,#0f0f0d_0%,#0c0c0b_45%,#050504_100%)] px-6 py-[10px] text-[12px] font-medium text-[#999999] lg:block">
+      <div className="hidden bg-[linear-gradient(to_right,#0f0f0d_0%,#0c0c0b_45%,#050504_100%)] px-6 py-[10px] text-[12px] font-medium text-[#999999] lg:block lg:px-8 xl:px-6">
         <div className="mx-auto flex max-w-[1200px] justify-end gap-9">
           {topBar.map((item, index) => (
             <span className="flex items-center gap-1.5" key={item}>

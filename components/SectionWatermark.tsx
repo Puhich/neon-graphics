@@ -4,49 +4,59 @@ type SectionWatermarkProps = {
   variant?: "hero" | "grey";
 };
 
-// Both variants share one fixed on-screen position so the fish stays put
-// while sections scroll past, only changing its look with the background.
-// The fish artwork is a pre-rasterized bitmap (public/fish-mark.webp), not
-// the SVG: fixed-in-clip-path layers get re-rasterized by WebKit on every
-// scroll frame, and blitting a bitmap is cheap enough that iPads keep up
-// during fast flicks (vector re-rendering was what caused black tiles).
-const boxClasses =
-  "pointer-events-none fixed -z-10 select-none right-[-70px] top-[18vh] h-[20rem] w-[16rem] sm:h-[26rem] sm:w-[21rem] lg:right-[9.5rem] lg:top-[8.2rem] lg:h-[31.8rem] lg:w-[25.8rem]";
+// Desktop (hover-capable): the fish is position: fixed and clipped by each
+// section's clip-path — it visibly stands still while content scrolls past.
+// Touch devices: WebKit re-rasterizes fixed-in-clip-path layers every scroll
+// frame and cannot keep up on fast flicks (black tiles), and JS pinning lags
+// behind momentum scroll. So on touch the .fish-wrap/.fish-stick overrides in
+// globals.css turn this into a sticky element — sticky is moved on the
+// compositor thread (like sticky headers): zero lag, zero repaint. The fish
+// pins to the same screen spot while its section passes and hands off
+// smoothly at boundaries. Artwork is a pre-rasterized bitmap for cheap
+// compositing.
+const wrapClasses =
+  "fish-wrap pointer-events-none fixed -z-10 select-none right-[-70px] top-[18vh] h-[20rem] w-[16rem] sm:h-[26rem] sm:w-[21rem] lg:right-[9.5rem] lg:top-[8.2rem] lg:h-[31.8rem] lg:w-[25.8rem]";
+
+const stickClasses = "fish-stick relative h-full w-full";
 
 export default function SectionWatermark({ variant = "grey" }: SectionWatermarkProps) {
   if (variant === "hero") {
     return (
-      <div aria-hidden className={boxClasses}>
-        <Image
-          className="fish-glow-img absolute inset-[-5.5rem] hidden h-[calc(100%+11rem)] w-[calc(100%+11rem)] object-contain opacity-75 blur-[88px] saturate-150 lg:block"
-          src="/fish-mark.webp"
-          alt=""
-          fill
-          priority
-          sizes="540px"
-        />
-        <div className="fish-glow-grad absolute inset-[-8rem] bg-[radial-gradient(48%_42%_at_38%_36%,rgba(204,26,44,0.34),transparent_100%),radial-gradient(38%_36%_at_58%_58%,rgba(22,140,205,0.28),transparent_100%),radial-gradient(34%_30%_at_48%_46%,rgba(204,26,44,0.18),transparent_100%)] [mask-image:radial-gradient(closest-side,#000_55%,transparent_98%)] lg:bg-[radial-gradient(circle_at_center,rgba(204,26,44,0.2),rgba(22,140,205,0.18)_58%,rgba(15,15,13,0)_76%)] lg:blur-[72px] lg:[mask-image:none]" />
-        <Image
-          className="absolute inset-0 h-full w-full object-contain opacity-[0.72] brightness-0"
-          src="/fish-mark.webp"
-          alt=""
-          fill
-          priority
-          sizes="420px"
-        />
+      <div aria-hidden className={wrapClasses}>
+        <div className={stickClasses}>
+          <Image
+            className="fish-glow-img absolute inset-[-5.5rem] hidden h-[calc(100%+11rem)] w-[calc(100%+11rem)] object-contain opacity-75 blur-[88px] saturate-150 lg:block"
+            src="/fish-mark.webp"
+            alt=""
+            fill
+            priority
+            sizes="540px"
+          />
+          <div className="fish-glow-grad absolute inset-[-8rem] bg-[radial-gradient(48%_42%_at_38%_36%,rgba(204,26,44,0.34),transparent_100%),radial-gradient(38%_36%_at_58%_58%,rgba(22,140,205,0.28),transparent_100%),radial-gradient(34%_30%_at_48%_46%,rgba(204,26,44,0.18),transparent_100%)] [mask-image:radial-gradient(closest-side,#000_55%,transparent_98%)] lg:bg-[radial-gradient(circle_at_center,rgba(204,26,44,0.2),rgba(22,140,205,0.18)_58%,rgba(15,15,13,0)_76%)] lg:blur-[72px] lg:[mask-image:none]" />
+          <Image
+            className="absolute inset-0 h-full w-full object-contain opacity-[0.72] brightness-0"
+            src="/fish-mark.webp"
+            alt=""
+            fill
+            priority
+            sizes="420px"
+          />
+        </div>
       </div>
     );
   }
 
   return (
-    <div aria-hidden className={boxClasses}>
-      <Image
-        className="absolute inset-0 h-full w-full object-contain brightness-0 opacity-[0.06]"
-        src="/fish-mark.webp"
-        alt=""
-        fill
-        sizes="420px"
-      />
+    <div aria-hidden className={wrapClasses}>
+      <div className={stickClasses}>
+        <Image
+          className="absolute inset-0 h-full w-full object-contain brightness-0 opacity-[0.06]"
+          src="/fish-mark.webp"
+          alt=""
+          fill
+          sizes="420px"
+        />
+      </div>
     </div>
   );
 }

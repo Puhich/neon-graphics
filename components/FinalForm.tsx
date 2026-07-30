@@ -4,6 +4,7 @@ type FinalFormContent = typeof import("@/data/content.json")["finalForm"];
 
 type FinalFormProps = {
   form: FinalFormContent;
+  privacyHref: string;
 };
 
 function CheckIcon() {
@@ -14,7 +15,7 @@ function CheckIcon() {
   );
 }
 
-export default function FinalForm({ form }: FinalFormProps) {
+export default function FinalForm({ form, privacyHref }: FinalFormProps) {
   return (
     <section className="relative isolate bg-white px-5 py-16 text-brand-ink [clip-path:inset(0)] sm:px-6 lg:px-8 xl:px-0 lg:py-20" id={form.id}>
       <SectionWatermark />
@@ -63,7 +64,12 @@ export default function FinalForm({ form }: FinalFormProps) {
           >
             {form.submitText}
           </button>
-          <p className="mt-4 text-[13px] leading-[1.4] text-[#666666]">{form.privacyText}</p>
+          <p className="mt-4 text-[13px] leading-[1.4] text-[#666666]">
+            {form.privacyPrefix}
+            <a className="underline underline-offset-2 transition hover:text-brand-ink" href={privacyHref}>
+              {form.privacyLinkText}
+            </a>
+          </p>
         </form>
       </div>
     </section>

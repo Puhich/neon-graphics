@@ -99,7 +99,7 @@ export default function Footer({ footer }: FooterProps) {
 
         <div className="mt-6 flex flex-col gap-4 text-[12px] text-[#666666] xl:flex-row xl:items-center xl:justify-between">
           <p className="text-[11px] xl:whitespace-nowrap xl:text-[12px]">{footer.copyright}</p>
-          <a className="text-[#999999] transition hover:text-white" href="#contacts">
+          <a className="text-[#999999] transition hover:text-white" href={footer.privacyHref}>
             {footer.privacy}
           </a>
         </div>

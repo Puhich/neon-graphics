@@ -26,7 +26,7 @@ export default function Home() {
       <Reviews reviews={content.reviews} />
       <DirectorQuote quote={content.directorQuote} />
       <FAQ faq={content.faq} />
-      <FinalForm form={content.finalForm} />
+      <FinalForm form={content.finalForm} privacyHref={content.footer.privacyHref} />
       <Contacts contacts={content.contacts} />
       <Footer footer={content.footer} />
     </main>
