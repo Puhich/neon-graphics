@@ -1,28 +1,6 @@
 "use client";
 
-import {
-  Building2,
-  CircleHelp,
-  ClipboardList,
-  Cookie,
-  FileText,
-  Image as ImageIcon,
-  LayoutDashboard,
-  ListOrdered,
-  Menu,
-  MessageSquareQuote,
-  PanelBottom,
-  Quote,
-  Search,
-  Send,
-  Settings2,
-  Sparkles,
-  Star,
-  Store,
-  Users,
-  Wrench,
-  X
-} from "lucide";
+import { Menu, X } from "lucide";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -31,31 +9,9 @@ import { useEffect, useState } from "react";
 import ClientIcon from "@/components/admin/ClientIcon";
 import PublishBar from "@/components/admin/PublishBar";
 import { useContentStore } from "@/components/admin/ContentProvider";
+import { fallbackIcon, routeIcons } from "@/components/admin/route-icons";
 import { adminNav, sectionsByRoute } from "@/lib/admin-nav";
 import type { IconNode } from "@/lib/icons";
-
-const routeIcons: Record<string, IconNode> = {
-  "/admin": LayoutDashboard as IconNode,
-  "/admin/header": Menu as IconNode,
-  "/admin/hero": Sparkles as IconNode,
-  "/admin/clients": Users as IconNode,
-  "/admin/services": Wrench as IconNode,
-  "/admin/portfolio": ImageIcon as IconNode,
-  "/admin/why-us": Star as IconNode,
-  "/admin/cta": Send as IconNode,
-  "/admin/stages": ListOrdered as IconNode,
-  "/admin/reviews": MessageSquareQuote as IconNode,
-  "/admin/director": Quote as IconNode,
-  "/admin/faq": CircleHelp as IconNode,
-  "/admin/form": ClipboardList as IconNode,
-  "/admin/contacts": Store as IconNode,
-  "/admin/footer": PanelBottom as IconNode,
-  "/admin/company": Building2 as IconNode,
-  "/admin/seo": Search as IconNode,
-  "/admin/privacy": FileText as IconNode,
-  "/admin/misc": Cookie as IconNode,
-  "/admin/settings": Settings2 as IconNode
-};
 
 function isRouteChanged(href: string, changedSections: string[]): boolean {
   const sections = sectionsByRoute[href];
@@ -127,7 +83,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
                     >
                       <ClientIcon
                         className={`h-[18px] w-[18px] shrink-0 ${isActive ? "text-brand-accent" : "text-[#6f6f6a]"}`}
-                        node={routeIcons[item.href] ?? (Sparkles as IconNode)}
+                        node={routeIcons[item.href] ?? fallbackIcon}
                       />
                       <span className="flex-1 truncate">{item.label}</span>
                       {hasIssue ? (

@@ -2,7 +2,9 @@
 
 import Link from "next/link";
 
+import ClientIcon from "@/components/admin/ClientIcon";
 import { useContentStore } from "@/components/admin/ContentProvider";
+import { fallbackIcon, routeIcons } from "@/components/admin/route-icons";
 import { Card, Note, Page } from "@/components/admin/ui";
 import { adminNav, sectionTitles, sectionsByRoute } from "@/lib/admin-nav";
 
@@ -70,23 +72,33 @@ export default function AdminDashboardPage() {
         )}
       </Card>
 
-      <Card title="Разделы" description="Всё, что можно менять на сайте.">
-        <div className="grid gap-2 sm:grid-cols-2">
-          {adminNav
-            .flatMap((group) => group.items)
-            .filter((item) => item.href !== "/admin")
-            .map((item) => (
-              <Link
-                className="rounded-xl border border-white/10 bg-[#0f0f0d] px-4 py-3 transition hover:border-white/25"
-                href={item.href}
-                key={item.href}
-              >
-                <span className="block text-[14px] text-white">{item.label}</span>
-                {item.hint ? <span className="mt-0.5 block text-[12px] text-[#6f6f6a]">{item.hint}</span> : null}
-              </Link>
-            ))}
-        </div>
-      </Card>
+      {adminNav
+        .filter((group) => group.items.some((item) => item.href !== "/admin"))
+        .map((group) => (
+          <Card key={group.title} title={group.title}>
+            <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
+              {group.items
+                .filter((item) => item.href !== "/admin")
+                .map((item) => (
+                  <Link
+                    className="group flex min-h-[136px] flex-col justify-between rounded-2xl border border-white/10 bg-[#0f0f0d] p-4 transition hover:border-brand-accent/45 hover:bg-[#191917]"
+                    href={item.href}
+                    key={item.href}
+                  >
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 text-brand-accent transition group-hover:bg-brand-accent/15">
+                      <ClientIcon className="h-5 w-5" node={routeIcons[item.href] ?? fallbackIcon} />
+                    </span>
+                    <span className="mt-4">
+                      <span className="block text-[14px] font-semibold leading-[1.3] text-white">{item.label}</span>
+                      {item.hint ? (
+                        <span className="mt-1 block text-[12px] leading-[1.4] text-[#6f6f6a]">{item.hint}</span>
+                      ) : null}
+                    </span>
+                  </Link>
+                ))}
+            </div>
+          </Card>
+        ))}
     </Page>
   );
 }
