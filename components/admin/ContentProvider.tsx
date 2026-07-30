@@ -58,6 +58,7 @@ export function ContentProvider({
   const [isReady, setIsReady] = useState(false);
   const [publishState, setPublishState] = useState<PublishState>({ status: "idle" });
   const saveTimer = useRef<ReturnType<typeof setTimeout>>();
+  const previousPublished = useRef(published);
 
   // Черновик переживает перезагрузку страницы. Если сайт успели опубликовать
   // из другого места, черновик от старой версии отбрасываем.
@@ -79,6 +80,21 @@ export function ContentProvider({
     }
 
     setIsReady(true);
+  }, [published]);
+
+  // Сайт могли опубликовать из другого места (или мы сами только что). Если
+  // своих несохранённых правок нет — просто подхватываем новую версию, иначе
+  // оставляем черновик и показываем его как изменения.
+  useEffect(() => {
+    if (JSON.stringify(previousPublished.current) === JSON.stringify(published)) {
+      return;
+    }
+
+    setContent((current) =>
+      JSON.stringify(current) === JSON.stringify(previousPublished.current) ? clone(published) : current
+    );
+
+    previousPublished.current = published;
   }, [published]);
 
   const update = useCallback((mutate: (draft: SiteContent) => void) => {

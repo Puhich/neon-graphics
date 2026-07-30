@@ -18,7 +18,8 @@ import {
   verticalListSortingStrategy
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { GripVertical, Trash2 } from "lucide";
+import { ChevronDown, ChevronUp, GripVertical, Trash2 } from "lucide";
+import { useId } from "react";
 
 import ClientIcon from "@/components/admin/ClientIcon";
 import type { IconNode } from "@/lib/icons";
@@ -41,13 +42,19 @@ function SortableRow({
   id,
   title,
   onRemove,
+  onMove,
   canRemove,
+  canMoveUp,
+  canMoveDown,
   children
 }: {
   id: string;
   title: string;
   onRemove: () => void;
+  onMove: (direction: -1 | 1) => void;
   canRemove: boolean;
+  canMoveUp: boolean;
+  canMoveDown: boolean;
   children: React.ReactNode;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id });
@@ -69,6 +76,24 @@ function SortableRow({
           <ClientIcon className="h-4 w-4" node={GripVertical as IconNode} />
         </button>
         <span className="min-w-0 flex-1 truncate text-[13px] font-semibold text-[#c9c9c4]">{title}</span>
+        <button
+          aria-label="Переместить выше"
+          className="rounded-lg p-1.5 text-[#6f6f6a] transition hover:text-white disabled:opacity-30 disabled:hover:text-[#6f6f6a]"
+          disabled={!canMoveUp}
+          onClick={() => onMove(-1)}
+          type="button"
+        >
+          <ClientIcon className="h-4 w-4" node={ChevronUp as IconNode} />
+        </button>
+        <button
+          aria-label="Переместить ниже"
+          className="rounded-lg p-1.5 text-[#6f6f6a] transition hover:text-white disabled:opacity-30 disabled:hover:text-[#6f6f6a]"
+          disabled={!canMoveDown}
+          onClick={() => onMove(1)}
+          type="button"
+        >
+          <ClientIcon className="h-4 w-4" node={ChevronDown as IconNode} />
+        </button>
         {canRemove ? (
           <button
             aria-label="Удалить"
@@ -95,6 +120,9 @@ export default function ListEditor<T>({
   minItems = 0,
   emptyLabel = "Пока пусто"
 }: ListEditorProps<T>) {
+  // Свой стабильный id: иначе dnd-kit нумерует контексты по порядку
+  // монтирования и разметка сервера не совпадает с клиентской.
+  const dndId = useId();
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 4 } }),
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
@@ -123,6 +151,7 @@ export default function ListEditor<T>({
 
       <DndContext
         collisionDetection={closestCenter}
+        id={dndId}
         modifiers={[restrictToVerticalAxis, restrictToParentElement]}
         onDragEnd={handleDragEnd}
         sensors={sensors}
@@ -131,9 +160,12 @@ export default function ListEditor<T>({
           <div className="grid gap-3">
             {items.map((item, index) => (
               <SortableRow
+                canMoveDown={index < items.length - 1}
+                canMoveUp={index > 0}
                 canRemove={items.length > minItems}
                 id={ids[index]}
                 key={ids[index]}
+                onMove={(direction) => onChange(arrayMove(items, index, index + direction))}
                 onRemove={() => onChange(items.filter((_, itemIndex) => itemIndex !== index))}
                 title={itemTitle(item, index) || `Элемент ${index + 1}`}
               >

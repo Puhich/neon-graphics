@@ -32,18 +32,51 @@
     "menuOpenLabel": "Открыть меню",
     "menuCloseLabel": "Закрыть меню",
     "links": [
-      { "label": "Услуги", "href": "#services" },
-      { "label": "Проекты", "href": "#portfolio" },
-      { "label": "О нас", "href": "#why-us" },
-      { "label": "Этапы", "href": "#stages" },
-      { "label": "Отзывы", "href": "#reviews" },
-      { "label": "FAQ", "href": "#faq" },
-      { "label": "Контакты", "href": "#contacts" }
+      {
+        "label": "Услуги",
+        "href": "#services"
+      },
+      {
+        "label": "Проекты",
+        "href": "#portfolio"
+      },
+      {
+        "label": "О нас",
+        "href": "#why-us"
+      },
+      {
+        "label": "Этапы",
+        "href": "#stages"
+      },
+      {
+        "label": "Отзывы",
+        "href": "#reviews"
+      },
+      {
+        "label": "FAQ",
+        "href": "#faq"
+      },
+      {
+        "label": "Контакты",
+        "href": "#contacts"
+      }
     ],
     "socials": [
-      { "label": "Telegram", "href": "https://telegram.org", "icon": "telegram" },
-      { "label": "MAX", "href": "https://max.ru", "icon": "max" },
-      { "label": "VK", "href": "https://vk.com", "icon": "vk" }
+      {
+        "label": "Telegram",
+        "href": "https://telegram.org",
+        "icon": "telegram"
+      },
+      {
+        "label": "MAX",
+        "href": "https://max.ru",
+        "icon": "max"
+      },
+      {
+        "label": "VK",
+        "href": "https://vk.com",
+        "icon": "vk"
+      }
     ],
     "cta": {
       "label": "Заказать",
@@ -91,10 +124,22 @@
       }
     ],
     "stats": [
-      { "value": "300+", "label": "заказов в год" },
-      { "value": "20+", "label": "лет на рынке" },
-      { "value": "105+", "label": "клиентов ежегодно" },
-      { "value": "100%", "label": "свое производство" }
+      {
+        "value": "300+",
+        "label": "заказов в год"
+      },
+      {
+        "value": "20+",
+        "label": "лет на рынке"
+      },
+      {
+        "value": "105+",
+        "label": "клиентов ежегодно"
+      },
+      {
+        "value": "100%",
+        "label": "свое производство"
+      }
     ]
   },
   "clientsLogos": {
@@ -102,14 +147,38 @@
     "title": "Работаем с локальными и федеральными брендами",
     "note": "И ещё десятки магазинов, кафе, банков, управляющих компаний и производств по всей России.",
     "items": [
-      { "src": "/logos/Logo_01.png", "alt": "РусГидро" },
-      { "src": "/logos/Logo_02.png", "alt": "Сбер Банк" },
-      { "src": "/logos/Logo_03.png", "alt": "КуйбышевАзот" },
-      { "src": "/logos/Logo_04.png", "alt": "Банк Авангард" },
-      { "src": "/logos/Logo_05.png", "alt": "Дежурная Аптека 245" },
-      { "src": "/logos/Logo_06.png", "alt": "Транспорт будущего" },
-      { "src": "/logos/Logo_07.png", "alt": "Додо Пицца" },
-      { "src": "/logos/Logo_08.png", "alt": "Клиент Неон Графикс" }
+      {
+        "src": "/logos/Logo_01.png",
+        "alt": "РусГидро"
+      },
+      {
+        "src": "/logos/Logo_02.png",
+        "alt": "Сбер Банк"
+      },
+      {
+        "src": "/logos/Logo_03.png",
+        "alt": "КуйбышевАзот"
+      },
+      {
+        "src": "/logos/Logo_04.png",
+        "alt": "Банк Авангард"
+      },
+      {
+        "src": "/logos/Logo_05.png",
+        "alt": "Дежурная Аптека 245"
+      },
+      {
+        "src": "/logos/Logo_06.png",
+        "alt": "Транспорт будущего"
+      },
+      {
+        "src": "/logos/Logo_07.png",
+        "alt": "Додо Пицца"
+      },
+      {
+        "src": "/logos/Logo_08.png",
+        "alt": "Клиент Неон Графикс"
+      }
     ]
   },
   "services": {
@@ -218,8 +287,14 @@
           "title": "Собственное производство полного цикла",
           "description": "Всё — от проектирования до монтажа — делаем сами на собственной производственной базе в Тольятти. Фрезеровка ЧПУ, лазерная резка, сборка и покраска. Работаем с акрилом, композитом, нержавеющей сталью, LED-модулями и неоном.",
           "metrics": [
-            { "value": "300+", "label": "заказов в год" },
-            { "value": "500+", "label": "проектов" }
+            {
+              "value": "300+",
+              "label": "заказов в год"
+            },
+            {
+              "value": "500+",
+              "label": "проектов"
+            }
           ]
         },
         "image": {
@@ -234,8 +309,14 @@
           "title": "Более 20 лет на рынке наружной рекламы",
           "description": "С 2002 года реализовали сотни проектов для крупнейших компаний — РусГидро, Сбербанк, Магнит (АО Тандер), Cherry. Полный цикл под ключ: не нужно искать разных подрядчиков. Гарантия от 1 года до 5 лет на работы и материалы.",
           "metrics": [
-            { "value": "20+", "label": "лет опыта" },
-            { "value": "105+", "label": "клиентов" }
+            {
+              "value": "20+",
+              "label": "лет опыта"
+            },
+            {
+              "value": "105+",
+              "label": "клиентов"
+            }
           ]
         },
         "image": {
@@ -250,8 +331,14 @@
           "title": "Профессиональные электромонтажные работы",
           "description": "Все работы по подключению световых вывесок выполняем сами — лицензированные электрики в штате. Надёжное подключение, согласование с энергоснабжающими организациями, гарантия безопасности.",
           "metrics": [
-            { "value": "3-15", "label": "дней на изготовление" },
-            { "value": "100%", "label": "контроль подключения" }
+            {
+              "value": "3-15",
+              "label": "дней на изготовление"
+            },
+            {
+              "value": "100%",
+              "label": "контроль подключения"
+            }
           ]
         },
         "image": {
@@ -441,8 +528,14 @@
   },
   "contacts": {
     "id": "contacts",
-    "mapCenter": [53.534555, 49.257789],
-    "mapWidgetCenter": [53.534555, 49.249789],
+    "mapCenter": [
+      53.534555,
+      49.257789
+    ],
+    "mapWidgetCenter": [
+      53.534555,
+      49.249789
+    ],
     "mapZoom": 15,
     "mapAlt": "Карта проезда к Неон Графикс",
     "mapLoadLabel": "Показать карту",
@@ -470,27 +563,75 @@
     "logoAlt": "Неон Графикс",
     "about": "Производство наружной рекламы полного цикла. Работаем с 2002 года.",
     "socials": [
-      { "label": "Telegram", "href": "https://telegram.org", "icon": "telegram" },
-      { "label": "MAX", "href": "https://max.ru", "icon": "max" },
-      { "label": "VK", "href": "https://vk.com", "icon": "vk" }
+      {
+        "label": "Telegram",
+        "href": "https://telegram.org",
+        "icon": "telegram"
+      },
+      {
+        "label": "MAX",
+        "href": "https://max.ru",
+        "icon": "max"
+      },
+      {
+        "label": "VK",
+        "href": "https://vk.com",
+        "icon": "vk"
+      }
     ],
     "navTitle": "Разделы",
     "nav": [
-      { "label": "Услуги", "href": "#services" },
-      { "label": "Проекты", "href": "#portfolio" },
-      { "label": "О нас", "href": "#why-us" },
-      { "label": "Этапы", "href": "#stages" },
-      { "label": "Отзывы", "href": "#reviews" },
-      { "label": "FAQ", "href": "#faq" }
+      {
+        "label": "Услуги",
+        "href": "#services"
+      },
+      {
+        "label": "Проекты",
+        "href": "#portfolio"
+      },
+      {
+        "label": "О нас",
+        "href": "#why-us"
+      },
+      {
+        "label": "Этапы",
+        "href": "#stages"
+      },
+      {
+        "label": "Отзывы",
+        "href": "#reviews"
+      },
+      {
+        "label": "FAQ",
+        "href": "#faq"
+      }
     ],
     "servicesTitle": "Услуги",
     "services": [
-      { "label": "Уличные вывески", "href": "#services" },
-      { "label": "Объёмные буквы", "href": "#services" },
-      { "label": "Световые короба", "href": "#services" },
-      { "label": "Крышные установки", "href": "#services" },
-      { "label": "Оформление фасадов", "href": "#services" },
-      { "label": "Вывески на козырьках", "href": "#services" }
+      {
+        "label": "Уличные вывески",
+        "href": "#services"
+      },
+      {
+        "label": "Объёмные буквы",
+        "href": "#services"
+      },
+      {
+        "label": "Световые короба",
+        "href": "#services"
+      },
+      {
+        "label": "Крышные установки",
+        "href": "#services"
+      },
+      {
+        "label": "Оформление фасадов",
+        "href": "#services"
+      },
+      {
+        "label": "Вывески на козырьках",
+        "href": "#services"
+      }
     ],
     "contactsTitle": "Контакты",
     "privacy": "Политика конфиденциальности",

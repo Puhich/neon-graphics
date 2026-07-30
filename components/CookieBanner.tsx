@@ -31,7 +31,7 @@ export default function CookieBanner({
   };
 
   return (
-    <div className="fixed bottom-3 left-3 right-3 z-[2147483646] mx-auto max-w-[760px] rounded-2xl border border-[#2a2a28] bg-[#151513]/97 p-4 text-white shadow-[0_18px_48px_rgba(0,0,0,0.5)] backdrop-blur sm:bottom-5 sm:left-5 sm:right-5 sm:p-5">
+    <div className="fixed bottom-3 left-3 right-3 z-[2147483646] mx-auto max-w-[760px] rounded-2xl border border-[#2a2a28] bg-[#151513]/95 p-4 text-white shadow-[0_18px_48px_rgba(0,0,0,0.5)] backdrop-blur sm:bottom-5 sm:left-5 sm:right-5 sm:p-5">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
         <p className="flex-1 text-[13px] leading-[1.5] text-[#b5b5b0]">
           {banner.text}{" "}
