@@ -23,7 +23,7 @@ export default function Services({ services }: ServicesProps) {
         <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {services.main.map((service) => (
             <article className="rounded-2xl bg-[#f8f8f8] p-7" key={service.title}>
-              <div className="relative h-40 overflow-hidden rounded-xl bg-zinc-200">
+              <div className="relative h-52 overflow-hidden rounded-xl bg-zinc-200 lg:h-56">
                 <Image
                   className="object-cover"
                   src={service.imageSrc}
