@@ -179,7 +179,7 @@ export default function Hero({ content }: HeroProps) {
       </div>
 
       <header
-        className="sticky top-0 z-[9000] -mb-[64px] lg:-mb-[88px]"
+        className="sticky top-0 z-[9000] -mb-[64px] lg:-mb-[80px] xl:-mb-[88px]"
         style={{
           "--nav-bg-opacity": isMenuOpen ? 0.9 : navOpacity * 0.9,
           "--nav-blur": `${(isMenuOpen ? 1 : navOpacity) * 18}px`,
@@ -190,24 +190,24 @@ export default function Hero({ content }: HeroProps) {
         <div
           className="nav-backdrop pointer-events-none absolute inset-0 bg-[rgb(7_7_6_/_var(--nav-bg-opacity))] shadow-[0_10px_34px_rgb(0_0_0_/_var(--nav-shadow-opacity))] lg:backdrop-blur-[var(--nav-blur)]"
         />
-        <div className="relative mx-auto flex max-w-[1200px] items-center justify-between px-5 py-2 sm:px-6 lg:px-0">
+        <div className="relative mx-auto flex max-w-[1200px] items-center justify-between px-5 py-2 sm:px-6 lg:px-8 xl:px-0">
           <Image
-            className="h-12 w-auto origin-left lg:h-[72px] lg:transition-transform lg:duration-150 lg:[transform:scale(var(--logo-scale))]"
+            className="h-12 w-auto origin-left lg:h-16 lg:transition-transform lg:duration-150 lg:[transform:scale(var(--logo-scale))] xl:h-[72px]"
             src={nav.logoSrc}
             alt={nav.logoAlt}
             width={185}
             height={80}
             priority
           />
-          <div className="hidden items-center gap-7 lg:flex">
-            <nav className="flex items-center gap-8 text-[14px] font-medium text-[#999999]">
+          <div className="hidden items-center gap-4 lg:flex xl:gap-7">
+            <nav className="flex items-center gap-4 whitespace-nowrap text-[14px] font-medium text-[#999999] xl:gap-8">
               {nav.links.map((link) => (
                 <a className="transition hover:text-white" href={link.href} key={link.label}>
                   {link.label}
                 </a>
               ))}
             </nav>
-            <div className="flex items-center gap-5 text-[#999999]">
+            <div className="flex items-center gap-3.5 text-[#999999] xl:gap-5">
               {nav.socials.map((social) => (
                 <a
                   aria-label={social.label}
@@ -360,7 +360,7 @@ export default function Hero({ content }: HeroProps) {
         </div>
       </div>
 
-      <dl className="relative z-10 mx-auto grid max-w-[1200px] grid-cols-2 gap-y-8 px-5 pb-12 pt-3 sm:px-6 lg:grid-cols-4 lg:px-0 lg:pb-16">
+      <dl className="relative z-10 mx-auto grid max-w-[1200px] grid-cols-2 gap-y-8 px-5 pb-12 pt-3 sm:px-6 lg:grid-cols-4 lg:px-8 xl:px-0 lg:pb-16">
         {stats.map((stat) => (
           <div className="border-white/10 text-center lg:border-l lg:first:border-l-0" key={stat.label}>
             <dt className="font-heading text-[36px] leading-none text-brand-accent sm:text-[48px]">{stat.value}</dt>

@@ -54,7 +54,7 @@ export default function Reviews({ reviews }: ReviewsProps) {
   };
 
   return (
-    <section className="relative isolate bg-white px-5 py-16 text-brand-ink [clip-path:inset(0)] sm:px-6 lg:px-0 lg:py-20" id={reviews.id}>
+    <section className="relative isolate bg-white px-5 py-16 text-brand-ink [clip-path:inset(0)] sm:px-6 lg:px-8 xl:px-0 lg:py-20" id={reviews.id}>
       <SectionWatermark />
       <div className="reveal mx-auto max-w-[1200px]">
         <div className="mx-auto max-w-[720px] text-center">
@@ -73,7 +73,7 @@ export default function Reviews({ reviews }: ReviewsProps) {
           </button>
 
           <div
-            className="flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-smooth px-8 pb-4 [touch-action:pan-x_pan-y] sm:gap-6 sm:px-11 lg:px-0 lg:pb-0 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-smooth px-8 pb-4 [touch-action:pan-x_pan-y] sm:gap-6 sm:px-11 lg:px-8 xl:px-0 lg:pb-0 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             ref={scrollerRef}
           >
             {reviews.items.map((review) => (

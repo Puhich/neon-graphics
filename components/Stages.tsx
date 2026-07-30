@@ -8,7 +8,7 @@ type StagesProps = {
 
 export default function Stages({ stages }: StagesProps) {
   return (
-    <section className="relative isolate bg-[#f8f8f8] px-5 pb-16 pt-4 text-brand-ink [clip-path:inset(0)] sm:px-6 lg:px-0 lg:pb-20 lg:pt-6" id={stages.id}>
+    <section className="relative isolate bg-[#f8f8f8] px-5 pb-16 pt-4 text-brand-ink [clip-path:inset(0)] sm:px-6 lg:px-8 xl:px-0 lg:pb-20 lg:pt-6" id={stages.id}>
       <SectionWatermark />
       <div className="reveal mx-auto max-w-[1200px]">
         <div className="mx-auto max-w-[760px] text-center">

@@ -52,7 +52,7 @@ export default function Portfolio({ portfolio }: PortfolioProps) {
   }, [slides.length]);
 
   return (
-    <section className="relative isolate bg-[#f8f8f8] px-5 py-16 text-brand-ink [clip-path:inset(0)] sm:px-6 lg:px-0 lg:py-20" id={portfolio.id}>
+    <section className="relative isolate bg-[#f8f8f8] px-5 py-16 text-brand-ink [clip-path:inset(0)] sm:px-6 lg:px-8 xl:px-0 lg:py-20" id={portfolio.id}>
       <SectionWatermark />
       <div className="reveal mx-auto max-w-[1200px] text-center">
         <h2 className="font-heading text-[34px] leading-tight sm:text-[42px] lg:text-[48px]">{portfolio.title}</h2>

@@ -46,7 +46,7 @@ function TextCard({ card }: { card: WhyUsContent["rows"][number]["card"] }) {
 
 export default function WhyUs({ whyUs }: WhyUsProps) {
   return (
-    <section className="relative isolate bg-white px-5 py-16 text-brand-ink [clip-path:inset(0)] sm:px-6 lg:px-0 lg:py-20" id={whyUs.id}>
+    <section className="relative isolate bg-white px-5 py-16 text-brand-ink [clip-path:inset(0)] sm:px-6 lg:px-8 xl:px-0 lg:py-20" id={whyUs.id}>
       <SectionWatermark />
       <div className="reveal mx-auto max-w-[1200px]">
         <div className="mx-auto max-w-[840px] text-center">

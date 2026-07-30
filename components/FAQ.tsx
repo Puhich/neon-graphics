@@ -14,7 +14,7 @@ export default function FAQ({ faq }: FAQProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="relative isolate bg-[#f8f8f8] px-5 pb-16 pt-4 text-brand-ink [clip-path:inset(0)] sm:px-6 lg:px-0 lg:pb-20 lg:pt-6" id={faq.id}>
+    <section className="relative isolate bg-[#f8f8f8] px-5 pb-16 pt-4 text-brand-ink [clip-path:inset(0)] sm:px-6 lg:px-8 xl:px-0 lg:pb-20 lg:pt-6" id={faq.id}>
       <SectionWatermark />
       <div className="reveal mx-auto grid max-w-[1200px] gap-10 lg:grid-cols-[360px_1fr] lg:justify-between lg:gap-12">
         <div>
