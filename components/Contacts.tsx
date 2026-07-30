@@ -83,7 +83,7 @@ export default function Contacts({ contacts }: ContactsProps) {
               </a>
             </div>
 
-            <div className="my-6 h-px bg-[#242421]" />
+            <div className="my-6 h-px bg-white/10" />
 
             <div className="grid gap-4">
               <div className="flex items-center gap-4 pl-1">

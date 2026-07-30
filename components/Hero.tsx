@@ -353,7 +353,7 @@ export default function Hero({ content }: HeroProps) {
                 alt={image.alt}
                 fill
                 sizes="(min-width: 1536px) 410px, (min-width: 1024px) 340px, (min-width: 640px) 292px, 238px"
-                priority={index < hero.images.length}
+                priority={index < 3}
               />
             </div>
           ))}
