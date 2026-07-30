@@ -1,91 +1,66 @@
 # Neon Graphics Project Status
 
-Last updated: 2026-05-06
+Last updated: 2026-07-30
 
 ## Current Goal
 
-Preview landing page for Neon Graphics is ready to share with the client.
-
-Current flow:
-
-1. Finish visual preview.
-2. Push to GitHub.
-3. Import/deploy from GitHub to Vercel.
-4. Send preview link to client.
-5. Collect client edits.
-6. Later: build admin area and move editable site data into a GitHub-backed JSON workflow.
+Лендинг готов и одобрен клиентом. Админка на `/admin` собрана: клиент правит
+весь контент сам и публикует изменения в один клик. Осталось привязать домен,
+подключить аналитику и заполнить переменные окружения на Vercel —
+подробности в `LAUNCH-CHECKLIST.md`.
 
 ## Repository
 
 - GitHub: `https://github.com/Puhich/neon-graphics`
-- Branch: `main`
+- Branch: `main` (Vercel деплоит отсюда)
 - Stack: Next.js 14 App Router, TypeScript, Tailwind CSS
-- Main content source for the landing page: `data/content.json`
+- Контент сайта: `data/content.json`, схема — `lib/content-schema.ts`
 
 ## Important Files
 
-- `app/page.tsx` - page composition and section order
-- `data/content.json` - text, links, stats, services, FAQ, reviews, contacts, images
-- `components/Hero.tsx` - hero, top menu, mobile menu, hero carousel, floating phone button
-- `components/ClientsLogos.tsx` - client logo section after hero
-- `components/Services.tsx` - services and additional services
-- `components/Portfolio.tsx` - projects slider
-- `components/WhyUs.tsx` - bento "why us" section and advantages
-- `components/CTASection.tsx` - dark CTA card
-- `components/Stages.tsx` - work steps
-- `components/Reviews.tsx` - reviews slider
-- `components/DirectorQuote.tsx` - direct quote card
-- `components/FAQ.tsx` - animated FAQ accordion
-- `components/FinalForm.tsx` - request form UI
-- `components/Contacts.tsx` - Yandex map and contact card
-- `components/Footer.tsx` - footer
-- `public/images/` - site photos
-- `public/logos/` - client logo images
+Сайт:
+
+- `app/page.tsx` — состав и порядок секций
+- `app/privacy/page.tsx` — политика конфиденциальности
+- `app/not-found.tsx` — 404
+- `app/robots.ts`, `app/sitemap.ts` — генерируются из домена в админке
+- `components/Hero.tsx`, `Services.tsx`, `WhyUs.tsx`, `Portfolio.tsx`,
+  `Reviews.tsx`, `DirectorQuote.tsx`, `FAQ.tsx`, `FinalForm.tsx`,
+  `Contacts.tsx`, `Footer.tsx` — секции
+- `components/SectionWatermark.tsx` — рыбка-водяной знак (хрупкая логика,
+  вместе с блоками `@media (hover: none)` в `app/globals.css`)
+- `components/CookieBanner.tsx`, `Metrika.tsx`, `SiteChrome.tsx`
+
+Админка:
+
+- `app/admin/(panel)/…` — 19 разделов
+- `components/admin/…` — оболочка, черновик, поля, списки, пикер иконок
+- `app/api/admin/…` — вход, публикация, загрузка картинок, иконки, статус
+- `app/api/lead` — заявки в Telegram и на почту
+- `lib/publisher.ts` — коммит в GitHub (или запись на диск локально)
 
 ## Current State
 
-- Landing page is static and data-driven from JSON.
-- Mobile and desktop layouts have been tuned manually after visual review.
-- Navigation is sticky: transparent at hero top, darkens with scroll.
-- Floating phone button is outside the hero section so it stays above map/footer.
-- Yandex map uses an embedded widget and a separate mobile center.
-- FAQ uses a controlled React accordion for smoother opening.
-- Form is visual-only for now: name, phone, email, message. No backend submit yet.
+- Реквизиты (телефон, почта, адрес, режим работы) вводятся один раз в разделе
+  «Реквизиты» и подставляются в топбар, контакты, футер, копирайт, кнопку звонка.
+- Иконки услуг и преимуществ — lucide по имени, в админке пикер с поиском.
+- Загрузка фото сама делает webp + варианты 640/1280 для кастомного лоадера.
+- Публикация — атомарный коммит `data/content.json`; ассеты коммитятся сразу
+  с `[skip ci]`.
+- Форма заявки рабочая: валидация, honeypot, ограничение частоты, цель Метрики
+  `lead_form_submit`.
+- Cookie-баннер: при отказе не грузятся Метрика и карта Яндекса.
 
-## Known Next Steps After Client Review
+## Next Steps
 
-- Apply client copy/design edits.
-- Decide final form handling:
-  - Telegram/email webhook,
-  - CRM,
-  - or simple serverless endpoint on Vercel.
-- Build admin area for editing JSON fields.
-- Define GitHub-backed content update flow:
-  - admin edits JSON,
-  - commit to GitHub,
-  - Vercel redeploys from `main`.
-- Add SEO metadata and Open Graph images.
-- Add privacy policy page/link before real launch.
-- Final production QA on mobile/desktop.
-
-## Local Reference Files Not Required For App Runtime
-
-These may exist locally as references and are not required by the Next.js app unless intentionally imported:
-
-- `NeonGraphics.pen`
-- `NeonGraphics-admin.pen`
-- `index_old.html`
-- `preview.html`
-- `Logos/`
-- `SVG/`
-- Excel/client brief files
+Всё в `LAUNCH-CHECKLIST.md`: переменные в Vercel, домен, SPF/DKIM/DMARC,
+Метрика и Вебмастер, OG-картинка, реальные ссылки соцсетей, вычитка политики
+юристом, финальная проверка и передача доступов клиенту.
 
 ## Commands
 
 ```bash
 npm run dev
-npm run lint
 npm run build
-git status
-git push
+npm run lint
 ```
