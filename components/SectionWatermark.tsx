@@ -21,7 +21,7 @@ export default function SectionWatermark({ variant = "grey" }: SectionWatermarkP
           priority
           sizes="540px"
         />
-        <div className="absolute inset-[-8rem] bg-[radial-gradient(closest-side,rgba(204,26,44,0.16),rgba(22,140,205,0.12)_55%,transparent_100%)] lg:bg-[radial-gradient(circle_at_center,rgba(204,26,44,0.2),rgba(22,140,205,0.18)_58%,rgba(15,15,13,0)_76%)] lg:blur-[72px]" />
+        <div className="absolute inset-[-8rem] bg-[radial-gradient(52%_46%_at_36%_34%,rgba(204,26,44,0.34),transparent_100%),radial-gradient(56%_50%_at_66%_72%,rgba(22,140,205,0.26),transparent_100%),radial-gradient(40%_36%_at_55%_50%,rgba(204,26,44,0.18),transparent_100%)] lg:bg-[radial-gradient(circle_at_center,rgba(204,26,44,0.2),rgba(22,140,205,0.18)_58%,rgba(15,15,13,0)_76%)] lg:blur-[72px]" />
         <Image
           className="absolute inset-0 h-full w-full object-contain opacity-[0.72] brightness-0"
           src="/logo-mark.svg"

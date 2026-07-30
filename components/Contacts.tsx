@@ -81,23 +81,28 @@ export default function Contacts({ contacts }: ContactsProps) {
                   <span className="mt-1 block text-[17px] font-extrabold">{contacts.email.value}</span>
                 </span>
               </a>
-              <div className="flex items-center gap-4 rounded-xl border border-[#242421] bg-[#181816] py-3.5 pl-5 pr-4">
+            </div>
+
+            <div className="my-6 h-px bg-[#242421]" />
+
+            <div className="grid gap-4">
+              <div className="flex items-center gap-4 pl-1">
                 <Icon muted path={iconPaths.pin} />
                 <span>
-                  <span className="block text-[11px] font-bold text-[#777777]">{contacts.address.label}</span>
-                  <span className="mt-1 block text-[14px] font-semibold leading-[1.3] text-[#c9c9c9]">{contacts.address.value}</span>
+                  <span className="block text-[11px] font-bold text-[#5a5a5a]">{contacts.address.label}</span>
+                  <span className="mt-1 block text-[13px] font-medium leading-[1.25] text-[#a0a0a0]">{contacts.address.value}</span>
                 </span>
               </div>
-              <div className="flex items-center gap-4 rounded-xl border border-[#242421] bg-[#181816] py-3.5 pl-5 pr-4">
+              <div className="flex items-center gap-4 pl-1">
                 <Icon muted path={iconPaths.clock} />
                 <span>
-                  <span className="block text-[11px] font-bold text-[#777777]">{contacts.schedule.label}</span>
-                  <span className="mt-1 block text-[14px] font-semibold text-[#c9c9c9]">{contacts.schedule.value}</span>
+                  <span className="block text-[11px] font-bold text-[#5a5a5a]">{contacts.schedule.label}</span>
+                  <span className="mt-1 block text-[13px] font-medium text-[#a0a0a0]">{contacts.schedule.value}</span>
                 </span>
               </div>
             </div>
 
-            <div className="mt-5 flex flex-wrap gap-2.5">
+            <div className="mt-6 flex flex-wrap gap-2.5">
               {contacts.mapButtons.map((button) => (
                 <a
                   className="inline-flex items-center gap-2.5 rounded-xl border border-[#2e2e2b] bg-[#1d1d1b] px-4 py-2.5 text-[13px] font-bold text-white transition hover:border-[#4a4a46] hover:bg-[#242422]"
