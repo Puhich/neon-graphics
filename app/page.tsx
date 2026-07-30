@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 import CTASection from "@/components/CTASection";
 import ClientsLogos from "@/components/ClientsLogos";
 import DirectorQuote from "@/components/DirectorQuote";
@@ -18,21 +16,6 @@ import content from "@/data/content.json";
 export default function Home() {
   return (
     <main className="min-h-screen bg-white">
-      {/* Touch-only stationary grey fish (see SectionWatermark): fixed outside
-          any clip-path so the compositor never repaints it. multiply blend
-          hides it on dark pixels; dark hosts sit above it via z-20. */}
-      <div
-        aria-hidden
-        className="fish-global pointer-events-none fixed right-[-70px] top-[18vh] z-[15] hidden h-[20rem] w-[16rem] select-none mix-blend-multiply sm:h-[26rem] sm:w-[21rem] lg:right-[9.5rem] lg:top-[8.2rem] lg:h-[31.8rem] lg:w-[25.8rem]"
-      >
-        <Image
-          className="h-full w-full object-contain brightness-0 opacity-[0.06]"
-          src="/fish-mark.webp"
-          alt=""
-          width={840}
-          height={1034}
-        />
-      </div>
       <Hero content={content} />
       <ClientsLogos clientsLogos={content.clientsLogos} />
       <Services services={content.services} />

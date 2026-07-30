@@ -2,25 +2,24 @@ import Image from "next/image";
 
 type SectionWatermarkProps = {
   variant?: "hero" | "grey";
+  touchHidden?: boolean;
 };
 
 // Desktop (hover-capable): every variant is position: fixed and clipped by
 // its section's clip-path — one fish standing still, changing its look with
 // the background. Touch WebKit can't do that cheaply (fixed-in-clip-path
 // re-rasterizes every frame -> black tiles; JS pinning lags; sticky hands off
-// visibly), so on touch devices globals.css swaps the scheme:
-//  - the grey per-section copies are hidden (.fish-desktop) and replaced by
-//    ONE global fixed layer rendered in page.tsx (.fish-global) that sits
-//    above light content via mix-blend-multiply and under the dark hosts;
-//  - the colored variant (.fish-wrap-hero) becomes absolute, centered inside
-//    its dark host, scrolling with it as that block's own artwork.
+// visibly), so on touch devices the fish exists ONLY in the hero:
+// globals.css hides the grey copies and the colored copies marked
+// touchHidden, and turns the hero copy into position: absolute — same spot
+// as on desktop, scrolling away together with the hero.
 const boxClasses =
   "pointer-events-none fixed -z-10 select-none right-[-70px] top-[18vh] h-[20rem] w-[16rem] sm:h-[26rem] sm:w-[21rem] lg:right-[9.5rem] lg:top-[8.2rem] lg:h-[31.8rem] lg:w-[25.8rem]";
 
-export default function SectionWatermark({ variant = "grey" }: SectionWatermarkProps) {
+export default function SectionWatermark({ variant = "grey", touchHidden = false }: SectionWatermarkProps) {
   if (variant === "hero") {
     return (
-      <div aria-hidden className={`fish-wrap-hero ${boxClasses}`}>
+      <div aria-hidden className={`${touchHidden ? "fish-touch-hide" : "fish-wrap-hero"} ${boxClasses}`}>
         <Image
           className="fish-glow-img absolute inset-[-5.5rem] hidden h-[calc(100%+11rem)] w-[calc(100%+11rem)] object-contain opacity-75 blur-[88px] saturate-150 lg:block"
           src="/fish-mark.webp"

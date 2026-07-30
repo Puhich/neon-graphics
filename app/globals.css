@@ -111,22 +111,17 @@ a {
     display: none !important;
   }
 
-  /* Touch scheme: hide the per-section grey copies, show the single global
-     fixed grey layer (it lives outside any clip-path, so the compositor never
-     repaints it — perfectly still, zero lag), and let the colored variant
-     ride inside its dark host as that block's own artwork. */
-  .fish-desktop {
+  /* Touch scheme: the fish lives only in the hero. The grey copies and the
+     colored copies marked touchHidden disappear; the hero copy becomes
+     absolute at its desktop spot and simply scrolls away with the hero —
+     nothing fixed inside clip-path, nothing for WebKit to choke on. */
+  .fish-desktop,
+  .fish-touch-hide {
     display: none !important;
-  }
-
-  .fish-global {
-    display: block !important;
   }
 
   .fish-wrap-hero {
     position: absolute !important;
-    top: 50% !important;
-    transform: translateY(-50%);
   }
 
   /* Glow blobs + vignette pre-baked into a bitmap (public/fish-glow-touch.webp):

@@ -19,7 +19,7 @@ export default function CTASection({ cta }: CTASectionProps) {
     <section className="relative isolate bg-[linear-gradient(to_bottom,#ffffff_0%,#ffffff_50%,#f8f8f8_50%,#f8f8f8_100%)] px-5 pb-16 pt-4 text-white [clip-path:inset(0)] sm:px-6 lg:px-8 xl:px-0 lg:pb-20 lg:pt-6">
       <SectionWatermark />
       <div className="reveal-fade relative isolate z-20 mx-auto max-w-[1200px] overflow-hidden rounded-2xl bg-brand-ink px-6 py-10 text-center [clip-path:inset(0_round_1rem)] sm:px-10 lg:px-16 lg:py-12">
-        <SectionWatermark variant="hero" />
+        <SectionWatermark variant="hero" touchHidden />
         <div className="pointer-events-none absolute left-[6%] top-[-4rem] h-64 w-[30rem] rounded-full bg-brand-blue/26 blur-[74px]" />
         <div className="pointer-events-none absolute bottom-[4.7rem] left-1/2 h-48 w-[30rem] -translate-x-1/2 rounded-full bg-brand-accent/62 blur-[64px]" />
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_70%,rgba(204,26,44,0.22),transparent_25%),radial-gradient(circle_at_16%_10%,rgba(22,140,205,0.12),transparent_28%)]" />
