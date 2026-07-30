@@ -57,7 +57,9 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
         </button>
       </div>
 
-      <nav className="adm-scroll flex-1 overflow-y-auto overflow-x-hidden px-3 pb-6">
+      {/* overscroll-contain: докрутив меню до края, колесо не должно
+          перескакивать на основную область справа. */}
+      <nav className="adm-scroll flex-1 overflow-y-auto overflow-x-hidden overscroll-contain px-3 pb-6">
         {adminNav.map((group) => (
           <div className="mb-5" key={group.title}>
             <p className="px-3 pb-2 text-[11px] font-bold uppercase tracking-[0.14em] text-[#5f5f5b]">
@@ -118,7 +120,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
 
   return (
     <div className="min-h-screen lg:grid lg:grid-cols-[268px_1fr]">
-      <aside className="hidden border-r border-white/10 bg-[#121210] lg:sticky lg:top-0 lg:block lg:h-screen">
+      <aside className="hidden border-r border-white/10 bg-[#121210] lg:sticky lg:top-0 lg:block lg:h-screen lg:overflow-hidden lg:overscroll-contain">
         {sidebar}
       </aside>
 
@@ -130,7 +132,9 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
             onClick={() => setIsMenuOpen(false)}
             type="button"
           />
-          <aside className="absolute inset-y-0 left-0 w-[280px] border-r border-white/10 bg-[#121210]">{sidebar}</aside>
+          <aside className="absolute inset-y-0 left-0 w-[280px] overflow-hidden overscroll-contain border-r border-white/10 bg-[#121210]">
+            {sidebar}
+          </aside>
         </div>
       ) : null}
 
