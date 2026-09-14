@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useContentStore } from "@/components/admin/ContentProvider";
 import ImageField from "@/components/admin/ImageField";
 import ListEditor from "@/components/admin/ListEditor";
-import { Card, Field, Note, Page, Row, Select } from "@/components/admin/ui";
+import { Card, Field, LinkField, Note, Page, Row, Select } from "@/components/admin/ui";
 import { copyrightLine, footerContactLinks } from "@/lib/site";
 
 const socialOptions = [
@@ -100,7 +100,7 @@ export default function FooterPage() {
                 path={`footer.nav.${index}.label`}
                 value={item.label}
               />
-              <Field
+              <LinkField
                 label="Ссылка"
                 onChange={(value) => update((draft) => void (draft.footer.nav[index].href = value))}
                 path={`footer.nav.${index}.href`}
@@ -132,7 +132,7 @@ export default function FooterPage() {
                 path={`footer.services.${index}.label`}
                 value={item.label}
               />
-              <Field
+              <LinkField
                 label="Ссылка"
                 onChange={(value) => update((draft) => void (draft.footer.services[index].href = value))}
                 path={`footer.services.${index}.href`}

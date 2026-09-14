@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useContentStore } from "@/components/admin/ContentProvider";
 import ImageField from "@/components/admin/ImageField";
 import ListEditor from "@/components/admin/ListEditor";
-import { Card, Field, Note, Page, Row, Select } from "@/components/admin/ui";
+import { Card, Field, LinkField, Note, Page, Row, Select } from "@/components/admin/ui";
 import { topBarItems } from "@/lib/site";
 
 const socialOptions = [
@@ -70,8 +70,7 @@ export default function HeaderPage() {
                 path={`nav.links.${index}.label`}
                 value={item.label}
               />
-              <Field
-                hint="Ссылка на секцию сайта, например #services"
+              <LinkField
                 label="Ссылка"
                 onChange={(value) => update((draft) => void (draft.nav.links[index].href = value))}
                 path={`nav.links.${index}.href`}
@@ -127,7 +126,7 @@ export default function HeaderPage() {
             path="nav.cta.label"
             value={nav.cta.label}
           />
-          <Field
+          <LinkField
             label="Ссылка кнопки"
             onChange={(value) => update((draft) => void (draft.nav.cta.href = value))}
             path="nav.cta.href"
@@ -149,19 +148,21 @@ export default function HeaderPage() {
             path="nav.callQrHint"
             value={nav.callQrHint}
           />
+        </Row>
+        <Row>
           <Field
             label="Подпись «открыть меню»"
             onChange={(value) => update((draft) => void (draft.nav.menuOpenLabel = value))}
             path="nav.menuOpenLabel"
             value={nav.menuOpenLabel}
           />
+          <Field
+            label="Подпись «закрыть меню»"
+            onChange={(value) => update((draft) => void (draft.nav.menuCloseLabel = value))}
+            path="nav.menuCloseLabel"
+            value={nav.menuCloseLabel}
+          />
         </Row>
-        <Field
-          label="Подпись «закрыть меню»"
-          onChange={(value) => update((draft) => void (draft.nav.menuCloseLabel = value))}
-          path="nav.menuCloseLabel"
-          value={nav.menuCloseLabel}
-        />
       </Card>
     </Page>
   );

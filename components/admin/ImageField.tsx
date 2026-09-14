@@ -13,10 +13,12 @@ type ImageFieldProps = {
   ratio?: "wide" | "square" | "logo";
 };
 
+// Превью компактное: миниатюра фиксированного размера, а не картинка во всю
+// ширину — иначе страницы с фотографиями превращаются в бесконечную ленту.
 const ratioClass: Record<NonNullable<ImageFieldProps["ratio"]>, string> = {
-  wide: "aspect-[16/10]",
-  square: "aspect-square",
-  logo: "aspect-[16/7]"
+  wide: "h-28 w-44",
+  square: "h-24 w-24",
+  logo: "h-20 w-44"
 };
 
 export function assetPreviewUrl(src: string): string {
@@ -86,43 +88,52 @@ export default function ImageField({
     <div className="grid gap-2">
       <span className="text-[13px] font-semibold text-[var(--adm-text-2)]">{label}</span>
 
-      <div
-        className={`relative overflow-hidden rounded-xl border border-dashed transition ${
-          isDragOver ? "border-brand-accent bg-brand-accent/5" : "border-[var(--adm-border-strong)] bg-[var(--adm-sunken)]"
-        } ${ratioClass[ratio]}`}
-        onDragLeave={() => setIsDragOver(false)}
-        onDragOver={(event) => {
-          event.preventDefault();
-          setIsDragOver(true);
-        }}
-        onDrop={handleDrop}
-      >
-        {value ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img alt="" className="h-full w-full object-contain" src={assetPreviewUrl(value)} />
-        ) : (
-          <span className="absolute inset-0 flex items-center justify-center text-[13px] text-[var(--adm-faint)]">
-            Перетащите файл сюда
-          </span>
-        )}
-
-        {isUploading ? (
-          <span className="absolute inset-0 flex items-center justify-center bg-black/60 text-[13px] font-semibold text-white">
-            Загружаем и сжимаем…
-          </span>
-        ) : null}
-      </div>
-
-      <div className="flex flex-wrap items-center gap-2">
-        <button
-          className="rounded-xl border border-[var(--adm-border-strong)] px-3.5 py-2 text-[13px] font-semibold text-[var(--adm-text-2)] transition hover:border-[var(--adm-border-hover)] hover:text-[var(--adm-text)] disabled:opacity-50"
-          disabled={isUploading}
+      <div className="flex flex-wrap items-start gap-4">
+        <div
+          className={`relative shrink-0 overflow-hidden rounded-xl border border-dashed transition ${
+            isDragOver ? "border-brand-accent bg-brand-accent/5" : "border-[var(--adm-border-strong)] bg-[var(--adm-sunken)]"
+          } ${ratioClass[ratio]}`}
           onClick={() => inputRef.current?.click()}
-          type="button"
+          onDragLeave={() => setIsDragOver(false)}
+          onDragOver={(event) => {
+            event.preventDefault();
+            setIsDragOver(true);
+          }}
+          onDrop={handleDrop}
+          role="button"
+          tabIndex={-1}
         >
-          {value ? "Заменить" : "Выбрать файл"}
-        </button>
-        <span className="truncate text-[12px] text-[var(--adm-faint)]">{value || "файл не выбран"}</span>
+          {value ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img alt="" className="h-full w-full cursor-pointer object-contain p-1.5" src={assetPreviewUrl(value)} />
+          ) : (
+            <span className="absolute inset-0 flex cursor-pointer items-center justify-center px-2 text-center text-[12px] leading-[1.35] text-[var(--adm-faint)]">
+              Перетащите файл или нажмите
+            </span>
+          )}
+
+          {isUploading ? (
+            <span className="absolute inset-0 flex items-center justify-center bg-black/60 px-2 text-center text-[12px] font-semibold text-white">
+              Загружаем…
+            </span>
+          ) : null}
+        </div>
+
+        <div className="grid min-w-0 flex-1 gap-2 self-center">
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              className="rounded-xl border border-[var(--adm-border-strong)] px-3.5 py-2 text-[13px] font-semibold text-[var(--adm-text-2)] transition hover:border-[var(--adm-border-hover)] hover:text-[var(--adm-text)] disabled:opacity-50"
+              disabled={isUploading}
+              onClick={() => inputRef.current?.click()}
+              type="button"
+            >
+              {value ? "Заменить" : "Выбрать файл"}
+            </button>
+            <span className="truncate text-[12px] text-[var(--adm-faint)]">{value || "файл не выбран"}</span>
+          </div>
+          {error ? <span className="text-[12px] font-semibold text-brand-accent">{error}</span> : null}
+          {hint && !error ? <span className="text-[12px] leading-[1.45] text-[var(--adm-faint)]">{hint}</span> : null}
+        </div>
       </div>
 
       <input
@@ -141,8 +152,6 @@ export default function ImageField({
         type="file"
       />
 
-      {error ? <span className="text-[12px] font-semibold text-brand-accent">{error}</span> : null}
-      {hint && !error ? <span className="text-[12px] leading-[1.45] text-[var(--adm-faint)]">{hint}</span> : null}
     </div>
   );
 }

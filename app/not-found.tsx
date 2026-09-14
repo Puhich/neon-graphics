@@ -47,7 +47,7 @@ export default function NotFound() {
             </Link>
             <Link
               className="rounded-xl border border-[#444444] px-8 py-4 text-center text-[15px] font-semibold text-white transition hover:border-white"
-              href="/#request"
+              href={`/#${content.finalForm.id}`}
             >
               {notFound.secondaryLabel}
             </Link>

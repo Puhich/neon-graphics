@@ -3,7 +3,7 @@
 import { useContentStore } from "@/components/admin/ContentProvider";
 import ImageField from "@/components/admin/ImageField";
 import ListEditor from "@/components/admin/ListEditor";
-import { Card, Field, Page, Row } from "@/components/admin/ui";
+import { Card, Field, InlineField, LinkField, Page, Row } from "@/components/admin/ui";
 
 export default function HeroPage() {
   const { content, update } = useContentStore();
@@ -42,7 +42,7 @@ export default function HeroPage() {
             path="hero.primaryCta.label"
             value={hero.primaryCta.label}
           />
-          <Field
+          <LinkField
             label="Ссылка главной кнопки"
             onChange={(value) => update((draft) => void (draft.hero.primaryCta.href = value))}
             path="hero.primaryCta.href"
@@ -56,7 +56,7 @@ export default function HeroPage() {
             path="hero.secondaryCta.label"
             value={hero.secondaryCta.label}
           />
-          <Field
+          <LinkField
             label="Ссылка второй кнопки"
             onChange={(value) => update((draft) => void (draft.hero.secondaryCta.href = value))}
             path="hero.secondaryCta.href"
@@ -67,14 +67,14 @@ export default function HeroPage() {
 
       <Card title="Галочки под кнопками">
         <ListEditor
-          addLabel="Добавить галочку"
+          collapsible={false}
+                    addLabel="Добавить галочку"
           createItem={() => "Новое преимущество"}
           itemTitle={(item) => item}
           items={hero.advantages}
           onChange={(items) => update((draft) => void (draft.hero.advantages = items))}
           renderItem={(item, index) => (
-            <Field
-              label="Текст"
+            <InlineField
               onChange={(value) => update((draft) => void (draft.hero.advantages[index] = value))}
               path={`hero.advantages.${index}`}
               value={item}

@@ -12,14 +12,15 @@ export default function PublishBar() {
   const canPublish = isDirty && issues.length === 0 && !isPublishing;
 
   return (
-    <div className="flex flex-1 flex-wrap items-center justify-end gap-2 sm:gap-3">
+    <div className="flex flex-1 items-center justify-end gap-2 sm:gap-3">
       <div className="mr-auto flex min-w-0 items-center gap-2">
         <span
           className={`h-2 w-2 shrink-0 rounded-full ${
             issues.length > 0 ? "bg-[#f3a40d]" : isDirty ? "bg-brand-blue" : "bg-[var(--adm-ok)]"
           }`}
         />
-        <span className="truncate text-[13px] text-[var(--adm-nav-text)]">
+        {/* На телефоне текст статуса не влезает рядом с кнопкой — остаётся только точка. */}
+        <span className="hidden truncate text-[13px] text-[var(--adm-nav-text)] sm:inline">
           {issues.length > 0
             ? `Незаполненных полей: ${issues.length}`
             : isDirty

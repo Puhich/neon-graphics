@@ -2,7 +2,7 @@
 
 import { useContentStore } from "@/components/admin/ContentProvider";
 import ListEditor from "@/components/admin/ListEditor";
-import { Card, Field, Page, Row } from "@/components/admin/ui";
+import { Card, Field, InlineField, LinkField, Page, Row } from "@/components/admin/ui";
 
 export default function CtaPage() {
   const { content, update } = useContentStore();
@@ -33,7 +33,7 @@ export default function CtaPage() {
             path="cta.button.label"
             value={cta.button.label}
           />
-          <Field
+          <LinkField
             label="Ссылка кнопки"
             onChange={(value) => update((draft) => void (draft.cta.button.href = value))}
             path="cta.button.href"
@@ -44,14 +44,14 @@ export default function CtaPage() {
 
       <Card title="Галочки">
         <ListEditor
-          addLabel="Добавить галочку"
+          collapsible={false}
+                    addLabel="Добавить галочку"
           createItem={() => "Новый пункт"}
           itemTitle={(item) => item}
           items={cta.checks}
           onChange={(items) => update((draft) => void (draft.cta.checks = items))}
           renderItem={(item, index) => (
-            <Field
-              label="Текст"
+            <InlineField
               onChange={(value) => update((draft) => void (draft.cta.checks[index] = value))}
               path={`cta.checks.${index}`}
               value={item}

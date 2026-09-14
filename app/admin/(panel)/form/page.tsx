@@ -2,7 +2,7 @@
 
 import { useContentStore } from "@/components/admin/ContentProvider";
 import ListEditor from "@/components/admin/ListEditor";
-import { Card, Field, Note, Page, Row } from "@/components/admin/ui";
+import { Card, Field, InlineField, Note, Page, Row } from "@/components/admin/ui";
 
 export default function FormPage() {
   const { content, update } = useContentStore();
@@ -36,14 +36,14 @@ export default function FormPage() {
 
       <Card title="Список с галочками">
         <ListEditor
-          addLabel="Добавить пункт"
+          collapsible={false}
+                    addLabel="Добавить пункт"
           createItem={() => "Новый пункт"}
           itemTitle={(item) => item}
           items={form.bullets}
           onChange={(items) => update((draft) => void (draft.finalForm.bullets = items))}
           renderItem={(item, index) => (
-            <Field
-              label="Текст"
+            <InlineField
               onChange={(value) => update((draft) => void (draft.finalForm.bullets[index] = value))}
               path={`finalForm.bullets.${index}`}
               value={item}

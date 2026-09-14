@@ -28,7 +28,7 @@ const contactIcons = [
 
 function ContactIcon({ path, label }: { path: string; label: string }) {
   return (
-    <svg aria-label={label} className="h-3.5 w-3.5 shrink-0 text-[#8a8a8a]" fill="none" viewBox="0 0 24 24">
+    <svg aria-hidden="true" className="h-3.5 w-3.5 shrink-0 text-[#8a8a8a]" fill="none" viewBox="0 0 24 24">
       <path d={path} fill="currentColor" fillRule="evenodd" />
     </svg>
   );

@@ -36,11 +36,11 @@ export function copyrightLine(company: CompanyContent): string {
 }
 
 // Колонка «Контакты» в футере — те же реквизиты, что и везде.
-export function footerContactLinks(company: CompanyContent): { label: string; href?: string }[] {
+export function footerContactLinks(company: CompanyContent, contactsId = "contacts"): { label: string; href?: string }[] {
   return [
     { label: company.phone, href: telHref(company.phone) },
     { label: company.email, href: mailtoHref(company.email) },
-    { label: company.addressShort, href: "#contacts" },
+    { label: company.addressShort, href: `#${contactsId}` },
     { label: company.schedule }
   ];
 }

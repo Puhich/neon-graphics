@@ -39,7 +39,7 @@ export default function Home() {
         privacyHref={content.footer.privacyHref}
       />
       <Contacts company={content.company} contacts={content.contacts} />
-      <Footer company={content.company} footer={content.footer} />
+      <Footer company={content.company} contactsId={content.contacts.id} footer={content.footer} />
       <CallFab hint={content.nav.callQrHint} href={callHref} label={content.nav.callLabel} phone={content.company.phone} qrSvg={callQr} />
       <SiteChrome withJsonLd />
     </main>

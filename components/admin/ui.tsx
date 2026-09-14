@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import { useContentStore } from "@/components/admin/ContentProvider";
 
 // Базовые кирпичики админки: заголовок страницы, карточка, поля ввода.
@@ -120,6 +122,38 @@ export function Field({
   );
 }
 
+// Поле без подписи — для однострочных списков (галочки, пункты), где
+// подпись «Текст» над каждым полем только мешает.
+export function InlineField({
+  value,
+  onChange,
+  path,
+  placeholder,
+  ariaLabel = "Текст"
+}: {
+  value: string;
+  onChange: (value: string) => void;
+  path?: string;
+  placeholder?: string;
+  ariaLabel?: string;
+}) {
+  const error = useFieldError(path ?? "");
+
+  return (
+    <div className="grid gap-1">
+      <input
+        aria-label={ariaLabel}
+        className={`${controlClass} h-10 ${error ? "border-brand-accent/70" : ""}`}
+        onChange={(event) => onChange(event.target.value)}
+        placeholder={placeholder}
+        type="text"
+        value={value}
+      />
+      {error ? <span className="text-[12px] font-semibold text-brand-accent">{error}</span> : null}
+    </div>
+  );
+}
+
 export function NumberField({
   label,
   value,
@@ -220,4 +254,85 @@ export function Note({ children, tone = "info" }: { children: React.ReactNode; t
       : "border-[var(--adm-border)] bg-[var(--adm-note)] text-[var(--adm-muted)]";
 
   return <p className={`rounded-xl border px-4 py-3 text-[13px] leading-[1.5] ${toneClass}`}>{children}</p>;
+}
+
+// Ссылка на секцию сайта: выпадающий список секций вместо ручного ввода
+// «#services». Для нестандартных адресов остаётся пункт «Другая ссылка».
+export function useSectionOptions(): { value: string; label: string }[] {
+  const { content } = useContentStore();
+
+  return [
+    { value: `#${content.clientsLogos.id}`, label: "Логотипы клиентов" },
+    { value: `#${content.services.id}`, label: "Услуги" },
+    { value: `#${content.portfolio.id}`, label: "Портфолио" },
+    { value: `#${content.whyUs.id}`, label: "Почему выбирают нас" },
+    { value: `#${content.stages.id}`, label: "Этапы работы" },
+    { value: `#${content.reviews.id}`, label: "Отзывы" },
+    { value: `#${content.faq.id}`, label: "Вопросы и ответы" },
+    { value: `#${content.finalForm.id}`, label: "Форма заявки" },
+    { value: `#${content.contacts.id}`, label: "Контакты" }
+  ];
+}
+
+const CUSTOM_LINK = "__custom__";
+
+export function LinkField({
+  label,
+  value,
+  onChange,
+  path,
+  hint
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  path?: string;
+  hint?: string;
+}) {
+  const options = useSectionOptions();
+  const error = useFieldError(path ?? "");
+  const isKnown = options.some((option) => option.value === value);
+  const [custom, setCustom] = useState(!isKnown);
+  const selectValue = custom ? CUSTOM_LINK : value;
+
+  return (
+    <div className="grid gap-1.5">
+      <span className="text-[13px] font-semibold text-[var(--adm-text-2)]">{label}</span>
+      <div className={`grid gap-2 ${custom ? "sm:grid-cols-2" : ""}`}>
+        <select
+          className={`${controlClass} h-11 ${error ? "border-brand-accent/70" : ""}`}
+          onChange={(event) => {
+            if (event.target.value === CUSTOM_LINK) {
+              setCustom(true);
+              return;
+            }
+            setCustom(false);
+            onChange(event.target.value);
+          }}
+          value={selectValue}
+        >
+          {options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+          <option value={CUSTOM_LINK}>Другая ссылка…</option>
+        </select>
+        {custom ? (
+          <input
+            className={`${controlClass} h-11 ${error ? "border-brand-accent/70" : ""}`}
+            onChange={(event) => onChange(event.target.value)}
+            placeholder="https://… или #секция"
+            type="text"
+            value={value}
+          />
+        ) : null}
+      </div>
+      {error ? (
+        <span className="text-[12px] font-semibold text-brand-accent">{error}</span>
+      ) : hint ? (
+        <span className="text-[12px] leading-[1.45] text-[var(--adm-faint)]">{hint}</span>
+      ) : null}
+    </div>
+  );
 }

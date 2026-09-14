@@ -57,21 +57,13 @@ export default function ServicesPage() {
                 rows={4}
                 value={item.description}
               />
-              <Row>
-                <Field
-                  hint="Например: от 15 000 ₽"
-                  label="Цена"
-                  onChange={(value) => update((draft) => void (draft.services.main[index].price = value))}
-                  path={`services.main.${index}.price`}
-                  value={item.price}
-                />
-                <IconPicker
-                  hint="Пока не показывается на сайте, но пригодится для будущих блоков."
-                  label="Иконка"
-                  onChange={(value) => update((draft) => void (draft.services.main[index].icon = value))}
-                  value={item.icon}
-                />
-              </Row>
+              <Field
+                hint="Например: от 15 000 ₽"
+                label="Цена"
+                onChange={(value) => update((draft) => void (draft.services.main[index].price = value))}
+                path={`services.main.${index}.price`}
+                value={item.price}
+              />
               <ImageField
                 label="Фотография"
                 onChange={(src) => update((draft) => void (draft.services.main[index].imageSrc = src))}

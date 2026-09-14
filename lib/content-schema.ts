@@ -97,7 +97,7 @@ export const contentSchema = z.object({
     subtitle: text,
     main: z.array(
       z.object({
-        icon: requiredText,
+        icon: text.optional(),
         imageSrc: requiredText,
         imageAlt: text,
         title: requiredText,

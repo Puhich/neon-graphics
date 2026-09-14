@@ -7,6 +7,7 @@ import { copyrightLine, footerContactLinks } from "@/lib/site";
 type FooterProps = {
   footer: SiteContent["footer"];
   company: SiteContent["company"];
+  contactsId?: string;
 };
 
 const socialIconFiles: Record<string, string> = {
@@ -27,8 +28,8 @@ function SocialIcon({ icon }: { icon: string }) {
   );
 }
 
-export default function Footer({ footer, company }: FooterProps) {
-  const contacts = footerContactLinks(company);
+export default function Footer({ footer, company, contactsId }: FooterProps) {
+  const contacts = footerContactLinks(company, contactsId);
 
   return (
     <footer className="relative isolate z-20 overflow-hidden bg-brand-bg px-5 py-16 text-white [clip-path:inset(0)] sm:px-6 lg:px-8 xl:px-0 lg:py-20">

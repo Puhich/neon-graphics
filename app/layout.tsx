@@ -60,7 +60,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang={content.meta.lang}>
+    <html lang={content.meta.lang} suppressHydrationWarning>
       <body className={`${russoOne.variable} ${manrope.variable} font-sans`}>{children}</body>
     </html>
   );
