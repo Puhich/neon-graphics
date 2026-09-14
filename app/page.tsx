@@ -1,3 +1,6 @@
+import QRCode from "qrcode";
+
+import CallFab from "@/components/CallFab";
 import CTASection from "@/components/CTASection";
 import ClientsLogos from "@/components/ClientsLogos";
 import DirectorQuote from "@/components/DirectorQuote";
@@ -13,8 +16,12 @@ import SiteChrome from "@/components/SiteChrome";
 import Stages from "@/components/Stages";
 import WhyUs from "@/components/WhyUs";
 import content from "@/lib/content";
+import { telHref } from "@/lib/site";
 
-export default function Home() {
+export default async function Home() {
+  const callHref = telHref(content.company.phone);
+  const callQr = await QRCode.toString(callHref, { type: "svg", margin: 0, errorCorrectionLevel: "M" });
+
   return (
     <main className="min-h-screen bg-white">
       <Hero content={content} />
@@ -34,6 +41,7 @@ export default function Home() {
       />
       <Contacts company={content.company} contacts={content.contacts} />
       <Footer company={content.company} footer={content.footer} />
+      <CallFab href={callHref} label={content.nav.callLabel} phone={content.company.phone} qrSvg={callQr} />
       <SiteChrome withJsonLd />
     </main>
   );

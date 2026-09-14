@@ -72,14 +72,6 @@ function NavSocialIcon({ icon }: { icon: string }) {
   );
 }
 
-function PhoneFillIcon() {
-  return (
-    <svg aria-hidden="true" className="h-7 w-7 lg:h-6 lg:w-6" fill="none" viewBox="0 0 24 24">
-      <path d="M22 16.92v2.5a2.45 2.45 0 0 1-2.67 2.45A19.3 19.3 0 0 1 10.92 19 18.9 18.9 0 0 1 5 13.08a19.3 19.3 0 0 1-2.87-8.46A2.45 2.45 0 0 1 4.57 2h2.5a2.45 2.45 0 0 1 2.45 2.1c.16 1.18.43 2.33.82 3.43a2.45 2.45 0 0 1-.55 2.52l-1.06 1.06a15.7 15.7 0 0 0 6.16 6.16l1.06-1.06a2.45 2.45 0 0 1 2.52-.55c1.1.39 2.25.66 3.43.82A2.45 2.45 0 0 1 22 16.92Z" fill="currentColor" />
-    </svg>
-  );
-}
-
 export default function Hero({ content }: HeroProps) {
   const { company, nav, hero } = content;
   const topBar = useMemo(() => topBarItems(company), [company]);
@@ -371,13 +363,6 @@ export default function Hero({ content }: HeroProps) {
       </dl>
 
       </section>
-      <a
-        className="call-fab fixed bottom-20 right-5 z-[2147483647] flex h-14 w-14 items-center justify-center rounded-full bg-brand-accent text-xl text-white shadow-[0_0_24px_rgba(204,26,44,0.6)] transition hover:bg-red-700 sm:bottom-6 sm:right-6 lg:h-12 lg:w-12 lg:shadow-[0_0_18px_rgba(204,26,44,0.55)]"
-        href={telHref(company.phone)}
-        aria-label={nav.callLabel}
-      >
-        <PhoneFillIcon />
-      </a>
     </>
   );
 }
