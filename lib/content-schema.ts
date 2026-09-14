@@ -69,7 +69,8 @@ export const contentSchema = z.object({
     links: z.array(linkSchema),
     socials: z.array(socialSchema),
     cta: linkSchema,
-    callLabel: requiredText
+    callLabel: requiredText,
+    callQrHint: requiredText
   }),
 
   hero: z.object({

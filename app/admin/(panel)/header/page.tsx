@@ -143,6 +143,13 @@ export default function HeaderPage() {
             value={nav.callLabel}
           />
           <Field
+            hint="Показывается на компьютере в карточке с QR-кодом, которая открывается по кнопке звонка."
+            label="Подпись под QR-кодом"
+            onChange={(value) => update((draft) => void (draft.nav.callQrHint = value))}
+            path="nav.callQrHint"
+            value={nav.callQrHint}
+          />
+          <Field
             label="Подпись «открыть меню»"
             onChange={(value) => update((draft) => void (draft.nav.menuOpenLabel = value))}
             path="nav.menuOpenLabel"
