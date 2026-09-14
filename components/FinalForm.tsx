@@ -72,7 +72,7 @@ export default function FinalForm({ form, privacyHref, metrikaId }: FinalFormPro
       <div className="reveal mx-auto grid max-w-[1200px] gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.15em] text-brand-accent">{form.eyebrow}</p>
-          <h2 className="mt-4 whitespace-pre-line font-heading text-[34px] leading-[1.1] sm:text-[42px] lg:text-[48px]">
+          <h2 className="mt-4 whitespace-pre-line font-heading text-[30px] leading-[1.1] sm:text-[34px] lg:text-[36px]">
             {form.title}
           </h2>
           <p className="mt-5 text-sm leading-[1.55] text-[#666666] sm:text-base sm:leading-[1.55]">{form.description}</p>
