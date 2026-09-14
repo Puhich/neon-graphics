@@ -64,30 +64,35 @@ export default function CallFab({ href, phone, label, qrSvg }: CallFabProps) {
   }
 
   return (
-    <div ref={rootRef}>
+    <div
+      className={`call-fab fixed bottom-6 right-6 z-[2147483647] overflow-hidden bg-brand-accent text-white shadow-[0_0_18px_rgba(204,26,44,0.55)] transition-[width,height,border-radius,box-shadow] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] ${
+        open ? "h-[352px] w-[224px] rounded-3xl shadow-[0_18px_48px_rgba(204,26,44,0.45)]" : "h-12 w-12 rounded-full hover:bg-red-700"
+      }`}
+      ref={rootRef}
+    >
       <div
         aria-hidden={!open}
-        className={`call-fab-card fixed bottom-6 right-6 z-[2147483646] w-[220px] origin-bottom-right rounded-2xl border border-[#2a2a28] bg-[#151513]/95 p-4 pb-[72px] text-white shadow-[0_18px_48px_rgba(0,0,0,0.5)] backdrop-blur transition duration-200 ${
-          open ? "translate-y-0 scale-100 opacity-100" : "pointer-events-none translate-y-2 scale-95 opacity-0"
-        }`}
+        className={`absolute inset-x-0 top-0 p-4 transition-opacity duration-200 ${open ? "opacity-100 delay-150" : "pointer-events-none opacity-0"}`}
       >
         <div
-          className="call-fab-qr overflow-hidden rounded-xl bg-white p-2 [&>svg]:block [&>svg]:h-auto [&>svg]:w-full"
+          className="overflow-hidden rounded-2xl bg-white p-2.5 [&>svg]:block [&>svg]:h-auto [&>svg]:w-full"
           dangerouslySetInnerHTML={{ __html: qrSvg }}
         />
-        <p className="mt-3 text-center text-[13px] leading-[1.4] text-[#bbbbbb]">Наведите камеру телефона, чтобы позвонить</p>
-        <a className="mt-2 block text-center font-heading text-[17px] text-white transition hover:text-brand-accent" href={href}>
+        <p className="mt-3 text-center text-[13px] leading-[1.35] text-white/80">Наведите камеру телефона, чтобы позвонить</p>
+        <a className="mt-1.5 block text-center font-heading text-[17px] text-white transition hover:text-white/70" href={href}>
           {phone}
         </a>
       </div>
       <button
         aria-expanded={open}
-        aria-label={label}
-        className={`${buttonClass} ${open ? "scale-110 bg-red-700" : ""}`}
+        aria-label={open ? "Закрыть" : label}
+        className="absolute bottom-0 right-0 flex h-12 w-12 items-center justify-center rounded-full text-xl text-white transition hover:bg-white/10"
         onClick={() => setOpen((value) => !value)}
         type="button"
       >
-        <PhoneFillIcon />
+        <span className={`transition-transform duration-300 ${open ? "rotate-[135deg]" : ""}`}>
+          <PhoneFillIcon />
+        </span>
       </button>
     </div>
   );
