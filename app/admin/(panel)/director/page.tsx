@@ -9,7 +9,7 @@ export default function DirectorPage() {
   const quote = content.directorQuote;
 
   return (
-    <Page title="Цитата директора" description="Блок с фотографией, цитатой и подписью.">
+    <Page title="Цитата директора">
       <SectionVisibility section="directorQuote" />
       <Card title="Цитата">
         <Field

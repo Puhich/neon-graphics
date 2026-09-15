@@ -4,7 +4,6 @@
 export type AdminNavItem = {
   href: string;
   label: string;
-  hint?: string;
 };
 
 export type AdminNavGroup = {
@@ -15,15 +14,15 @@ export type AdminNavGroup = {
 export const adminNav: AdminNavGroup[] = [
   {
     title: "Обзор",
-    items: [{ href: "/admin", label: "Дашборд", hint: "Что изменено и публикация" }]
+    items: [{ href: "/admin", label: "Дашборд" }]
   },
   {
     title: "Секции сайта",
     items: [
-      { href: "/admin/header", label: "Шапка и меню", hint: "Логотип, пункты меню, соцсети" },
-      { href: "/admin/hero", label: "Первый экран", hint: "Заголовки, кнопки, фото, цифры" },
+      { href: "/admin/header", label: "Шапка и меню" },
+      { href: "/admin/hero", label: "Первый экран" },
       { href: "/admin/clients", label: "Логотипы клиентов" },
-      { href: "/admin/services", label: "Услуги", hint: "Основные и дополнительные" },
+      { href: "/admin/services", label: "Услуги" },
       { href: "/admin/portfolio", label: "Портфолио" },
       { href: "/admin/why-us", label: "Почему выбирают нас" },
       { href: "/admin/cta", label: "Блок с призывом" },
@@ -39,7 +38,7 @@ export const adminNav: AdminNavGroup[] = [
   {
     title: "Настройки сайта",
     items: [
-      { href: "/admin/company", label: "Реквизиты", hint: "Телефон, почта, адрес, режим" },
+      { href: "/admin/company", label: "Реквизиты" },
       { href: "/admin/seo", label: "SEO и счётчики" },
       { href: "/admin/privacy", label: "Политика конфиденциальности" },
       { href: "/admin/misc", label: "Cookie и страница 404" },

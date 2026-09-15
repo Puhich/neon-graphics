@@ -10,7 +10,7 @@ export default function ReviewsPage() {
   const reviews = content.reviews;
 
   return (
-    <Page title="Отзывы" description="Слайдер с отзывами клиентов.">
+    <Page title="Отзывы">
       <SectionVisibility section="reviews" />
       <Card title="Заголовок секции">
         <Field

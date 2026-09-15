@@ -19,7 +19,7 @@ export default function FooterPage() {
   const footer = content.footer;
 
   return (
-    <Page title="Футер" description="Нижняя часть сайта: логотип, колонки ссылок, контакты и копирайт.">
+    <Page title="Футер">
       <Card title="Логотип и описание">
         <ImageField
           kind="brand"

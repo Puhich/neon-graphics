@@ -19,8 +19,8 @@ export default function HeaderPage() {
   const nav = content.nav;
 
   return (
-    <Page title="Шапка и меню" description="Логотип, пункты меню, соцсети и кнопка в верхней части сайта.">
-      <Card title="Верхняя строка" description="Телефон, адрес и режим работы над меню.">
+    <Page title="Шапка и меню">
+      <Card title="Верхняя строка">
         <ul className="grid gap-2">
           {topBarItems(content.company).map((item) => (
             <li className="rounded-xl border border-[var(--adm-border)] bg-[var(--adm-sunken)] px-4 py-2.5 text-[14px] text-[var(--adm-text-2)]" key={item}>
@@ -55,7 +55,7 @@ export default function HeaderPage() {
         />
       </Card>
 
-      <Card title="Пункты меню" description="Порядок можно менять перетаскиванием.">
+      <Card title="Пункты меню">
         <ListEditor
           addLabel="Добавить пункт"
           createItem={() => ({ label: "Новый пункт", href: "#services" })}
@@ -81,7 +81,7 @@ export default function HeaderPage() {
         />
       </Card>
 
-      <Card title="Соцсети" description="Иконки рядом с меню и в футере — свои для каждой площадки.">
+      <Card title="Соцсети">
         <ListEditor
           addLabel="Добавить соцсеть"
           createItem={() => ({ label: "Telegram", href: "https://t.me/", icon: "telegram" as const })}

@@ -9,7 +9,7 @@ export default function FormPage() {
   const form = content.finalForm;
 
   return (
-    <Page title="Форма заявки" description="Блок «Начните прямо сейчас» с формой в нижней части сайта.">
+    <Page title="Форма заявки">
       <Card title="Тексты слева">
         <Field
           label="Надзаголовок"
@@ -52,7 +52,7 @@ export default function FormPage() {
         />
       </Card>
 
-      <Card title="Поля формы" description="Названия полей и подсказки внутри них.">
+      <Card title="Поля формы">
         <Row>
           <Field
             label="Название поля «Имя»"

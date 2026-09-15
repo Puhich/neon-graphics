@@ -10,7 +10,7 @@ export default function HeroPage() {
   const hero = content.hero;
 
   return (
-    <Page title="Первый экран" description="Самый заметный блок сайта: заголовок, кнопки, лента фотографий и цифры.">
+    <Page title="Первый экран">
       <Card title="Заголовок">
         <Field
           label="Первая строка"
@@ -83,7 +83,7 @@ export default function HeroPage() {
         />
       </Card>
 
-      <Card title="Лента фотографий" description="Движущаяся карусель под заголовком. Минимум одна фотография.">
+      <Card title="Лента фотографий">
         <ListEditor
           addLabel="Добавить фотографию"
           createItem={() => ({ src: "", alt: "" })}
@@ -110,7 +110,7 @@ export default function HeroPage() {
         />
       </Card>
 
-      <Card title="Цифры" description="Строка с показателями под каруселью.">
+      <Card title="Цифры">
         <ListEditor
           addLabel="Добавить показатель"
           createItem={() => ({ value: "10+", label: "новый показатель" })}

@@ -9,7 +9,7 @@ export default function MiscPage() {
   const notFound = content.notFound;
 
   return (
-    <Page title="Cookie и страница 404" description="Плашка о файлах cookie и страница «не найдено».">
+    <Page title="Cookie и страница 404">
       <Card title="Cookie-баннер">
         <Toggle
           checked={banner.enabled}
@@ -37,7 +37,7 @@ export default function MiscPage() {
         />
       </Card>
 
-      <Card title="Страница 404" description="Что видит посетитель, если открыл несуществующий адрес.">
+      <Card title="Страница 404">
         <Field
           label="Заголовок"
           onChange={(value) => update((draft) => void (draft.notFound.title = value))}

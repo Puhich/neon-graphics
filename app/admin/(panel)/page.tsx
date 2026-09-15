@@ -99,9 +99,6 @@ export default function AdminDashboardPage() {
                           </span>
                         ) : null}
                       </span>
-                      {item.hint ? (
-                        <span className="mt-1 block text-[12px] leading-[1.4] text-[var(--adm-faint)]">{item.hint}</span>
-                      ) : null}
                     </span>
                   </Link>
                 ))}

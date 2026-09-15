@@ -9,7 +9,7 @@ export default function CtaPage() {
   const cta = content.cta;
 
   return (
-    <Page title="Блок с призывом" description="Тёмная карточка между портфолио и этапами работы.">
+    <Page title="Блок с призывом">
       <SectionVisibility section="cta" />
       <Card title="Тексты">
         <Field

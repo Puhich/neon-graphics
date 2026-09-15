@@ -10,7 +10,7 @@ export default function PortfolioPage() {
   const portfolio = content.portfolio;
 
   return (
-    <Page title="Портфолио" description="Крупное фото проекта и лента миниатюр под ним.">
+    <Page title="Портфолио">
       <SectionVisibility section="portfolio" />
       <Card title="Заголовок секции">
         <Field
@@ -56,7 +56,7 @@ export default function PortfolioPage() {
         />
       </Card>
 
-      <Card title="Миниатюры" description="Нажатие на миниатюру показывает её крупно.">
+      <Card title="Миниатюры">
         <ListEditor
           addLabel="Добавить проект"
           createItem={() => ({ src: "", alt: "" })}

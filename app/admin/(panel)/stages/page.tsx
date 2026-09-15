@@ -9,7 +9,7 @@ export default function StagesPage() {
   const stages = content.stages;
 
   return (
-    <Page title="Этапы работы" description="Как проходит заказ — от обращения до монтажа.">
+    <Page title="Этапы работы">
       <SectionVisibility section="stages" />
       <Card title="Заголовок секции">
         <Field

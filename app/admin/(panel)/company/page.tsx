@@ -64,7 +64,7 @@ export default function CompanyPage() {
         </Row>
       </Card>
 
-      <Card title="Юридические данные" description="Используются в копирайте футера и в политике конфиденциальности.">
+      <Card title="Юридические данные">
         <Row>
           <Field
             label="Название"

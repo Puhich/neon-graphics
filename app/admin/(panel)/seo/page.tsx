@@ -23,7 +23,7 @@ export default function SeoPage() {
         />
       </Card>
 
-      <Card title="Поисковая выдача" description="Заголовок и описание, которые видно в Яндексе и Google.">
+      <Card title="Поисковая выдача">
         <Field
           hint="До 60 символов — длиннее обрезается."
           label="Заголовок страницы"
@@ -43,7 +43,7 @@ export default function SeoPage() {
 
       <Card
         title="Превью ссылки в мессенджерах"
-        description="Что видно, когда ссылку на сайт отправляют в Telegram, WhatsApp или ВКонтакте."
+        description="Превью ссылки в мессенджерах."
       >
         <ImageField
           hint="Картинка 1200×630. Сервер сам обрежет и сожмёт."

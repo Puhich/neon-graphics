@@ -11,7 +11,7 @@ export default function ServicesPage() {
   const services = content.services;
 
   return (
-    <Page title="Услуги" description="Основные услуги с фотографиями и дополнительные услуги с иконками.">
+    <Page title="Услуги">
       <SectionVisibility section="services" />
       <Card title="Заголовок секции">
         <Field
@@ -29,7 +29,7 @@ export default function ServicesPage() {
         />
       </Card>
 
-      <Card title="Основные услуги" description="Карточки с фотографией, описанием и ценой.">
+      <Card title="Основные услуги">
         <ListEditor
           addLabel="Добавить услугу"
           createItem={() => ({
@@ -82,7 +82,7 @@ export default function ServicesPage() {
         />
       </Card>
 
-      <Card title="Дополнительные услуги" description="Небольшие карточки с иконкой.">
+      <Card title="Дополнительные услуги">
         <Field
           label="Заголовок блока"
           onChange={(value) => update((draft) => void (draft.services.additionalTitle = value))}

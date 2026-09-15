@@ -11,7 +11,7 @@ export default function ContactsPage() {
   const contacts = content.contacts;
 
   return (
-    <Page title="Контакты и карта" description="Секция с картой Яндекса и карточкой контактов.">
+    <Page title="Контакты и карта">
       <Card title="Данные в карточке">
         <ul className="grid gap-2 text-[14px] text-[var(--adm-text-2)]">
           <li className="rounded-xl border border-[var(--adm-border)] bg-[var(--adm-sunken)] px-4 py-2.5">{content.company.phone}</li>
@@ -110,7 +110,7 @@ export default function ContactsPage() {
         </Row>
       </Card>
 
-      <Card title="Кнопки карт" description="Ссылки на карточки компании в Яндекс.Картах и 2ГИС.">
+      <Card title="Кнопки карт">
         <ListEditor
           addLabel="Добавить кнопку"
           createItem={() => ({ label: "Мы на карте", href: "https://", icon: "/icons/yamaps.svg" })}

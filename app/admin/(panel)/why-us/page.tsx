@@ -11,7 +11,7 @@ export default function WhyUsPage() {
   const whyUs = content.whyUs;
 
   return (
-    <Page title="Почему выбирают нас" description="Крупные блоки с фотографиями и четыре преимущества под ними.">
+    <Page title="Почему выбирают нас">
       <SectionVisibility section="whyUs" />
       <Card title="Заголовок секции">
         <Field
@@ -121,7 +121,7 @@ export default function WhyUsPage() {
         />
       </Card>
 
-      <Card title="Преимущества" description="Четыре карточки с иконками внизу секции.">
+      <Card title="Преимущества">
         <ListEditor
           addLabel="Добавить преимущество"
           createItem={() => ({ icon: "shield-check", title: "Новое преимущество", description: "" })}

@@ -75,7 +75,7 @@ export default function SettingsPage() {
   };
 
   return (
-    <Page title="Проверка интеграций" description="Что подключено на сервере и доходят ли заявки.">
+    <Page title="Проверка интеграций">
       <Card title="Подключения">
         {status ? (
           <>

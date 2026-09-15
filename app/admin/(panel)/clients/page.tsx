@@ -10,7 +10,7 @@ export default function ClientsPage() {
   const clients = content.clientsLogos;
 
   return (
-    <Page title="Логотипы клиентов" description="Лента логотипов сразу под первым экраном.">
+    <Page title="Логотипы клиентов">
       <SectionVisibility section="clientsLogos" />
       <Card title="Заголовок">
         <Field
@@ -28,7 +28,7 @@ export default function ClientsPage() {
         />
       </Card>
 
-      <Card title="Логотипы" description="Лучше загружать PNG с прозрачным фоном — сервер сам сожмёт.">
+      <Card title="Логотипы" description="Лучше PNG с прозрачным фоном.">
         <ListEditor
           addLabel="Добавить логотип"
           createItem={() => ({ src: "", alt: "" })}

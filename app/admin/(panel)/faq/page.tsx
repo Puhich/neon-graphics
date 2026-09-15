@@ -9,7 +9,7 @@ export default function FaqPage() {
   const faq = content.faq;
 
   return (
-    <Page title="Вопросы и ответы" description="Раскрывающийся список частых вопросов.">
+    <Page title="Вопросы и ответы">
       <SectionVisibility section="faq" />
       <Card title="Заголовок секции">
         <Field
