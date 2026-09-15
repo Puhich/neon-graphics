@@ -15,31 +15,32 @@ import Stages from "@/components/Stages";
 import WhyUs from "@/components/WhyUs";
 import content from "@/lib/content";
 import { qrSvg } from "@/lib/qr";
-import { telHref } from "@/lib/site";
+import { hiddenAnchors, telHref } from "@/lib/site";
 
 export default function Home() {
   const callHref = telHref(content.company.phone);
   const callQr = qrSvg(callHref);
+  const hidden = hiddenAnchors(content);
 
   return (
     <main className="min-h-screen bg-white">
       <Hero content={content} />
-      <ClientsLogos clientsLogos={content.clientsLogos} />
-      <Services services={content.services} />
-      <Portfolio portfolio={content.portfolio} />
-      <WhyUs whyUs={content.whyUs} />
-      <CTASection cta={content.cta} />
-      <Stages stages={content.stages} />
-      <Reviews reviews={content.reviews} />
-      <DirectorQuote quote={content.directorQuote} />
-      <FAQ faq={content.faq} />
+      {content.clientsLogos.hidden ? null : <ClientsLogos clientsLogos={content.clientsLogos} />}
+      {content.services.hidden ? null : <Services services={content.services} />}
+      {content.portfolio.hidden ? null : <Portfolio portfolio={content.portfolio} />}
+      {content.whyUs.hidden ? null : <WhyUs whyUs={content.whyUs} />}
+      {content.cta.hidden ? null : <CTASection cta={content.cta} />}
+      {content.stages.hidden ? null : <Stages stages={content.stages} />}
+      {content.reviews.hidden ? null : <Reviews reviews={content.reviews} />}
+      {content.directorQuote.hidden ? null : <DirectorQuote quote={content.directorQuote} />}
+      {content.faq.hidden ? null : <FAQ faq={content.faq} />}
       <FinalForm
         form={content.finalForm}
         metrikaId={content.meta.yandexMetrikaId}
         privacyHref={content.footer.privacyHref}
       />
       <Contacts company={content.company} contacts={content.contacts} />
-      <Footer company={content.company} contactsId={content.contacts.id} footer={content.footer} />
+      <Footer company={content.company} contactsId={content.contacts.id} footer={content.footer} hiddenAnchors={hidden} />
       <CallFab hint={content.nav.callQrHint} href={callHref} label={content.nav.callLabel} phone={content.company.phone} qrSvg={callQr} />
       <SiteChrome withJsonLd />
     </main>

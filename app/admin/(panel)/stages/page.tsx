@@ -2,7 +2,7 @@
 
 import { useContentStore } from "@/components/admin/ContentProvider";
 import ListEditor from "@/components/admin/ListEditor";
-import { Card, Field, Page, Row } from "@/components/admin/ui";
+import { Card, Field, Page, Row, SectionVisibility } from "@/components/admin/ui";
 
 export default function StagesPage() {
   const { content, update } = useContentStore();
@@ -10,6 +10,7 @@ export default function StagesPage() {
 
   return (
     <Page title="Этапы работы" description="Как проходит заказ — от обращения до монтажа.">
+      <SectionVisibility section="stages" />
       <Card title="Заголовок секции">
         <Field
           label="Заголовок"

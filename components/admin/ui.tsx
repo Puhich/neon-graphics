@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { useContentStore } from "@/components/admin/ContentProvider";
+import type { HideableSection } from "@/lib/site";
 
 // Базовые кирпичики админки: заголовок страницы, карточка, поля ввода.
 // Всё в одном стиле, чтобы разделы выглядели одинаково.
@@ -92,7 +93,7 @@ export function Field({
   const errorClass = error ? "border-brand-accent/70" : "";
 
   return (
-    <label className="grid gap-1.5">
+    <label className="grid content-start gap-1.5">
       <span className="text-[13px] font-semibold text-[var(--adm-text-2)]">{label}</span>
       {rows ? (
         <textarea
@@ -140,7 +141,7 @@ export function InlineField({
   const error = useFieldError(path ?? "");
 
   return (
-    <div className="grid gap-1">
+    <div className="grid content-start gap-1">
       <input
         aria-label={ariaLabel}
         className={`${controlClass} h-10 ${error ? "border-brand-accent/70" : ""}`}
@@ -168,7 +169,7 @@ export function NumberField({
   step?: number;
 }) {
   return (
-    <label className="grid gap-1.5">
+    <label className="grid content-start gap-1.5">
       <span className="text-[13px] font-semibold text-[var(--adm-text-2)]">{label}</span>
       <input
         className={`${controlClass} h-11`}
@@ -202,7 +203,7 @@ export function Select({
   hint?: string;
 }) {
   return (
-    <label className="grid gap-1.5">
+    <label className="grid content-start gap-1.5">
       <span className="text-[13px] font-semibold text-[var(--adm-text-2)]">{label}</span>
       <select
         className={`${controlClass} h-11`}
@@ -296,7 +297,7 @@ export function LinkField({
   const selectValue = custom ? CUSTOM_LINK : value;
 
   return (
-    <div className="grid gap-1.5">
+    <div className="grid content-start gap-1.5">
       <span className="text-[13px] font-semibold text-[var(--adm-text-2)]">{label}</span>
       <div className={`grid gap-2 ${custom ? "sm:grid-cols-2" : ""}`}>
         <select
@@ -334,5 +335,27 @@ export function LinkField({
         <span className="text-[12px] leading-[1.45] text-[var(--adm-faint)]">{hint}</span>
       ) : null}
     </div>
+  );
+}
+
+// Переключатель «показывать секцию на сайте». Скрытая секция остаётся
+// в админке со всем содержимым и возвращается одним кликом.
+export function SectionVisibility({ section }: { section: HideableSection }) {
+  const { content, update } = useContentStore();
+  const hidden = Boolean(content[section].hidden);
+
+  return (
+    <Card>
+      <Toggle
+        checked={!hidden}
+        hint={
+          hidden
+            ? "Секция скрыта: на сайте её нет, ссылки на неё в меню и футере тоже не показываются. Тексты и фото сохранены."
+            : "Выключите, чтобы временно убрать секцию с сайта. Содержимое останется в админке."
+        }
+        label="Показывать на сайте"
+        onChange={(value) => update((draft) => void (draft[section].hidden = value ? undefined : true))}
+      />
+    </Card>
   );
 }

@@ -8,6 +8,7 @@ type FooterProps = {
   footer: SiteContent["footer"];
   company: SiteContent["company"];
   contactsId?: string;
+  hiddenAnchors?: string[];
 };
 
 const socialIconFiles: Record<string, string> = {
@@ -28,8 +29,9 @@ function SocialIcon({ icon }: { icon: string }) {
   );
 }
 
-export default function Footer({ footer, company, contactsId }: FooterProps) {
+export default function Footer({ footer, company, contactsId, hiddenAnchors = [] }: FooterProps) {
   const contacts = footerContactLinks(company, contactsId);
+  const visible = <T extends { href: string }>(links: T[]) => links.filter((link) => !hiddenAnchors.includes(link.href));
 
   return (
     <footer className="relative isolate z-20 overflow-hidden bg-brand-bg px-5 py-16 text-white [clip-path:inset(0)] sm:px-6 lg:px-8 xl:px-0 lg:py-20">
@@ -58,7 +60,7 @@ export default function Footer({ footer, company, contactsId }: FooterProps) {
           <div>
             <h2 className="text-sm font-bold uppercase tracking-[0.08em] text-[#777777]">{footer.navTitle}</h2>
             <ul className="mt-4 grid gap-3 text-[14px]">
-              {footer.nav.map((link) => (
+              {visible(footer.nav).map((link) => (
                 <li key={link.label}>
                   <a className="text-[#bbbbbb] transition hover:text-white" href={link.href}>
                     {link.label}
@@ -71,7 +73,7 @@ export default function Footer({ footer, company, contactsId }: FooterProps) {
           <div>
             <h2 className="text-sm font-bold uppercase tracking-[0.08em] text-[#777777]">{footer.servicesTitle}</h2>
             <ul className="mt-4 grid gap-3 text-[14px]">
-              {footer.services.map((service) => (
+              {visible(footer.services).map((service) => (
                 <li key={service.label}>
                   <a className="text-[#bbbbbb] transition hover:text-white" href={service.href}>
                     {service.label}

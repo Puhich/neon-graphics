@@ -2,7 +2,7 @@
 
 import { useContentStore } from "@/components/admin/ContentProvider";
 import ListEditor from "@/components/admin/ListEditor";
-import { Card, Field, InlineField, LinkField, Page, Row } from "@/components/admin/ui";
+import { Card, Field, InlineField, LinkField, Page, Row, SectionVisibility } from "@/components/admin/ui";
 
 export default function CtaPage() {
   const { content, update } = useContentStore();
@@ -10,6 +10,7 @@ export default function CtaPage() {
 
   return (
     <Page title="Блок с призывом" description="Тёмная карточка между портфолио и этапами работы.">
+      <SectionVisibility section="cta" />
       <Card title="Тексты">
         <Field
           hint="Перенос строки в заголовке сохраняется — можно разбить на две строки."

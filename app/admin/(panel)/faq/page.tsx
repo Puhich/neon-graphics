@@ -2,7 +2,7 @@
 
 import { useContentStore } from "@/components/admin/ContentProvider";
 import ListEditor from "@/components/admin/ListEditor";
-import { Card, Field, Page } from "@/components/admin/ui";
+import { Card, Field, Page, SectionVisibility } from "@/components/admin/ui";
 
 export default function FaqPage() {
   const { content, update } = useContentStore();
@@ -10,6 +10,7 @@ export default function FaqPage() {
 
   return (
     <Page title="Вопросы и ответы" description="Раскрывающийся список частых вопросов.">
+      <SectionVisibility section="faq" />
       <Card title="Заголовок секции">
         <Field
           label="Заголовок"

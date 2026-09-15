@@ -4,7 +4,7 @@ import { useContentStore } from "@/components/admin/ContentProvider";
 import IconPicker from "@/components/admin/IconPicker";
 import ImageField from "@/components/admin/ImageField";
 import ListEditor from "@/components/admin/ListEditor";
-import { Card, Field, Page, Row, Toggle } from "@/components/admin/ui";
+import { Card, Field, Page, Row, SectionVisibility, Toggle } from "@/components/admin/ui";
 
 export default function WhyUsPage() {
   const { content, update } = useContentStore();
@@ -12,6 +12,7 @@ export default function WhyUsPage() {
 
   return (
     <Page title="Почему выбирают нас" description="Крупные блоки с фотографиями и четыре преимущества под ними.">
+      <SectionVisibility section="whyUs" />
       <Card title="Заголовок секции">
         <Field
           hint="Маленькая надпись над заголовком."

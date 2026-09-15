@@ -3,7 +3,7 @@
 import { useContentStore } from "@/components/admin/ContentProvider";
 import ImageField from "@/components/admin/ImageField";
 import ListEditor from "@/components/admin/ListEditor";
-import { Card, Field, Page } from "@/components/admin/ui";
+import { Card, Field, Page, SectionVisibility } from "@/components/admin/ui";
 
 export default function ClientsPage() {
   const { content, update } = useContentStore();
@@ -11,6 +11,7 @@ export default function ClientsPage() {
 
   return (
     <Page title="Логотипы клиентов" description="Лента логотипов сразу под первым экраном.">
+      <SectionVisibility section="clientsLogos" />
       <Card title="Заголовок">
         <Field
           label="Заголовок"

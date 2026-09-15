@@ -3,7 +3,7 @@
 import { useContentStore } from "@/components/admin/ContentProvider";
 import ImageField from "@/components/admin/ImageField";
 import ListEditor from "@/components/admin/ListEditor";
-import { Card, Field, Page, Row } from "@/components/admin/ui";
+import { Card, Field, Page, Row, SectionVisibility } from "@/components/admin/ui";
 
 export default function PortfolioPage() {
   const { content, update } = useContentStore();
@@ -11,6 +11,7 @@ export default function PortfolioPage() {
 
   return (
     <Page title="Портфолио" description="Крупное фото проекта и лента миниатюр под ним.">
+      <SectionVisibility section="portfolio" />
       <Card title="Заголовок секции">
         <Field
           label="Заголовок"

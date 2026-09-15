@@ -5,7 +5,7 @@ import { useEffect, useMemo, useRef, useState, type PointerEvent } from "react";
 
 import SectionWatermark from "@/components/SectionWatermark";
 import type { SiteContent } from "@/lib/content-schema";
-import { telHref, topBarItems } from "@/lib/site";
+import { hiddenAnchors, telHref, topBarItems } from "@/lib/site";
 
 type HeroProps = {
   content: SiteContent;
@@ -75,6 +75,8 @@ function NavSocialIcon({ icon }: { icon: string }) {
 export default function Hero({ content }: HeroProps) {
   const { company, nav, hero } = content;
   const topBar = useMemo(() => topBarItems(company), [company]);
+  const hidden = useMemo(() => hiddenAnchors(content), [content]);
+  const navLinks = useMemo(() => nav.links.filter((link) => !hidden.includes(link.href)), [nav.links, hidden]);
   const carouselRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
@@ -194,7 +196,7 @@ export default function Hero({ content }: HeroProps) {
           />
           <div className="hidden items-center gap-4 lg:flex xl:gap-7">
             <nav className="flex items-center gap-4 whitespace-nowrap text-[14px] font-medium text-[#999999] xl:gap-8">
-              {nav.links.map((link) => (
+              {navLinks.map((link) => (
                 <a className="transition hover:text-white" href={link.href} key={link.label}>
                   {link.label}
                 </a>
@@ -247,7 +249,7 @@ export default function Hero({ content }: HeroProps) {
             </div>
 
             <nav className="mt-5 grid grid-cols-2 gap-x-5 gap-y-3 text-[15px] font-semibold text-[#dddddd]">
-              {nav.links.map((link) => (
+              {navLinks.map((link) => (
                 <a
                   className="transition hover:text-white"
                   href={link.href}

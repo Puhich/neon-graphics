@@ -85,7 +85,7 @@ export default function ImageField({
   };
 
   return (
-    <div className="grid gap-2">
+    <div className="grid content-start gap-2">
       <span className="text-[13px] font-semibold text-[var(--adm-text-2)]">{label}</span>
 
       <div className="flex flex-wrap items-start gap-4">

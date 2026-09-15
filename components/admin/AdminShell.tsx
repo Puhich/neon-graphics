@@ -23,7 +23,9 @@ function isRouteChanged(href: string, changedSections: string[]): boolean {
 export default function AdminShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const { changedSections, issues } = useContentStore();
+  const { content, changedSections, issues } = useContentStore();
+  const isRouteHidden = (href: string) =>
+    (sectionsByRoute[href] ?? []).some((section) => Boolean((content[section as keyof typeof content] as { hidden?: boolean }).hidden));
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -88,7 +90,10 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
                         className={`h-[18px] w-[18px] shrink-0 ${isActive ? "text-brand-accent" : "text-[var(--adm-faint)]"}`}
                         node={routeIcons[item.href] ?? fallbackIcon}
                       />
-                      <span className="flex-1 truncate">{item.label}</span>
+                      <span className={`flex-1 truncate ${isRouteHidden(item.href) ? "opacity-50" : ""}`}>{item.label}</span>
+                      {isRouteHidden(item.href) ? (
+                        <span className="shrink-0 text-[11px] text-[var(--adm-faint)]" title="Секция скрыта на сайте">скрыта</span>
+                      ) : null}
                       {hasIssue ? (
                         <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#f3a40d]" title="Есть незаполненные поля" />
                       ) : changed ? (

@@ -63,3 +63,25 @@ export function absoluteUrl(content: SiteContent, path: string): string | undefi
 
   return base ? `${base}${path.startsWith("/") ? path : `/${path}`}` : undefined;
 }
+
+// Секции, которые клиент скрыл в админке. Ссылки на них в меню и футере
+// не показываем, чтобы не вести в пустоту.
+export const HIDEABLE_SECTIONS = [
+  "clientsLogos",
+  "services",
+  "portfolio",
+  "whyUs",
+  "cta",
+  "stages",
+  "reviews",
+  "directorQuote",
+  "faq"
+] as const;
+
+export type HideableSection = (typeof HIDEABLE_SECTIONS)[number];
+
+export function hiddenAnchors(content: SiteContent): string[] {
+  return HIDEABLE_SECTIONS.filter((key) => content[key].hidden)
+    .map((key) => ("id" in content[key] ? `#${(content[key] as { id: string }).id}` : ""))
+    .filter(Boolean);
+}

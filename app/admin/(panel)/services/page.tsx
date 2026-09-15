@@ -4,7 +4,7 @@ import { useContentStore } from "@/components/admin/ContentProvider";
 import IconPicker from "@/components/admin/IconPicker";
 import ImageField from "@/components/admin/ImageField";
 import ListEditor from "@/components/admin/ListEditor";
-import { Card, Field, Page, Row } from "@/components/admin/ui";
+import { Card, Field, Page, Row, SectionVisibility } from "@/components/admin/ui";
 
 export default function ServicesPage() {
   const { content, update } = useContentStore();
@@ -12,6 +12,7 @@ export default function ServicesPage() {
 
   return (
     <Page title="Услуги" description="Основные услуги с фотографиями и дополнительные услуги с иконками.">
+      <SectionVisibility section="services" />
       <Card title="Заголовок секции">
         <Field
           label="Заголовок"

@@ -85,6 +85,7 @@ export const contentSchema = z.object({
   }),
 
   clientsLogos: z.object({
+    hidden: z.boolean().optional(),
     id: requiredText,
     title: requiredText,
     note: text,
@@ -92,6 +93,7 @@ export const contentSchema = z.object({
   }),
 
   services: z.object({
+    hidden: z.boolean().optional(),
     id: requiredText,
     title: requiredText,
     subtitle: text,
@@ -117,6 +119,7 @@ export const contentSchema = z.object({
   }),
 
   whyUs: z.object({
+    hidden: z.boolean().optional(),
     id: requiredText,
     eyebrow: text,
     title: requiredText,
@@ -143,6 +146,7 @@ export const contentSchema = z.object({
   }),
 
   cta: z.object({
+    hidden: z.boolean().optional(),
     title: requiredText,
     subtitle: text,
     button: linkSchema,
@@ -150,6 +154,7 @@ export const contentSchema = z.object({
   }),
 
   stages: z.object({
+    hidden: z.boolean().optional(),
     id: requiredText,
     title: requiredText,
     subtitle: text,
@@ -163,6 +168,7 @@ export const contentSchema = z.object({
   }),
 
   reviews: z.object({
+    hidden: z.boolean().optional(),
     id: requiredText,
     title: requiredText,
     subtitle: text,
@@ -180,6 +186,7 @@ export const contentSchema = z.object({
   }),
 
   directorQuote: z.object({
+    hidden: z.boolean().optional(),
     imageSrc: requiredText,
     imageAlt: text,
     quoteMark: text,
@@ -191,6 +198,7 @@ export const contentSchema = z.object({
   }),
 
   faq: z.object({
+    hidden: z.boolean().optional(),
     id: requiredText,
     title: requiredText,
     subtitle: text,
@@ -260,6 +268,7 @@ export const contentSchema = z.object({
   }),
 
   portfolio: z.object({
+    hidden: z.boolean().optional(),
     id: requiredText,
     title: requiredText,
     subtitle: text,

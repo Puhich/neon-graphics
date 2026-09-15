@@ -63,7 +63,7 @@ export default function IconPicker({
   }, [isOpen, query]);
 
   return (
-    <div className="grid gap-1.5">
+    <div className="grid content-start gap-1.5">
       <span className="text-[13px] font-semibold text-[var(--adm-text-2)]">{label}</span>
 
       <button

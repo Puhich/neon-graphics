@@ -2,7 +2,7 @@
 
 import { useContentStore } from "@/components/admin/ContentProvider";
 import ImageField from "@/components/admin/ImageField";
-import { Card, Field, Page, Row } from "@/components/admin/ui";
+import { Card, Field, Page, Row, SectionVisibility } from "@/components/admin/ui";
 
 export default function DirectorPage() {
   const { content, update } = useContentStore();
@@ -10,6 +10,7 @@ export default function DirectorPage() {
 
   return (
     <Page title="Цитата директора" description="Блок с фотографией, цитатой и подписью.">
+      <SectionVisibility section="directorQuote" />
       <Card title="Цитата">
         <Field
           label="Текст"

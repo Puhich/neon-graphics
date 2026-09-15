@@ -15,7 +15,9 @@ function routeForSection(section: string): string {
 }
 
 export default function AdminDashboardPage() {
-  const { changedSections, issues, isDirty, publishState } = useContentStore();
+  const { content, changedSections, issues, isDirty, publishState } = useContentStore();
+  const isHidden = (href: string) =>
+    (sectionsByRoute[href] ?? []).some((section) => Boolean((content[section as keyof typeof content] as { hidden?: boolean }).hidden));
 
   return (
     <Page
@@ -89,7 +91,14 @@ export default function AdminDashboardPage() {
                       <ClientIcon className="h-5 w-5" node={routeIcons[item.href] ?? fallbackIcon} />
                     </span>
                     <span className="mt-4">
-                      <span className="block text-[14px] font-semibold leading-[1.3] text-[var(--adm-text)]">{item.label}</span>
+                      <span className="block text-[14px] font-semibold leading-[1.3] text-[var(--adm-text)]">
+                        {item.label}
+                        {isHidden(item.href) ? (
+                          <span className="ml-2 rounded-md bg-[var(--adm-chip)] px-1.5 py-0.5 align-middle text-[11px] font-semibold text-[var(--adm-faint)]">
+                            скрыта
+                          </span>
+                        ) : null}
+                      </span>
                       {item.hint ? (
                         <span className="mt-1 block text-[12px] leading-[1.4] text-[var(--adm-faint)]">{item.hint}</span>
                       ) : null}
