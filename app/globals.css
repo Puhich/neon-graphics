@@ -45,6 +45,8 @@ a {
   --adm-field: #202020;
   --adm-field-border: rgb(255 255 255 / 0.16);
   --adm-chip: rgb(255 255 255 / 0.05);
+  /* Подложка иконок на карточках дашборда: в тёмной теме чуть светлее карточки, в светлой — белая. */
+  --adm-icon-chip: rgb(255 255 255 / 0.06);
   --adm-border: rgb(255 255 255 / 0.1);
   --adm-border-strong: rgb(255 255 255 / 0.15);
   --adm-border-hover: rgb(255 255 255 / 0.3);
@@ -70,6 +72,7 @@ html[data-admin-theme="light"] {
   --adm-field: #ffffff;
   --adm-field-border: rgb(0 0 0 / 0.2);
   --adm-chip: rgb(0 0 0 / 0.05);
+  --adm-icon-chip: #ffffff;
   --adm-border: rgb(0 0 0 / 0.11);
   --adm-border-strong: rgb(0 0 0 / 0.17);
   --adm-border-hover: rgb(0 0 0 / 0.32);
