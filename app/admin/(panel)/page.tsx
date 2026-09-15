@@ -87,7 +87,7 @@ export default function AdminDashboardPage() {
                     href={item.href}
                     key={item.href}
                   >
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--adm-chip)] text-brand-accent transition group-hover:bg-brand-accent/15">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-accent/10 text-brand-accent transition group-hover:bg-brand-accent/20">
                       <ClientIcon className="h-5 w-5" node={routeIcons[item.href] ?? fallbackIcon} />
                     </span>
                     <span className="mt-4">

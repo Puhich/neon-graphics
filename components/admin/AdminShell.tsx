@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, X } from "lucide";
+import { ExternalLink, LogOut, Menu, X } from "lucide";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -108,17 +108,23 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
         ))}
       </nav>
 
-      <div className="border-t border-[var(--adm-border)] px-5 py-4">
+      <div className="grid gap-1 border-t border-[var(--adm-border)] px-3 py-3">
         <a
-          className="block text-[13px] text-[var(--adm-muted)] transition hover:text-[var(--adm-text)]"
+          className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[14px] text-[var(--adm-nav-text)] transition hover:bg-[var(--adm-chip)] hover:text-[var(--adm-text)]"
           href="/"
           rel="noreferrer"
           target="_blank"
         >
-          Открыть сайт →
+          <ClientIcon className="h-[18px] w-[18px] shrink-0 text-[var(--adm-faint)]" node={ExternalLink as IconNode} />
+          <span className="flex-1 truncate">Открыть сайт</span>
         </a>
-        <button className="mt-3 text-[13px] text-[var(--adm-muted)] transition hover:text-[var(--adm-text)]" onClick={logout} type="button">
-          Выйти
+        <button
+          className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-[14px] text-[var(--adm-nav-text)] transition hover:bg-[var(--adm-chip)] hover:text-[var(--adm-text)]"
+          onClick={logout}
+          type="button"
+        >
+          <ClientIcon className="h-[18px] w-[18px] shrink-0 text-[var(--adm-faint)]" node={LogOut as IconNode} />
+          <span className="flex-1 truncate">Выйти</span>
         </button>
       </div>
     </div>
