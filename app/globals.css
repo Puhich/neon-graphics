@@ -63,6 +63,7 @@ a {
 }
 
 html[data-admin-theme="light"] {
+  color-scheme: light;
   --adm-bg: #f1f1ef;
   --adm-surface: #ffffff;
   --adm-sidebar: #ffffff;
@@ -90,28 +91,33 @@ html[data-admin-theme="light"] {
 
 /* Тонкие ненавязчивые полосы прокрутки внутри админки: системные на маке
    с включённым «всегда показывать» выглядят грубо. */
-.adm-scroll {
+.adm-scroll,
+[data-admin-theme] textarea {
   scrollbar-width: thin;
   scrollbar-color: var(--adm-scroll-thumb) transparent;
 }
 
-.adm-scroll::-webkit-scrollbar {
+.adm-scroll::-webkit-scrollbar,
+[data-admin-theme] textarea::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 
-.adm-scroll::-webkit-scrollbar-track {
+.adm-scroll::-webkit-scrollbar-track,
+[data-admin-theme] textarea::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.adm-scroll::-webkit-scrollbar-thumb {
+.adm-scroll::-webkit-scrollbar-thumb,
+[data-admin-theme] textarea::-webkit-scrollbar-thumb {
   border: 3px solid transparent;
   border-radius: 999px;
   background: var(--adm-scroll-thumb);
   background-clip: content-box;
 }
 
-.adm-scroll:hover::-webkit-scrollbar-thumb {
+.adm-scroll:hover::-webkit-scrollbar-thumb,
+[data-admin-theme] textarea:hover::-webkit-scrollbar-thumb {
   background: var(--adm-scroll-thumb-hover);
   background-clip: content-box;
 }
