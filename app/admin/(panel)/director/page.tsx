@@ -34,7 +34,6 @@ export default function DirectorPage() {
           />
         </Row>
         <Field
-          hint="Крупный знак кавычки перед цитатой."
           label="Знак кавычки"
           onChange={(value) => update((draft) => void (draft.directorQuote.quoteMark = value))}
           path="directorQuote.quoteMark"

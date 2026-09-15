@@ -1,7 +1,7 @@
 "use client";
 
 import { useContentStore } from "@/components/admin/ContentProvider";
-import { Card, Field, Note, Page, Row, Toggle } from "@/components/admin/ui";
+import { Card, Field, Page, Row, Toggle } from "@/components/admin/ui";
 
 export default function MiscPage() {
   const { content, update } = useContentStore();
@@ -13,7 +13,6 @@ export default function MiscPage() {
       <Card title="Cookie-баннер">
         <Toggle
           checked={banner.enabled}
-          hint="Плашка появляется один раз: после выбора она больше не показывается."
           label="Показывать плашку"
           onChange={(value) => update((draft) => void (draft.cookieBanner.enabled = value))}
         />
@@ -36,7 +35,6 @@ export default function MiscPage() {
           path="cookieBanner.acceptLabel"
           value={banner.acceptLabel}
         />
-        <Note>Полоса внизу экрана: строка текста и одна кнопка. Нажали — больше не показывается.</Note>
       </Card>
 
       <Card title="Страница 404" description="Что видит посетитель, если открыл несуществующий адрес.">

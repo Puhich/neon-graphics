@@ -15,7 +15,6 @@ export default function WhyUsPage() {
       <SectionVisibility section="whyUs" />
       <Card title="Заголовок секции">
         <Field
-          hint="Маленькая надпись над заголовком."
           label="Надзаголовок"
           onChange={(value) => update((draft) => void (draft.whyUs.eyebrow = value))}
           path="whyUs.eyebrow"

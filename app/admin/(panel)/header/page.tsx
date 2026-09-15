@@ -135,14 +135,14 @@ export default function HeaderPage() {
         </Row>
         <Row>
           <Field
-            hint="Подпись круглой кнопки звонка (её читают программы чтения с экрана)."
+            hint="Для программ чтения с экрана."
             label="Подпись кнопки звонка"
             onChange={(value) => update((draft) => void (draft.nav.callLabel = value))}
             path="nav.callLabel"
             value={nav.callLabel}
           />
           <Field
-            hint="Показывается на компьютере в карточке с QR-кодом, которая открывается по кнопке звонка."
+            hint="В карточке с QR-кодом на компьютере."
             label="Подпись под QR-кодом"
             onChange={(value) => update((draft) => void (draft.nav.callQrHint = value))}
             path="nav.callQrHint"

@@ -233,12 +233,17 @@ export function Toggle({
   onChange: (value: boolean) => void;
 }) {
   return (
-    <label className="flex cursor-pointer items-start gap-3">
+    <label className="flex cursor-pointer items-center gap-3">
       <input
         checked={checked}
-        className="mt-0.5 h-4 w-4 shrink-0 accent-brand-accent"
+        className="peer sr-only"
         onChange={(event) => onChange(event.target.checked)}
+        role="switch"
         type="checkbox"
+      />
+      <span
+        aria-hidden="true"
+        className="relative h-6 w-11 shrink-0 rounded-full bg-[var(--adm-border-strong)] transition peer-checked:bg-brand-accent peer-focus-visible:ring-2 peer-focus-visible:ring-brand-accent/40 after:absolute after:left-0.5 after:top-0.5 after:h-5 after:w-5 after:rounded-full after:bg-white after:shadow after:transition peer-checked:after:translate-x-5"
       />
       <span>
         <span className="block text-[14px] text-[var(--adm-text)]">{label}</span>
@@ -348,11 +353,6 @@ export function SectionVisibility({ section }: { section: HideableSection }) {
     <Card>
       <Toggle
         checked={!hidden}
-        hint={
-          hidden
-            ? "Секция скрыта: на сайте её нет, ссылки на неё в меню и футере тоже не показываются. Тексты и фото сохранены."
-            : "Выключите, чтобы временно убрать секцию с сайта. Содержимое останется в админке."
-        }
         label="Показывать на сайте"
         onChange={(value) => update((draft) => void (draft[section].hidden = value ? undefined : true))}
       />

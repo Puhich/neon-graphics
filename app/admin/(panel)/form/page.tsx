@@ -2,7 +2,7 @@
 
 import { useContentStore } from "@/components/admin/ContentProvider";
 import ListEditor from "@/components/admin/ListEditor";
-import { Card, Field, InlineField, Note, Page, Row } from "@/components/admin/ui";
+import { Card, Field, InlineField, Page, Row } from "@/components/admin/ui";
 
 export default function FormPage() {
   const { content, update } = useContentStore();
@@ -127,7 +127,6 @@ export default function FormPage() {
           />
         </Row>
         <Field
-          hint="Текст рядом с галочкой согласия — заканчивается ссылкой на политику."
           label="Текст согласия"
           onChange={(value) => update((draft) => void (draft.finalForm.consentPrefix = value))}
           path="finalForm.consentPrefix"
@@ -140,9 +139,6 @@ export default function FormPage() {
           path="finalForm.consentLinkText"
           value={form.consentLinkText}
         />
-        <Note>
-          Галочка согласия обязательна: без неё кнопка отправки не активна. Так требует закон о персональных данных.
-        </Note>
       </Card>
 
       <Card title="Сообщения после отправки">

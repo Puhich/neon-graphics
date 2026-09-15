@@ -1,7 +1,7 @@
 "use client";
 
 import { useContentStore } from "@/components/admin/ContentProvider";
-import { Card, Field, Note, Page, Row } from "@/components/admin/ui";
+import { Card, Field, Page, Row } from "@/components/admin/ui";
 
 export default function CompanyPage() {
   const { content, update } = useContentStore();
@@ -15,7 +15,7 @@ export default function CompanyPage() {
       <Card title="Связь">
         <Row>
           <Field
-            hint="В таком виде телефон показывается на сайте. Ссылка для звонка собирается автоматически."
+            hint="Как на сайте. Ссылка для звонка соберётся сама."
             label="Телефон"
             onChange={(value) => update((draft) => void (draft.company.phone = value))}
             path="company.phone"
@@ -114,7 +114,6 @@ export default function CompanyPage() {
             value={company.foundedYear}
           />
         </Row>
-        <Note>Год в копирайте футера подставляется автоматически — обновлять вручную не нужно.</Note>
       </Card>
     </Page>
   );

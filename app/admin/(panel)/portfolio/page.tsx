@@ -28,7 +28,6 @@ export default function PortfolioPage() {
         />
         <Row>
           <Field
-            hint="Подпись стрелки «назад» для читалок."
             label="Подпись «предыдущий»"
             onChange={(value) => update((draft) => void (draft.portfolio.previousLabel = value))}
             path="portfolio.previousLabel"

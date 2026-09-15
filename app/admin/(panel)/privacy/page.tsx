@@ -2,7 +2,7 @@
 
 import { useContentStore } from "@/components/admin/ContentProvider";
 import ListEditor from "@/components/admin/ListEditor";
-import { Card, Field, Note, Page, Row } from "@/components/admin/ui";
+import { Card, Field, Page, Row } from "@/components/admin/ui";
 
 export default function PrivacyPage() {
   const { content, update } = useContentStore();
@@ -45,10 +45,6 @@ export default function PrivacyPage() {
       </Card>
 
       <Card title="Разделы документа">
-        <Note tone="warn">
-          Текст подготовлен по образцу и требует проверки юристом клиента: реквизиты, цели обработки и сроки хранения
-          должны совпадать с реальными.
-        </Note>
         <ListEditor
           addLabel="Добавить раздел"
           createItem={() => ({ title: "Новый раздел", text: "" })}

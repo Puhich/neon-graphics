@@ -96,7 +96,7 @@ export default function ContactsPage() {
         </Row>
         <Row>
           <NumberField
-            hint="От 1 (весь мир) до 21 (дом). Сейчас 15."
+            hint="От 1 (весь мир) до 21 (дом)."
             label="Приближение"
             onChange={(value) => update((draft) => void (draft.contacts.mapZoom = value))}
             value={contacts.mapZoom}

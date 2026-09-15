@@ -13,7 +13,7 @@ export default function CtaPage() {
       <SectionVisibility section="cta" />
       <Card title="Тексты">
         <Field
-          hint="Перенос строки в заголовке сохраняется — можно разбить на две строки."
+          hint="Перенос строки сохраняется."
           label="Заголовок"
           onChange={(value) => update((draft) => void (draft.cta.title = value))}
           path="cta.title"

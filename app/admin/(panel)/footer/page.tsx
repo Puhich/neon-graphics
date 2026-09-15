@@ -179,7 +179,6 @@ export default function FooterPage() {
             value={footer.privacy}
           />
           <Field
-            hint="По умолчанию /privacy — страница политики на этом же сайте."
             label="Ссылка на политику"
             onChange={(value) => update((draft) => void (draft.footer.privacyHref = value))}
             path="footer.privacyHref"

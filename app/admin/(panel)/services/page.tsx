@@ -119,7 +119,6 @@ export default function ServicesPage() {
                 value={item.description}
               />
               <IconPicker
-                hint="Иконка показывается слева от названия."
                 label="Иконка"
                 onChange={(value) => update((draft) => void (draft.services.additional[index].icon = value))}
                 value={item.icon}

@@ -45,7 +45,6 @@ export default function ClientsPage() {
                 value={item.src}
               />
               <Field
-                hint="Название компании."
                 label="Название"
                 onChange={(value) => update((draft) => void (draft.clientsLogos.items[index].alt = value))}
                 path={`clientsLogos.items.${index}.alt`}

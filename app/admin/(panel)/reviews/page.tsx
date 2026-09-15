@@ -73,7 +73,6 @@ export default function ReviewsPage() {
                 />
               </Row>
               <ImageField
-                hint="Фотография работы, о которой отзыв."
                 label="Фотография"
                 onChange={(src) => update((draft) => void (draft.reviews.items[index].imageSrc = src))}
                 value={item.imageSrc}
