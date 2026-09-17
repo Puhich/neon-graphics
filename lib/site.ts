@@ -55,7 +55,13 @@ export function siteUrl(content: SiteContent): string | null {
 
   const withProtocol = /^https?:\/\//.test(raw) ? raw : `https://${raw}`;
 
-  return withProtocol.replace(/\/+$/, "");
+  // В админке домен может быть кириллицей (неон-графикс.рф) — для canonical,
+  // sitemap и OG нужна ASCII-форма, её даёт разбор URL.
+  try {
+    return new URL(withProtocol).origin;
+  } catch {
+    return withProtocol.replace(/\/+$/, "");
+  }
 }
 
 export function absoluteUrl(content: SiteContent, path: string): string | undefined {

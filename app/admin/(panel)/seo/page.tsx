@@ -15,7 +15,6 @@ export default function SeoPage() {
     >
       <Card title="Адрес сайта">
         <Field
-          hint="Например: neon-grafiks.ru. Нужен для карты сайта и правильных ссылок в превью. Пока поле пустое, эти функции выключены."
           label="Домен"
           onChange={(value) => update((draft) => void (draft.meta.siteUrl = value))}
           path="meta.siteUrl"
