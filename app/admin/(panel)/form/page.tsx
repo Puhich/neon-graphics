@@ -164,7 +164,7 @@ export default function FormPage() {
         />
       </Card>
 
-      <Card title="Сообщения после отправки">
+      <Card title="После отправки">
         <Row>
           <Field
             label="Заголовок успеха"
@@ -178,6 +178,18 @@ export default function FormPage() {
             path="finalForm.errorText"
             value={form.errorText}
           />
+        </Row>
+        <Field
+          label="Текст успеха"
+          onChange={(value) => update((draft) => void (draft.finalForm.successText = value))}
+          path="finalForm.successText"
+          rows={2}
+          value={form.successText}
+        />
+      </Card>
+
+      <Card title="Подсказки у полей">
+        <Row>
           <Field
             label="Пустое имя"
             onChange={(value) => update((draft) => void (draft.finalForm.nameRequiredText = value))}
@@ -190,6 +202,8 @@ export default function FormPage() {
             path="finalForm.phoneRequiredText"
             value={form.phoneRequiredText}
           />
+        </Row>
+        <Row>
           <Field
             label="Неполный телефон"
             onChange={(value) => update((draft) => void (draft.finalForm.phoneIncompleteText = value))}
@@ -203,13 +217,6 @@ export default function FormPage() {
             value={form.emailInvalidText}
           />
         </Row>
-        <Field
-          label="Текст успеха"
-          onChange={(value) => update((draft) => void (draft.finalForm.successText = value))}
-          path="finalForm.successText"
-          rows={2}
-          value={form.successText}
-        />
       </Card>
     </Page>
   );
