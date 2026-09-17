@@ -80,27 +80,13 @@ export default function SeoPage() {
         />
       </Card>
 
-      <Card title="Аналитика и подтверждение прав">
+      <Card title="Аналитика">
         <Field
-          hint="Только номер счётчика, например 12345678. Пусто — Метрика не подключается."
+          hint="Пусто — Метрика выключена."
           label="Номер счётчика Яндекс.Метрики"
           onChange={(value) => update((draft) => void (draft.meta.yandexMetrikaId = value))}
           path="meta.yandexMetrikaId"
           value={meta.yandexMetrikaId}
-        />
-        <Field
-          hint="Значение из мета-тега подтверждения в Яндекс.Вебмастере."
-          label="Код Яндекс.Вебмастера"
-          onChange={(value) => update((draft) => void (draft.meta.yandexVerification = value))}
-          path="meta.yandexVerification"
-          value={meta.yandexVerification}
-        />
-        <Field
-          hint="Значение из мета-тега подтверждения в Google Search Console."
-          label="Код Google Search Console"
-          onChange={(value) => update((draft) => void (draft.meta.googleVerification = value))}
-          path="meta.googleVerification"
-          value={meta.googleVerification}
         />
       </Card>
     </Page>
