@@ -91,6 +91,29 @@ html[data-admin-theme="light"] {
 
 /* Тонкие ненавязчивые полосы прокрутки внутри админки: системные на маке
    с включённым «всегда показывать» выглядят грубо. */
+/* Светлые поля на публичном сайте: у всего сайта тёмная системная схема,
+   и без этого браузер рисует в textarea чёрную полосу прокрутки. */
+.site-scroll {
+  color-scheme: light;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(0 0 0 / 0.22) transparent;
+}
+
+.site-scroll::-webkit-scrollbar {
+  width: 10px;
+}
+
+.site-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.site-scroll::-webkit-scrollbar-thumb {
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background: rgb(0 0 0 / 0.22);
+  background-clip: content-box;
+}
+
 .adm-scroll,
 [data-admin-theme] textarea {
   scrollbar-width: thin;

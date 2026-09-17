@@ -31,7 +31,7 @@ const inputClass =
 
 export default function FinalForm({ form, privacyHref, metrikaId }: FinalFormProps) {
   const [status, setStatus] = useState<Status>("idle");
-  const [consent, setConsent] = useState(true);
+  const [consent, setConsent] = useState(false);
   const [phone, setPhone] = useState("");
   const phoneRef = useRef<HTMLInputElement>(null);
 
@@ -157,7 +157,7 @@ export default function FinalForm({ form, privacyHref, metrikaId }: FinalFormPro
               <label className="grid gap-1.5 text-[13px] text-[#666666]">
                 <span>{form.messageLabel}</span>
                 <textarea
-                  className="min-h-[118px] resize-y rounded-xl bg-[#e8e8e8] px-4 py-3 text-[15px] text-brand-ink outline-none transition placeholder:text-[#999999] focus:ring-2 focus:ring-brand-accent/35"
+                  className="site-scroll min-h-[118px] resize-y rounded-xl bg-[#e8e8e8] px-4 py-3 text-[15px] text-brand-ink outline-none transition placeholder:text-[#999999] focus:ring-2 focus:ring-brand-accent/35"
                   name="message"
                   placeholder={form.messagePlaceholder}
                 />
