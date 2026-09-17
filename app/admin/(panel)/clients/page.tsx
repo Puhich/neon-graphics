@@ -10,8 +10,7 @@ export default function ClientsPage() {
   const clients = content.clientsLogos;
 
   return (
-    <Page title="Логотипы клиентов">
-      <SectionVisibility section="clientsLogos" />
+    <Page actions={<SectionVisibility section="clientsLogos" />} title="Логотипы клиентов">
       <Card title="Заголовок">
         <Field
           label="Заголовок"

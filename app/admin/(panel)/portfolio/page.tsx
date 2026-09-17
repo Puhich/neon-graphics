@@ -10,8 +10,7 @@ export default function PortfolioPage() {
   const portfolio = content.portfolio;
 
   return (
-    <Page title="Портфолио">
-      <SectionVisibility section="portfolio" />
+    <Page actions={<SectionVisibility section="portfolio" />} title="Портфолио">
       <Card title="Заголовок секции">
         <Field
           label="Заголовок"

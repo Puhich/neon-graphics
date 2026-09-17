@@ -10,8 +10,7 @@ export default function ReviewsPage() {
   const reviews = content.reviews;
 
   return (
-    <Page title="Отзывы">
-      <SectionVisibility section="reviews" />
+    <Page actions={<SectionVisibility section="reviews" />} title="Отзывы">
       <Card title="Заголовок секции">
         <Field
           label="Заголовок"

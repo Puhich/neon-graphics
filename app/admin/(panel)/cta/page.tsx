@@ -9,8 +9,7 @@ export default function CtaPage() {
   const cta = content.cta;
 
   return (
-    <Page title="Блок с призывом">
-      <SectionVisibility section="cta" />
+    <Page actions={<SectionVisibility section="cta" />} title="Блок с призывом">
       <Card title="Тексты">
         <Field
           hint="Перенос строки сохраняется."

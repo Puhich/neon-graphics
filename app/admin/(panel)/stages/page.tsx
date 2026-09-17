@@ -9,8 +9,7 @@ export default function StagesPage() {
   const stages = content.stages;
 
   return (
-    <Page title="Этапы работы">
-      <SectionVisibility section="stages" />
+    <Page actions={<SectionVisibility section="stages" />} title="Этапы работы">
       <Card title="Заголовок секции">
         <Field
           label="Заголовок"

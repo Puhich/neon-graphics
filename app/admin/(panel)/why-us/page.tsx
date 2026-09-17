@@ -11,8 +11,7 @@ export default function WhyUsPage() {
   const whyUs = content.whyUs;
 
   return (
-    <Page title="Почему выбирают нас">
-      <SectionVisibility section="whyUs" />
+    <Page actions={<SectionVisibility section="whyUs" />} title="Почему выбирают нас">
       <Card title="Заголовок секции">
         <Field
           label="Надзаголовок"

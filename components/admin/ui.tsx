@@ -11,15 +11,20 @@ import type { HideableSection } from "@/lib/site";
 export function Page({
   title,
   description,
+  actions,
   children
 }: {
   title: string;
   description?: string;
+  actions?: React.ReactNode;
   children: React.ReactNode;
 }) {
   return (
     <div>
-      <h1 className="font-heading text-[26px] leading-tight sm:text-[30px]">{title}</h1>
+      <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
+        <h1 className="font-heading text-[26px] leading-tight sm:text-[30px]">{title}</h1>
+        {actions}
+      </div>
       {description ? <p className="mt-2 text-[14px] leading-[1.5] text-[var(--adm-muted)]">{description}</p> : null}
       <div className="mt-6 grid gap-5">{children}</div>
     </div>
@@ -350,12 +355,10 @@ export function SectionVisibility({ section }: { section: HideableSection }) {
   const hidden = Boolean(content[section].hidden);
 
   return (
-    <Card>
-      <Toggle
-        checked={!hidden}
-        label="Показывать на сайте"
-        onChange={(value) => update((draft) => void (draft[section].hidden = value ? undefined : true))}
-      />
-    </Card>
+    <Toggle
+      checked={!hidden}
+      label="Показывать на сайте"
+      onChange={(value) => update((draft) => void (draft[section].hidden = value ? undefined : true))}
+    />
   );
 }

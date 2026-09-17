@@ -9,8 +9,7 @@ export default function DirectorPage() {
   const quote = content.directorQuote;
 
   return (
-    <Page title="Цитата директора">
-      <SectionVisibility section="directorQuote" />
+    <Page actions={<SectionVisibility section="directorQuote" />} title="Цитата директора">
       <Card title="Цитата">
         <Field
           label="Текст"

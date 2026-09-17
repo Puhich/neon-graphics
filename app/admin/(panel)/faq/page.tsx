@@ -9,8 +9,7 @@ export default function FaqPage() {
   const faq = content.faq;
 
   return (
-    <Page title="Вопросы и ответы">
-      <SectionVisibility section="faq" />
+    <Page actions={<SectionVisibility section="faq" />} title="Вопросы и ответы">
       <Card title="Заголовок секции">
         <Field
           label="Заголовок"

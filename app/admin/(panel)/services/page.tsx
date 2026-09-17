@@ -11,8 +11,7 @@ export default function ServicesPage() {
   const services = content.services;
 
   return (
-    <Page title="Услуги">
-      <SectionVisibility section="services" />
+    <Page actions={<SectionVisibility section="services" />} title="Услуги">
       <Card title="Заголовок секции">
         <Field
           label="Заголовок"
