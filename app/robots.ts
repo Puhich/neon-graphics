@@ -3,6 +3,8 @@ import type { MetadataRoute } from "next";
 import { getContent } from "@/lib/content";
 import { siteUrl } from "@/lib/site";
 
+export const dynamic = "force-dynamic";
+
 export default function robots(): MetadataRoute.Robots {
   const content = getContent();
   const base = siteUrl(content);

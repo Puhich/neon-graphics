@@ -5,6 +5,8 @@ import { siteUrl } from "@/lib/site";
 
 // Пока домен не задан в админке, карту сайта не отдаём — иначе в ней будут
 // неправильные адреса.
+export const dynamic = "force-dynamic";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const content = getContent();
   const base = siteUrl(content);

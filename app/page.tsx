@@ -17,6 +17,10 @@ import { getContent } from "@/lib/content";
 import { qrSvg } from "@/lib/qr";
 import { hiddenAnchors, telHref } from "@/lib/site";
 
+// На своём сервере контент лежит на диске и меняется без пересборки —
+// страница рендерится на запрос, а не запекается при сборке.
+export const dynamic = "force-dynamic";
+
 export default function Home() {
   const content = getContent();
   const callHref = telHref(content.company.phone);

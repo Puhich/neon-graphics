@@ -6,6 +6,8 @@ import Footer from "@/components/Footer";
 import SiteChrome from "@/components/SiteChrome";
 import { getContent } from "@/lib/content";
 
+export const dynamic = "force-dynamic";
+
 export function generateMetadata(): Metadata {
   const content = getContent();
 
