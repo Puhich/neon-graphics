@@ -1,17 +1,31 @@
 # Неон Графикс — сайт и админка
 
 Лендинг производителя наружной рекламы и админка для клиента.
-Next.js 14 (App Router) + TypeScript + Tailwind, деплой на Vercel из ветки `main`.
+Next.js 14 (App Router) + TypeScript + Tailwind. Живёт на VPS Beget
+(https://неон-графикс.рф), деплой автоматический из ветки `main`.
 
 ## Как это устроено
 
 - Весь текст и все картинки сайта лежат в `data/content.json`.
 - Структура файла описана zod-схемой `lib/content-schema.ts` — она же даёт типы
   компонентам и проверяет контент при сборке и перед публикацией.
+- Контент читается с диска на каждый запрос (`lib/content.ts`, кэш по времени
+  изменения файла), поэтому правки видны без пересборки.
 - Админка на `/admin` правит копию контента в браузере (черновик в localStorage),
-  а по кнопке «Опубликовать» коммитит `data/content.json` в GitHub. Vercel видит
-  коммит и пересобирает сайт — изменения появляются через 1–2 минуты.
+  а по кнопке «Опубликовать» коммитит `data/content.json` в GitHub **и** пишет его
+  на диск сервера — изменения на сайте сразу.
 - Каждая публикация — обычный git-коммит, поэтому история и откат встроены.
+
+## Сервер и деплой
+
+- Сервер: Ubuntu 24.04, приложение в `/var/www/neon` под пользователем `app`,
+  процесс под PM2 (`deploy/ecosystem.config.cjs`), nginx как прокси
+  (`deploy/nginx.conf`), TLS через certbot. Доступы — у разработчика, не в git.
+- Деплой: cron раз в 2 минуты запускает `deploy/deploy.sh`. Скрипт подтягивает
+  `origin/main` и пересобирает сайт **только если менялся код**; коммиты с контентом,
+  картинками и документацией просто синхронизируются. Лог: `/var/log/neon-deploy.log`.
+- Форсировать пересборку: `sudo -u app -H bash -c "cd /var/www/neon && ./deploy/deploy.sh --force"`.
+- После правки `.env`: `sudo -u app pm2 reload neon --update-env`.
 
 ## Разработка
 
@@ -34,9 +48,8 @@ npm run lint
 
 ## Переменные окружения
 
-Локально — `.env.local` (см. `.env.example`), на проде — Vercel → Settings →
-Environment Variables (Production + Preview). После изменения переменных нужен
-редеплой.
+Локально — `.env.local` (см. `.env.example`), на сервере — `/var/www/neon/.env`.
+После изменения переменных на сервере нужен `pm2 reload neon --update-env`.
 
 | Переменная | Зачем |
 | --- | --- |
@@ -46,8 +59,8 @@ Environment Variables (Production + Preview). После изменения пе
 | `GITHUB_TOKEN` | Fine-grained токен, Contents: Read and write на этот репозиторий |
 | `GITHUB_REPO` | `Puhich/neon-graphics` |
 | `GITHUB_BRANCH` | `main` |
-| `TELEGRAM_BOT_TOKEN` | Токен бота от @BotFather — заявки |
-| `TELEGRAM_CHAT_ID` | Чат или группа, куда падают заявки |
+| `SELF_HOSTED` | `1` на сервере: публикация пишет на диск и коммитит в GitHub |
+| `TELEGRAM_BOT_TOKEN` / `TELEGRAM_CHAT_ID` | Заявки в Telegram; не задано — канал выключен |
 | `SMTP_HOST` / `SMTP_PORT` | `smtp.yandex.ru` / `465` |
 | `SMTP_USER` / `SMTP_PASSWORD` | Ящик и пароль приложения (не основной пароль) |
 | `SMTP_FROM` / `SMTP_TO` | Отправитель и получатель писем с заявками |
@@ -57,7 +70,7 @@ Environment Variables (Production + Preview). После изменения пе
 
 ## Картинки
 
-Оптимизатор Vercel выключен, работает свой лоадер `image-loader.js`: для каждой
+Оптимизатор картинок Next выключен, работает свой лоадер `image-loader.js`: для каждой
 фотографии в `public/images` нужны три файла — `name.webp`, `name-640.webp`,
 `name-1280.webp`. Загрузка через админку делает этот набор автоматически
 (sharp, качество ~78, ширина базы до 1400px), поэтому клиент может грузить
@@ -91,5 +104,5 @@ data/content.json       весь контент сайта
 
 ## Что сделать перед запуском
 
-См. `LAUNCH-CHECKLIST.md`: домен, Метрика, Вебмастер, переменные в Vercel,
-OG-картинка, вычитка политики юристом.
+См. `LAUNCH-CHECKLIST.md`: что уже сделано при переезде на сервер и что осталось —
+Метрика, Вебмастер, OG-картинка, вычитка политики юристом.
