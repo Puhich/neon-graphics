@@ -162,17 +162,20 @@ export async function recentCommits(limit = 5): Promise<{ message: string; date:
   }
 
   try {
-    // Только публикации из админки: коммиты, которые меняли data/content.json.
+    // Только публикации из админки — их узнаём по тексту сообщения.
     // Правки кода разработчиком клиенту не нужны.
     const commits = await github<
       { commit: { message: string; author: { date: string } }; html_url: string }[]
-    >(`/commits?sha=${githubBranch}&path=data/content.json&per_page=${limit}`);
+    >(`/commits?sha=${githubBranch}&path=data/content.json&per_page=40`);
 
-    return commits.map((item) => ({
-      message: item.commit.message.split("\n")[0],
-      date: item.commit.author.date,
-      url: item.html_url
-    }));
+    return commits
+      .map((item) => ({
+        message: item.commit.message.split("\n")[0],
+        date: item.commit.author.date,
+        url: item.html_url
+      }))
+      .filter((item) => /^(Изменено:|Публикация из админки|Обновление контента сайта через админку)/.test(item.message))
+      .slice(0, limit);
   } catch {
     return [];
   }
