@@ -111,6 +111,29 @@ export default function FormPage() {
         </Row>
       </Card>
 
+      <Card title="Фото в заявке">
+        <Row>
+          <Field
+            label="Подпись поля"
+            onChange={(value) => update((draft) => void (draft.finalForm.photosLabel = value))}
+            path="finalForm.photosLabel"
+            value={form.photosLabel}
+          />
+          <Field
+            label="Текст кнопки"
+            onChange={(value) => update((draft) => void (draft.finalForm.photosAddText = value))}
+            path="finalForm.photosAddText"
+            value={form.photosAddText}
+          />
+        </Row>
+        <Field
+          label="Подсказка"
+          onChange={(value) => update((draft) => void (draft.finalForm.photosHint = value))}
+          path="finalForm.photosHint"
+          value={form.photosHint}
+        />
+      </Card>
+
       <Card title="Кнопка и согласие">
         <Row>
           <Field

@@ -231,6 +231,9 @@ export const contentSchema = z.object({
     successTitle: requiredText,
     successText: text,
     errorText: requiredText,
+    photosLabel: requiredText,
+    photosHint: text,
+    photosAddText: requiredText,
     nameRequiredText: requiredText,
     phoneRequiredText: requiredText,
     phoneIncompleteText: requiredText

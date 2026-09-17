@@ -10,8 +10,7 @@ export type LeadEmailData = {
   email: string;
   message: string;
   time: string;
-  siteName: string;
-  siteUrl: string;
+  photoCount: number;
 };
 
 function esc(value: string): string {
@@ -28,6 +27,8 @@ export function leadEmailHtml(d: LeadEmailData): string {
       <td style="padding:10px 0;border-bottom:1px solid #ececea;color:#8a8a86;font-size:13px;width:110px;vertical-align:top;">${label}</td>
       <td style="padding:10px 0;border-bottom:1px solid #ececea;color:#1a1a18;font-size:16px;font-weight:700;vertical-align:top;">${value}</td>
     </tr>`;
+
+  const photos = d.photoCount > 0 ? row("Фото", `${d.photoCount} во вложении`) : "";
 
   const message = d.message
     ? `
@@ -47,8 +48,7 @@ export function leadEmailHtml(d: LeadEmailData): string {
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ffffff;border-radius:16px;overflow:hidden;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;">
         <tr>
           <td style="background:#0f0f0d;padding:22px 28px;">
-            <div style="color:#cc1a2c;font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;">${esc(d.siteName)}</div>
-            <div style="color:#ffffff;font-size:22px;font-weight:800;margin-top:6px;">Новая заявка с сайта</div>
+            <div style="color:#ffffff;font-size:22px;font-weight:800;">Новая заявка с сайта</div>
           </td>
         </tr>
         <tr>
@@ -57,6 +57,7 @@ export function leadEmailHtml(d: LeadEmailData): string {
               ${row("Имя", esc(d.name))}
               ${row("Телефон", `<a href="${telHref(d.phone)}" style="color:#cc1a2c;text-decoration:none;">${esc(d.phone)}</a>`)}
               ${d.email ? row("Email", `<a href="mailto:${esc(d.email)}" style="color:#cc1a2c;text-decoration:none;">${esc(d.email)}</a>`) : ""}
+              ${photos}
               ${message}
             </table>
             <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:22px;">
@@ -64,10 +65,7 @@ export function leadEmailHtml(d: LeadEmailData): string {
                 <td style="padding-right:8px;">
                   <a href="${telHref(d.phone)}" style="display:inline-block;background:#cc1a2c;color:#ffffff;font-size:14px;font-weight:700;text-decoration:none;padding:12px 20px;border-radius:10px;">Позвонить</a>
                 </td>
-                <td style="color:#8a8a86;font-size:12px;text-align:right;">
-                  ${esc(d.time)}<br>
-                  <a href="${esc(d.siteUrl)}" style="color:#8a8a86;">${esc(d.siteUrl.replace(/^https?:\/\//, ""))}</a>
-                </td>
+                <td style="color:#8a8a86;font-size:12px;text-align:right;">${esc(d.time)}</td>
               </tr>
             </table>
           </td>

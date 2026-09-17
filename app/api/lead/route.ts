@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import sharp from "sharp";
 
 import { getContent } from "@/lib/content";
 import { leadEmailHtml } from "@/lib/lead-email";
@@ -14,6 +15,38 @@ type Lead = {
   message: string;
   company: string;
 };
+
+type Photo = { filename: string; content: Buffer };
+
+// Фото из формы: не больше пяти, каждое до 10 МБ на входе. Сжимаем до
+// 1600px по длинной стороне и JPEG ~80% — с телефона 6–8 МБ превращаются
+// в 300–500 КБ, письмо остаётся лёгким. На диске ничего не храним.
+const MAX_PHOTOS = 5;
+const MAX_PHOTO_BYTES = 10 * 1024 * 1024;
+
+async function preparePhotos(files: File[]): Promise<Photo[]> {
+  const photos: Photo[] = [];
+
+  const accepted = files.slice(0, MAX_PHOTOS);
+
+  for (let index = 0; index < accepted.length; index += 1) {
+    const file = accepted[index];
+    if (!file.type.startsWith("image/") || file.size === 0 || file.size > MAX_PHOTO_BYTES) {
+      continue;
+    }
+
+    const input = Buffer.from(await file.arrayBuffer());
+    const content = await sharp(input, { failOn: "none" })
+      .rotate()
+      .resize({ width: 1600, height: 1600, fit: "inside", withoutEnlargement: true })
+      .jpeg({ quality: 80, mozjpeg: true })
+      .toBuffer();
+
+    photos.push({ filename: `photo-${index + 1}.jpg`, content });
+  }
+
+  return photos;
+}
 
 // Простейшая защита от перебора: не больше пяти заявок с одного адреса в час.
 const attempts = new Map<string, number[]>();
@@ -33,13 +66,14 @@ function escapeHtml(value: string): string {
   return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
-function buildText(lead: Lead): { subject: string; lines: string[] } {
+function buildText(lead: Lead, photoCount = 0): { subject: string; lines: string[] } {
   // Контакты — построчно, сообщение — отдельным блоком через пустую строку,
   // чтобы в письме оно не сливалось с полями.
   const lines = [
     `Имя: ${lead.name}`,
     `Телефон: ${lead.phone}`,
     lead.email ? `Email: ${lead.email}` : "",
+    photoCount > 0 ? `Фото: ${photoCount} во вложении` : "",
     lead.message ? `\nСообщение:\n${lead.message}\n` : "",
     `Время: ${new Date().toLocaleString("ru-RU", { timeZone: "Europe/Samara" })}`
   ].filter(Boolean);
@@ -63,8 +97,8 @@ async function sendToTelegram(lead: Lead): Promise<void> {
   }
 }
 
-async function sendToEmail(lead: Lead): Promise<void> {
-  const { subject, lines } = buildText(lead);
+async function sendToEmail(lead: Lead, photos: Photo[]): Promise<void> {
+  const { subject, lines } = buildText(lead, photos.length);
 
   const transporter = nodemailer.createTransport({
     host: smtp.host,
@@ -87,17 +121,25 @@ async function sendToEmail(lead: Lead): Promise<void> {
       email: lead.email,
       message: lead.message,
       time: new Date().toLocaleString("ru-RU", { timeZone: "Europe/Samara" }),
-      siteName: content.company.name,
-      siteUrl: content.meta.siteUrl || "https://неон-графикс.рф"
-    })
+      photoCount: photos.length
+    }),
+    attachments: photos.map((photo) => ({ filename: photo.filename, content: photo.content, contentType: "image/jpeg" }))
   });
 }
 
 export async function POST(request: Request) {
   let body: Partial<Lead>;
+  let files: File[] = [];
 
   try {
-    body = (await request.json()) as Partial<Lead>;
+    if (request.headers.get("content-type")?.includes("multipart/form-data")) {
+      const formData = await request.formData();
+      const field = (key: string) => String(formData.get(key) ?? "");
+      body = { name: field("name"), phone: field("phone"), email: field("email"), message: field("message"), company: field("company") };
+      files = formData.getAll("photos").filter((item): item is File => item instanceof File);
+    } else {
+      body = (await request.json()) as Partial<Lead>;
+    }
   } catch {
     return NextResponse.json({ error: "Некорректный запрос" }, { status: 400 });
   }
@@ -125,6 +167,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Слишком много заявок, попробуйте позже" }, { status: 429 });
   }
 
+  const photos = files.length > 0 ? await preparePhotos(files) : [];
   const delivered: string[] = [];
   const errors: string[] = [];
 
@@ -139,7 +182,7 @@ export async function POST(request: Request) {
 
   if (smtp.host && smtp.user && smtp.password && smtp.to) {
     try {
-      await sendToEmail(lead);
+      await sendToEmail(lead, photos);
       delivered.push("почта");
     } catch (error) {
       errors.push((error as Error).message);

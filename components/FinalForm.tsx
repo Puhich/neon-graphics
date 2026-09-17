@@ -36,6 +36,25 @@ export default function FinalForm({ form, privacyHref, metrikaId }: FinalFormPro
   const [name, setName] = useState("");
   const [fieldErrors, setFieldErrors] = useState<{ name?: string; phone?: string }>({});
   const [serverError, setServerError] = useState("");
+  const [photos, setPhotos] = useState<{ file: File; url: string }[]>([]);
+  const photoInputRef = useRef<HTMLInputElement>(null);
+  const MAX_PHOTOS = 5;
+
+  const addPhotos = (list: FileList | null) => {
+    if (!list) return;
+    const next = [...photos];
+    for (const file of Array.from(list)) {
+      if (next.length >= MAX_PHOTOS) break;
+      if (!file.type.startsWith("image/")) continue;
+      next.push({ file, url: URL.createObjectURL(file) });
+    }
+    setPhotos(next);
+  };
+
+  const removePhoto = (index: number) => {
+    URL.revokeObjectURL(photos[index].url);
+    setPhotos(photos.filter((_, i) => i !== index));
+  };
   const phoneRef = useRef<HTMLInputElement>(null);
 
   // Маска дописывает скобки и дефисы — курсор держим в конце, чтобы
@@ -69,19 +88,18 @@ export default function FinalForm({ form, privacyHref, metrikaId }: FinalFormPro
     setServerError("");
     setStatus("sending");
 
+    // Уходит как multipart: текстовые поля плюс фото. Honeypot «company»
+    // скрыт от людей, боты его заполняют.
+    const payload = new FormData();
+    for (const key of ["name", "phone", "email", "message", "company"]) {
+      payload.append(key, String(formData.get(key) ?? ""));
+    }
+    for (const photo of photos) {
+      payload.append("photos", photo.file, photo.file.name);
+    }
+
     try {
-      const response = await fetch("/api/lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.get("name"),
-          phone: formData.get("phone"),
-          email: formData.get("email"),
-          message: formData.get("message"),
-          // Honeypot: поле скрыто от людей, боты его заполняют.
-          company: formData.get("company")
-        })
-      });
+      const response = await fetch("/api/lead", { method: "POST", body: payload });
 
       if (!response.ok) {
         const data = (await response.json().catch(() => ({}))) as { error?: string };
@@ -190,6 +208,47 @@ export default function FinalForm({ form, privacyHref, metrikaId }: FinalFormPro
                   placeholder={form.messagePlaceholder}
                 />
               </label>
+              <div className="grid gap-1.5 text-[13px] text-[#666666]">
+                <span>{form.photosLabel}</span>
+                <div className="flex flex-wrap gap-2.5">
+                  {photos.map((photo, index) => (
+                    <div className="relative h-[72px] w-[72px] overflow-hidden rounded-xl bg-[#e8e8e8]" key={photo.url}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img alt="" className="h-full w-full object-cover" src={photo.url} />
+                      <button
+                        aria-label="Убрать фото"
+                        className="absolute right-1 top-1 flex h-5 w-5 items-center justify-center rounded-full bg-black/60 text-[13px] leading-none text-white transition hover:bg-brand-accent"
+                        onClick={() => removePhoto(index)}
+                        type="button"
+                      >
+                        ×
+                      </button>
+                    </div>
+                  ))}
+                  {photos.length < MAX_PHOTOS ? (
+                    <button
+                      className="flex h-[72px] min-w-[72px] items-center justify-center gap-1.5 rounded-xl border border-dashed border-[#c4c4c0] px-3 text-[13px] font-semibold text-[#666666] transition hover:border-brand-accent hover:text-brand-accent"
+                      onClick={() => photoInputRef.current?.click()}
+                      type="button"
+                    >
+                      <span className="text-[18px] leading-none">+</span>
+                      {photos.length === 0 ? form.photosAddText : null}
+                    </button>
+                  ) : null}
+                </div>
+                {form.photosHint ? <span className="text-[12px] text-[#999999]">{form.photosHint}</span> : null}
+                <input
+                  accept="image/*"
+                  className="hidden"
+                  multiple
+                  onChange={(event) => {
+                    addPhotos(event.target.files);
+                    event.target.value = "";
+                  }}
+                  ref={photoInputRef}
+                  type="file"
+                />
+              </div>
             </div>
 
             <input
