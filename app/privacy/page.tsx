@@ -4,15 +4,20 @@ import Link from "next/link";
 
 import Footer from "@/components/Footer";
 import SiteChrome from "@/components/SiteChrome";
-import content from "@/lib/content";
+import { getContent } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: `${content.privacy.title} — ${content.company.name}`,
-  description: content.privacy.intro,
-  alternates: { canonical: "/privacy" }
-};
+export function generateMetadata(): Metadata {
+  const content = getContent();
+
+  return {
+    title: `${content.privacy.title} — ${content.company.name}`,
+    description: content.privacy.intro,
+    alternates: { canonical: "/privacy" }
+  };
+}
 
 export default function PrivacyPage() {
+  const content = getContent();
   const { privacy, nav } = content;
 
   return (

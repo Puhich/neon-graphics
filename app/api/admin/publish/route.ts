@@ -1,6 +1,8 @@
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
 import { contentSchema } from "@/lib/content-schema";
+import { isSelfHosted } from "@/lib/env";
 import { commitFiles } from "@/lib/publisher";
 
 export const runtime = "nodejs";
@@ -41,14 +43,21 @@ export async function POST(request: Request) {
       "Обновление контента сайта через админку"
     );
 
+    if (isSelfHosted) {
+      // Контент уже на диске — перегенерировать страницы, не дожидаясь сборки.
+      revalidatePath("/", "layout");
+    }
+
     return NextResponse.json({
       ok: true,
       mode: result.mode,
       url: result.url,
       message:
-        result.mode === "github"
-          ? "Опубликовано. Изменения появятся на сайте через 1–2 минуты."
-          : "Сохранено локально в data/content.json (режим разработки)."
+        result.mode === "both"
+          ? "Опубликовано. Изменения уже на сайте."
+          : result.mode === "github"
+            ? "Опубликовано. Изменения появятся на сайте через 1–2 минуты."
+            : "Сохранено локально в data/content.json (режим разработки)."
     });
   } catch (error) {
     return NextResponse.json(

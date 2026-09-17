@@ -1,7 +1,7 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 
-import { canPublishToGithub, githubBranch, githubRepo, githubToken } from "@/lib/env";
+import { canPublishToGithub, githubBranch, githubRepo, githubToken, isSelfHosted } from "@/lib/env";
 
 // Публикация = коммит в GitHub, после которого Vercel сам пересобирает сайт.
 // Локально (без токена) те же файлы просто пишутся на диск, чтобы админку
@@ -14,7 +14,7 @@ export type FileChange = {
 };
 
 export type CommitResult = {
-  mode: "github" | "fs";
+  mode: "github" | "fs" | "both";
   url?: string;
 };
 
@@ -63,6 +63,19 @@ export async function commitFiles(files: FileChange[], message: string): Promise
     return { mode: "fs" };
   }
 
+  // На своём сервере сначала коммит (источник правды и бэкап), потом диск —
+  // если GitHub недоступен, сайт не разойдётся с репозиторием.
+  if (isSelfHosted) {
+    const result = await commitToGithub(files, message);
+    await writeToDisk(files);
+
+    return { mode: "both", url: result.url };
+  }
+
+  return commitToGithub(files, message);
+}
+
+async function commitToGithub(files: FileChange[], message: string): Promise<CommitResult> {
   const ref = await github<{ object: { sha: string } }>(`/git/ref/heads/${githubBranch}`);
   const baseCommitSha = ref.object.sha;
   const baseCommit = await github<{ tree: { sha: string } }>(`/git/commits/${baseCommitSha}`);
@@ -116,7 +129,7 @@ export async function commitFiles(files: FileChange[], message: string): Promise
 export async function readRepoFile(filePath: string): Promise<Buffer | null> {
   const relative = filePath.replace(/^\/+/, "");
 
-  if (canPublishToGithub) {
+  if (canPublishToGithub && !isSelfHosted) {
     const response = await fetch(
       `${API}/repos/${githubRepo}/contents/${encodeURI(relative)}?ref=${githubBranch}`,
       {

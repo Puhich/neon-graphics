@@ -1,12 +1,14 @@
 import CookieBanner from "@/components/CookieBanner";
 import Metrika from "@/components/Metrika";
-import content from "@/lib/content";
+import { getContent } from "@/lib/content";
 import { localBusinessJsonLd } from "@/lib/jsonld";
 
 // Общая «обвязка» публичных страниц: плашка о cookie, счётчик и карточка
 // организации для поисковиков. В админке ничего этого не нужно, поэтому
 // подключается не в корневом layout, а на самих страницах сайта.
 export default function SiteChrome({ withJsonLd = false }: { withJsonLd?: boolean }) {
+  const content = getContent();
+
   return (
     <>
       <CookieBanner banner={content.cookieBanner} privacyHref={content.footer.privacyHref} />

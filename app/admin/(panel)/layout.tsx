@@ -1,6 +1,6 @@
 import AdminShell from "@/components/admin/AdminShell";
 import { ContentProvider } from "@/components/admin/ContentProvider";
-import bundledContent from "@/lib/content";
+import { getContent } from "@/lib/content";
 import { contentSchema, type SiteContent } from "@/lib/content-schema";
 import { readRepoFile } from "@/lib/publisher";
 
@@ -24,7 +24,7 @@ async function loadPublished(): Promise<SiteContent> {
     // Репозиторий недоступен — работаем с версией из сборки.
   }
 
-  return bundledContent;
+  return getContent();
 }
 
 export default async function AdminPanelLayout({ children }: { children: React.ReactNode }) {

@@ -13,11 +13,12 @@ import Services from "@/components/Services";
 import SiteChrome from "@/components/SiteChrome";
 import Stages from "@/components/Stages";
 import WhyUs from "@/components/WhyUs";
-import content from "@/lib/content";
+import { getContent } from "@/lib/content";
 import { qrSvg } from "@/lib/qr";
 import { hiddenAnchors, telHref } from "@/lib/site";
 
 export default function Home() {
+  const content = getContent();
   const callHref = telHref(content.company.phone);
   const callQr = qrSvg(callHref);
   const hidden = hiddenAnchors(content);

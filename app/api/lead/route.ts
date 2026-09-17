@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
-import content from "@/lib/content";
+import { getContent } from "@/lib/content";
 import { isDev, smtp, telegramBotToken, telegramChatId } from "@/lib/env";
 
 export const runtime = "nodejs";
@@ -71,7 +71,7 @@ async function sendToEmail(lead: Lead): Promise<void> {
   });
 
   await transporter.sendMail({
-    from: `"${content.company.name}" <${smtp.from}>`,
+    from: `"${getContent().company.name}" <${smtp.from}>`,
     to: smtp.to,
     replyTo: lead.email || undefined,
     subject,

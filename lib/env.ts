@@ -26,6 +26,10 @@ export const smtp = {
   to: process.env.SMTP_TO ?? ""
 };
 
+// Свой сервер (не Vercel): контент и картинки пишутся на диск и сразу видны
+// на сайте, а коммит в GitHub нужен только как история и бэкап.
+export const isSelfHosted = process.env.SELF_HOSTED === "1";
+
 // Публикация через GitHub возможна только с токеном; без него (локально)
 // работает запись на диск.
 export const canPublishToGithub = Boolean(githubToken && githubRepo);

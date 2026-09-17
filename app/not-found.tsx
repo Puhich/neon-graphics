@@ -2,15 +2,20 @@ import Image from "next/image";
 import Link from "next/link";
 
 import SiteChrome from "@/components/SiteChrome";
-import content from "@/lib/content";
+import { getContent } from "@/lib/content";
 import { telHref } from "@/lib/site";
 
-export const metadata = {
-  title: `${content.notFound.title} — ${content.company.name}`,
-  robots: { index: false, follow: true }
-};
+export function generateMetadata() {
+  const content = getContent();
+
+  return {
+    title: `${content.notFound.title} — ${content.company.name}`,
+    robots: { index: false, follow: true }
+  };
+}
 
 export default function NotFound() {
+  const content = getContent();
   const { notFound, company, nav } = content;
 
   return (
