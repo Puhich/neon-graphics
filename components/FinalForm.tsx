@@ -28,7 +28,7 @@ function CheckIcon() {
 }
 
 const inputClass =
-  "h-11 rounded-xl bg-[#e8e8e8] px-4 text-[15px] text-brand-ink outline-none transition placeholder:text-[#999999] focus:ring-2 focus:ring-brand-accent/35";
+  "h-11 rounded-xl bg-[#e8e8e8] px-4 text-[15px] text-brand-ink outline-none transition placeholder:text-[#999999] focus:bg-white focus:ring-2 focus:ring-brand-accent/35";
 
 export default function FinalForm({ form, privacyHref, metrikaId }: FinalFormProps) {
   const [status, setStatus] = useState<Status>("idle");
@@ -220,7 +220,7 @@ export default function FinalForm({ form, privacyHref, metrikaId }: FinalFormPro
               <label className="grid gap-1.5 text-[13px] text-[#666666]">
                 <span>{form.messageLabel}</span>
                 <textarea
-                  className="site-scroll min-h-[118px] resize-y rounded-xl bg-[#e8e8e8] px-4 py-3 text-[15px] text-brand-ink outline-none transition placeholder:text-[#999999] focus:ring-2 focus:ring-brand-accent/35"
+                  className="site-scroll min-h-[118px] resize-y rounded-xl bg-[#e8e8e8] px-4 py-3 text-[15px] text-brand-ink outline-none transition placeholder:text-[#999999] focus:bg-white focus:ring-2 focus:ring-brand-accent/35"
                   name="message"
                   placeholder={form.messagePlaceholder}
                 />
