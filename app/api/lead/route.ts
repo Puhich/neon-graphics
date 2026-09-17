@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
 import { getContent } from "@/lib/content";
+import { leadEmailHtml } from "@/lib/lead-email";
 import { isDev, smtp, telegramBotToken, telegramChatId } from "@/lib/env";
 
 export const runtime = "nodejs";
@@ -72,12 +73,23 @@ async function sendToEmail(lead: Lead): Promise<void> {
     auth: { user: smtp.user, pass: smtp.password }
   });
 
+  const content = getContent();
+
   await transporter.sendMail({
-    from: `"${getContent().company.name}" <${smtp.from}>`,
+    from: `"${content.company.name}" <${smtp.from}>`,
     to: smtp.to,
     replyTo: lead.email || undefined,
     subject,
-    text: lines.join("\n")
+    text: lines.join("\n"),
+    html: leadEmailHtml({
+      name: lead.name,
+      phone: lead.phone,
+      email: lead.email,
+      message: lead.message,
+      time: new Date().toLocaleString("ru-RU", { timeZone: "Europe/Samara" }),
+      siteName: content.company.name,
+      siteUrl: content.meta.siteUrl || "https://неон-графикс.рф"
+    })
   });
 }
 
