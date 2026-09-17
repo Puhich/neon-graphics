@@ -121,7 +121,8 @@ export default function FinalForm({ form, privacyHref, metrikaId }: FinalFormPro
     <section className="relative isolate bg-white px-5 py-16 text-brand-ink [clip-path:inset(0)] sm:px-6 lg:px-8 xl:px-0 lg:py-20" id={form.id}>
       <SectionWatermark />
       <div className="reveal mx-auto grid max-w-[1200px] gap-10 lg:grid-cols-2 lg:items-start lg:gap-16">
-        <div>
+        {/* На широком экране текст едет вместе со скроллом, пока форма не кончится */}
+        <div className="lg:sticky lg:top-28">
           <p className="text-xs font-bold uppercase tracking-[0.15em] text-brand-accent">{form.eyebrow}</p>
           <h2 className="mt-4 whitespace-pre-line font-heading text-[30px] leading-[1.1] sm:text-[34px] lg:text-[36px]">
             {form.title}

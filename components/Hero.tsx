@@ -179,7 +179,7 @@ export default function Hero({ content }: HeroProps) {
           "--nav-bg-opacity": isMenuOpen ? 0.9 : navOpacity * 0.9,
           "--nav-blur": `${(isMenuOpen ? 1 : navOpacity) * 18}px`,
           "--nav-shadow-opacity": (isMenuOpen ? 1 : navOpacity) * 0.28,
-          "--logo-scale": 1 - navOpacity * 0.12
+          "--logo-scale": 1 - navOpacity * 0.22
         } as React.CSSProperties}
       >
         <div
