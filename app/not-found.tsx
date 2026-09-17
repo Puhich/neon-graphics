@@ -58,10 +58,11 @@ export default function NotFound() {
             </Link>
           </div>
 
-          <div className="mt-10 flex flex-col gap-2 text-[14px] text-[#999999] sm:flex-row sm:gap-6">
+          <div className="mt-10 flex flex-col gap-2 text-[14px] text-[#999999] sm:flex-row sm:items-center sm:gap-4">
             <a className="transition hover:text-white" href={telHref(company.phone)}>
               {company.phone}
             </a>
+            <span aria-hidden="true" className="hidden h-1 w-1 rounded-full bg-[#555555] sm:block" />
             <a className="transition hover:text-white" href={`mailto:${company.email}`}>
               {company.email}
             </a>
