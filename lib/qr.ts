@@ -18,11 +18,19 @@ export function qrSvg(text: string): string {
 
   const parts: string[] = [];
 
-  // Обычные модули: квадрат 1×1 с радиусом 0.3.
+  // Обычные модули: скруглённые квадраты, а между соседними — перемычки,
+  // чтобы дорожки читались как сплошные линии, а не как россыпь точек.
+  const dark = (row: number, col: number) => isDark(row, col) && !inFinder(row, col);
   for (let row = 0; row < size; row += 1) {
     for (let col = 0; col < size; col += 1) {
-      if (!isDark(row, col) || inFinder(row, col)) continue;
-      parts.push(`<rect x="${col}" y="${row}" width="1" height="1" rx="0.3"/>`);
+      if (!dark(row, col)) continue;
+      parts.push(`<rect x="${col}" y="${row}" width="1" height="1" rx="0.32"/>`);
+      if (col + 1 < size && dark(row, col + 1)) {
+        parts.push(`<rect x="${col + 0.5}" y="${row}" width="1" height="1"/>`);
+      }
+      if (row + 1 < size && dark(row + 1, col)) {
+        parts.push(`<rect x="${col}" y="${row + 0.5}" width="1" height="1"/>`);
+      }
     }
   }
 
