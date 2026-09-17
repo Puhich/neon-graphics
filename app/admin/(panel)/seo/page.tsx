@@ -2,7 +2,7 @@
 
 import { useContentStore } from "@/components/admin/ContentProvider";
 import ImageField from "@/components/admin/ImageField";
-import { Card, Field, Note, Page } from "@/components/admin/ui";
+import { Card, Field, Page } from "@/components/admin/ui";
 
 export default function SeoPage() {
   const { content, update } = useContentStore();
@@ -102,10 +102,6 @@ export default function SeoPage() {
           path="meta.googleVerification"
           value={meta.googleVerification}
         />
-        <Note>
-          В Метрике стоит создать цель типа «JavaScript-событие» с идентификатором <b>lead_form_submit</b> — сайт
-          отправляет это событие при успешной заявке.
-        </Note>
       </Card>
     </Page>
   );
