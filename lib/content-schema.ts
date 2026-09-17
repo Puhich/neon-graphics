@@ -236,7 +236,8 @@ export const contentSchema = z.object({
     photosAddText: requiredText,
     nameRequiredText: requiredText,
     phoneRequiredText: requiredText,
-    phoneIncompleteText: requiredText
+    phoneIncompleteText: requiredText,
+    emailInvalidText: requiredText
   }),
 
   contacts: z.object({

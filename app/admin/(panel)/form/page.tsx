@@ -196,6 +196,12 @@ export default function FormPage() {
             path="finalForm.phoneIncompleteText"
             value={form.phoneIncompleteText}
           />
+          <Field
+            label="Неверная почта"
+            onChange={(value) => update((draft) => void (draft.finalForm.emailInvalidText = value))}
+            path="finalForm.emailInvalidText"
+            value={form.emailInvalidText}
+          />
         </Row>
         <Field
           label="Текст успеха"

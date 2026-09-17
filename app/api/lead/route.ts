@@ -3,6 +3,7 @@ import nodemailer from "nodemailer";
 import sharp from "sharp";
 
 import { getContent } from "@/lib/content";
+import { isValidEmail } from "@/lib/email";
 import { leadEmailHtml } from "@/lib/lead-email";
 import { isDev, smtp, telegramBotToken, telegramChatId } from "@/lib/env";
 
@@ -159,6 +160,10 @@ export async function POST(request: Request) {
 
   if (!lead.name || lead.phone.replace(/\D/g, "").length < 6) {
     return NextResponse.json({ error: "Укажите имя и телефон" }, { status: 400 });
+  }
+
+  if (lead.email && !isValidEmail(lead.email)) {
+    return NextResponse.json({ error: "Проверьте адрес почты" }, { status: 400 });
   }
 
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";

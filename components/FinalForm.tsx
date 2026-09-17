@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
 
+import { isValidEmail } from "@/lib/email";
 import { formatRuPhone, isCompleteRuPhone } from "@/lib/phone-mask";
 
 import SectionWatermark from "@/components/SectionWatermark";
@@ -34,7 +35,8 @@ export default function FinalForm({ form, privacyHref, metrikaId }: FinalFormPro
   const [consent, setConsent] = useState(false);
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
-  const [fieldErrors, setFieldErrors] = useState<{ name?: string; phone?: string }>({});
+  const [email, setEmail] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<{ name?: string; phone?: string; email?: string }>({});
   const [serverError, setServerError] = useState("");
   const [photos, setPhotos] = useState<{ file: File; url: string }[]>([]);
   const photoInputRef = useRef<HTMLInputElement>(null);
@@ -74,12 +76,13 @@ export default function FinalForm({ form, privacyHref, metrikaId }: FinalFormPro
     }
 
     // Проверяем до отправки: подсвечиваем поле и говорим, чего не хватает.
-    const errors: { name?: string; phone?: string } = {};
+    const errors: { name?: string; phone?: string; email?: string } = {};
     if (!name.trim()) errors.name = form.nameRequiredText;
     if (!phone.trim() || phone.trim() === "+7") errors.phone = form.phoneRequiredText;
     else if (!isCompleteRuPhone(phone)) errors.phone = form.phoneIncompleteText;
+    if (email.trim() && !isValidEmail(email)) errors.email = form.emailInvalidText;
     setFieldErrors(errors);
-    if (errors.name || errors.phone) {
+    if (errors.name || errors.phone || errors.email) {
       setStatus("idle");
       return;
     }
@@ -198,7 +201,20 @@ export default function FinalForm({ form, privacyHref, metrikaId }: FinalFormPro
               </label>
               <label className="grid gap-1.5 text-[13px] text-[#666666]">
                 <span>{form.emailLabel}</span>
-                <input className={inputClass} name="email" placeholder={form.emailPlaceholder} type="email" />
+                <input
+                  autoComplete="email"
+                  className={`${inputClass} ${fieldErrors.email ? "ring-2 ring-brand-accent/60" : ""}`}
+                  inputMode="email"
+                  name="email"
+                  onChange={(event) => {
+                    setEmail(event.target.value);
+                    if (fieldErrors.email) setFieldErrors((prev) => ({ ...prev, email: undefined }));
+                  }}
+                  placeholder={form.emailPlaceholder}
+                  type="email"
+                  value={email}
+                />
+                {fieldErrors.email ? <span className="text-[12px] font-semibold text-brand-accent">{fieldErrors.email}</span> : null}
               </label>
               <label className="grid gap-1.5 text-[13px] text-[#666666]">
                 <span>{form.messageLabel}</span>
@@ -227,7 +243,7 @@ export default function FinalForm({ form, privacyHref, metrikaId }: FinalFormPro
                   ))}
                   {photos.length < MAX_PHOTOS ? (
                     <button
-                      className="flex h-[72px] min-w-[72px] items-center justify-center gap-1.5 rounded-xl border border-dashed border-[#c4c4c0] px-3 text-[13px] font-semibold text-[#666666] transition hover:border-brand-accent hover:text-brand-accent"
+                      className="flex h-[72px] min-w-[72px] items-center justify-center gap-1.5 rounded-xl border border-dashed border-[#c4c4c0] px-5 text-[13px] font-semibold text-[#666666] transition hover:border-brand-accent hover:text-brand-accent"
                       onClick={() => photoInputRef.current?.click()}
                       type="button"
                     >

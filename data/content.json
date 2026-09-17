@@ -531,7 +531,8 @@
     "photosAddText": "Добавить фото",
     "nameRequiredText": "Как к вам обращаться?",
     "phoneRequiredText": "Укажите телефон, чтобы мы могли перезвонить",
-    "phoneIncompleteText": "Введите номер полностью"
+    "phoneIncompleteText": "Введите номер полностью",
+    "emailInvalidText": "Проверьте адрес почты"
   },
   "contacts": {
     "id": "contacts",
