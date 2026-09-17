@@ -2,6 +2,8 @@
 
 import { useState, type FormEvent } from "react";
 
+import { formatRuPhone } from "@/lib/phone-mask";
+
 import SectionWatermark from "@/components/SectionWatermark";
 import type { SiteContent } from "@/lib/content-schema";
 import { reachGoal } from "@/lib/metrika";
@@ -30,6 +32,7 @@ const inputClass =
 export default function FinalForm({ form, privacyHref, metrikaId }: FinalFormProps) {
   const [status, setStatus] = useState<Status>("idle");
   const [consent, setConsent] = useState(true);
+  const [phone, setPhone] = useState("");
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -106,7 +109,35 @@ export default function FinalForm({ form, privacyHref, metrikaId }: FinalFormPro
               </label>
               <label className="grid gap-1.5 text-[13px] text-[#666666]">
                 <span>{form.phoneLabel}</span>
-                <input className={inputClass} name="phone" placeholder={form.phonePlaceholder} required type="tel" />
+                <input
+                  autoComplete="tel"
+                  className={inputClass}
+                  inputMode="tel"
+                  minLength={18}
+                  name="phone"
+                  onChange={(event) => {
+                    const next = event.target.value;
+                    const prevDigits = phone.replace(/\D/g, "");
+                    const nextDigits = next.replace(/\D/g, "");
+                    // Backspace на скобке или дефисе: цифры не изменились, а маска
+                    // вернула бы символ обратно — удаляем ещё и последнюю цифру.
+                    if (next.length < phone.length && nextDigits === prevDigits) {
+                      setPhone(formatRuPhone(nextDigits.slice(0, -1)));
+                      return;
+                    }
+                    setPhone(formatRuPhone(next));
+                  }}
+                  onFocus={() => {
+                    if (!phone) setPhone("+7 ");
+                  }}
+                  onBlur={() => {
+                    if (phone.trim() === "+7") setPhone("");
+                  }}
+                  placeholder={form.phonePlaceholder}
+                  required
+                  type="tel"
+                  value={phone}
+                />
               </label>
               <label className="grid gap-1.5 text-[13px] text-[#666666]">
                 <span>{form.emailLabel}</span>
