@@ -162,9 +162,11 @@ export async function recentCommits(limit = 5): Promise<{ message: string; date:
   }
 
   try {
+    // Только публикации из админки: коммиты, которые меняли data/content.json.
+    // Правки кода разработчиком клиенту не нужны.
     const commits = await github<
       { commit: { message: string; author: { date: string } }; html_url: string }[]
-    >(`/commits?sha=${githubBranch}&per_page=${limit}`);
+    >(`/commits?sha=${githubBranch}&path=data/content.json&per_page=${limit}`);
 
     return commits.map((item) => ({
       message: item.commit.message.split("\n")[0],
