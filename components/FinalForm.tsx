@@ -172,18 +172,10 @@ export default function FinalForm({ form, privacyHref, metrikaId }: FinalFormPro
               tabIndex={-1}
             />
 
-            <button
-              className="mt-6 h-12 w-full rounded-xl bg-brand-accent px-5 text-[15px] font-bold text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-60"
-              disabled={status === "sending" || !consent}
-              type="submit"
-            >
-              {status === "sending" ? form.sendingText : form.submitText}
-            </button>
-
-            <label className="mt-4 flex cursor-pointer items-start gap-2.5 text-[13px] leading-[1.4] text-[#666666]">
+            <label className="mt-6 flex cursor-pointer items-start gap-2.5 text-[13px] leading-[1.4] text-[#666666]">
               <input
                 checked={consent}
-                className="mt-0.5 h-4 w-4 shrink-0 accent-brand-accent"
+                className="mt-0.5 h-4 w-4 shrink-0 accent-brand-accent [color-scheme:light]"
                 onChange={(event) => setConsent(event.target.checked)}
                 type="checkbox"
               />
@@ -194,6 +186,14 @@ export default function FinalForm({ form, privacyHref, metrikaId }: FinalFormPro
                 </a>
               </span>
             </label>
+
+            <button
+              className="mt-4 h-12 w-full rounded-xl bg-brand-accent px-5 text-[15px] font-bold text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-60"
+              disabled={status === "sending" || !consent}
+              type="submit"
+            >
+              {status === "sending" ? form.sendingText : form.submitText}
+            </button>
 
             {status === "error" ? (
               <p className="mt-3 text-[13px] font-semibold leading-[1.4] text-brand-accent">{form.errorText}</p>

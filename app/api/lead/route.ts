@@ -33,11 +33,13 @@ function escapeHtml(value: string): string {
 }
 
 function buildText(lead: Lead): { subject: string; lines: string[] } {
+  // Контакты — построчно, сообщение — отдельным блоком через пустую строку,
+  // чтобы в письме оно не сливалось с полями.
   const lines = [
     `Имя: ${lead.name}`,
     `Телефон: ${lead.phone}`,
     lead.email ? `Email: ${lead.email}` : "",
-    lead.message ? `Сообщение: ${lead.message}` : "",
+    lead.message ? `\nСообщение:\n${lead.message}\n` : "",
     `Время: ${new Date().toLocaleString("ru-RU", { timeZone: "Europe/Samara" })}`
   ].filter(Boolean);
 
