@@ -26,7 +26,7 @@ if [ "$LOCAL" = "$REMOTE" ] && [ "$FORCE" != "--force" ]; then
 fi
 
 # Что изменилось, кроме контента и загруженных картинок
-CODE_CHANGED=$(git diff --name-only "$LOCAL" "$REMOTE" | grep -vE '^(data/|public/(images|logos|brand|og)/|public/(icon|apple-icon)\.png$)' || true)
+CODE_CHANGED=$(git diff --name-only "$LOCAL" "$REMOTE" | grep -vE '^(data/|public/(images|logos|brand|og)/|public/(icon|apple-icon)\.png$|.*\.md$)' || true)
 
 git reset -q --hard origin/main
 
