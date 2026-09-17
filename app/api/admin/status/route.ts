@@ -9,6 +9,7 @@ import {
   telegramBotToken,
   telegramChatId
 } from "@/lib/env";
+import { sectionTitles } from "@/lib/admin-nav";
 import { recentCommits } from "@/lib/publisher";
 
 export const runtime = "nodejs";
@@ -25,6 +26,6 @@ export async function GET() {
     },
     telegram: { configured: Boolean(telegramBotToken && telegramChatId) },
     email: { configured: Boolean(smtp.host && smtp.user && smtp.password && smtp.to) },
-    history: await recentCommits(5)
+    history: await recentCommits(5, sectionTitles)
   });
 }

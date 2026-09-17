@@ -156,7 +156,36 @@ export async function readRepoFile(filePath: string): Promise<Buffer | null> {
 }
 
 // Последние коммиты — история публикаций для дашборда.
-export async function recentCommits(limit = 5): Promise<{ message: string; date: string; url: string }[]> {
+// Для старых записей с общим сообщением разделы вычисляются задним числом:
+// сравниваем content.json коммита с родительским. Результат кэшируется по sha.
+const historyLabels = new Map<string, string>();
+
+async function contentAt(sha: string): Promise<Record<string, unknown> | null> {
+  const response = await fetch(`${API}/repos/${githubRepo}/contents/data/content.json?ref=${sha}`, {
+    cache: "no-store",
+    headers: { Accept: "application/vnd.github.raw", Authorization: `Bearer ${githubToken}` }
+  });
+
+  return response.ok ? ((await response.json()) as Record<string, unknown>) : null;
+}
+
+export function describeChanges(
+  before: Record<string, unknown> | null,
+  after: Record<string, unknown>,
+  titles: Record<string, string>
+): string {
+  if (!before) return "Публикация из админки";
+  const changed = Object.keys(after)
+    .filter((key) => JSON.stringify(before[key]) !== JSON.stringify(after[key]))
+    .map((key) => titles[key] ?? key);
+
+  return changed.length > 0 ? `Изменено: ${changed.join(", ")}` : "Публикация без изменений";
+}
+
+export async function recentCommits(
+  limit = 5,
+  titles: Record<string, string> = {}
+): Promise<{ message: string; date: string; url: string }[]> {
   if (!canPublishToGithub) {
     return [];
   }
@@ -165,17 +194,40 @@ export async function recentCommits(limit = 5): Promise<{ message: string; date:
     // Только публикации из админки — их узнаём по тексту сообщения.
     // Правки кода разработчиком клиенту не нужны.
     const commits = await github<
-      { commit: { message: string; author: { date: string } }; html_url: string }[]
+      { sha: string; parents: { sha: string }[]; commit: { message: string; author: { date: string } }; html_url: string }[]
     >(`/commits?sha=${githubBranch}&path=data/content.json&per_page=40`);
 
-    return commits
-      .map((item) => ({
-        message: item.commit.message.split("\n")[0],
-        date: item.commit.author.date,
-        url: item.html_url
-      }))
-      .filter((item) => /^(Изменено:|Публикация из админки|Обновление контента сайта через админку)/.test(item.message))
+    const own = commits
+      .filter((item) => /^(Изменено:|Публикация|Обновление контента сайта через админку)/.test(item.commit.message))
       .slice(0, limit);
+
+    return Promise.all(
+      own.map(async (item) => {
+        let message = item.commit.message.split("\n")[0];
+
+        if (message.startsWith("Обновление контента")) {
+          const cached = historyLabels.get(item.sha);
+          if (cached) {
+            message = cached;
+          } else {
+            try {
+              const [after, before] = await Promise.all([
+                contentAt(item.sha),
+                item.parents[0] ? contentAt(item.parents[0].sha) : Promise.resolve(null)
+              ]);
+              if (after) {
+                message = describeChanges(before, after, titles);
+                historyLabels.set(item.sha, message);
+              }
+            } catch {
+              // Оставляем исходное сообщение.
+            }
+          }
+        }
+
+        return { message, date: item.commit.author.date, url: item.html_url };
+      })
+    );
   } catch {
     return [];
   }

@@ -5,7 +5,7 @@ import { sectionTitles } from "@/lib/admin-nav";
 import { getContent } from "@/lib/content";
 import { contentSchema } from "@/lib/content-schema";
 import { isSelfHosted } from "@/lib/env";
-import { commitFiles } from "@/lib/publisher";
+import { commitFiles, describeChanges } from "@/lib/publisher";
 
 export const runtime = "nodejs";
 
@@ -37,14 +37,11 @@ export async function POST(request: Request) {
   // публикаций, которую видит клиент в админке.
   let message = "Публикация из админки";
   try {
-    const current = getContent() as unknown as Record<string, unknown>;
-    const next = parsed.data as unknown as Record<string, unknown>;
-    const changed = Object.keys(next)
-      .filter((key) => JSON.stringify(current[key]) !== JSON.stringify(next[key]))
-      .map((key) => sectionTitles[key] ?? key);
-    if (changed.length > 0) {
-      message = `Изменено: ${changed.join(", ")}`;
-    }
+    message = describeChanges(
+      getContent() as unknown as Record<string, unknown>,
+      parsed.data as unknown as Record<string, unknown>,
+      sectionTitles
+    );
   } catch {
     // Не удалось сравнить — оставляем общее сообщение.
   }
