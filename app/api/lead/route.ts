@@ -121,7 +121,12 @@ async function sendToEmail(lead: Lead, photos: Photo[]): Promise<void> {
       phone: lead.phone,
       email: lead.email,
       message: lead.message,
-      time: new Date().toLocaleString("ru-RU", { timeZone: "Europe/Samara" }),
+      time: (() => {
+        const now = new Date();
+        const date = now.toLocaleDateString("ru-RU", { timeZone: "Europe/Samara" });
+        const time = now.toLocaleTimeString("ru-RU", { timeZone: "Europe/Samara", hour: "2-digit", minute: "2-digit" });
+        return `${date} в ${time}`;
+      })(),
       photoCount: photos.length
     }),
     attachments: photos.map((photo) => ({ filename: photo.filename, content: photo.content, contentType: "image/jpeg" }))
