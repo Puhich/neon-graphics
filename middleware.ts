@@ -24,7 +24,12 @@ export async function middleware(request: NextRequest) {
   }
 
   const loginUrl = new URL("/admin/login", request.url);
-  loginUrl.searchParams.set("next", pathname);
+
+  // После входа и так попадаем на дашборд — для него параметр лишний,
+  // ссылка на админку остаётся чистой.
+  if (pathname !== "/admin" && pathname !== "/admin/") {
+    loginUrl.searchParams.set("next", pathname);
+  }
 
   return NextResponse.redirect(loginUrl);
 }
