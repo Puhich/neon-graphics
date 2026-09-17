@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
 
-import { formatRuPhone } from "@/lib/phone-mask";
+import { formatRuPhone, isCompleteRuPhone } from "@/lib/phone-mask";
 
 import SectionWatermark from "@/components/SectionWatermark";
 import type { SiteContent } from "@/lib/content-schema";
@@ -33,6 +33,9 @@ export default function FinalForm({ form, privacyHref, metrikaId }: FinalFormPro
   const [status, setStatus] = useState<Status>("idle");
   const [consent, setConsent] = useState(false);
   const [phone, setPhone] = useState("");
+  const [name, setName] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<{ name?: string; phone?: string }>({});
+  const [serverError, setServerError] = useState("");
   const phoneRef = useRef<HTMLInputElement>(null);
 
   // Маска дописывает скобки и дефисы — курсор держим в конце, чтобы
@@ -51,7 +54,19 @@ export default function FinalForm({ form, privacyHref, metrikaId }: FinalFormPro
       return;
     }
 
+    // Проверяем до отправки: подсвечиваем поле и говорим, чего не хватает.
+    const errors: { name?: string; phone?: string } = {};
+    if (!name.trim()) errors.name = form.nameRequiredText;
+    if (!phone.trim() || phone.trim() === "+7") errors.phone = form.phoneRequiredText;
+    else if (!isCompleteRuPhone(phone)) errors.phone = form.phoneIncompleteText;
+    setFieldErrors(errors);
+    if (errors.name || errors.phone) {
+      setStatus("idle");
+      return;
+    }
+
     const formData = new FormData(event.currentTarget);
+    setServerError("");
     setStatus("sending");
 
     try {
@@ -69,6 +84,8 @@ export default function FinalForm({ form, privacyHref, metrikaId }: FinalFormPro
       });
 
       if (!response.ok) {
+        const data = (await response.json().catch(() => ({}))) as { error?: string };
+        setServerError(response.status === 400 && data.error ? data.error : "");
         throw new Error("request failed");
       }
 
@@ -115,15 +132,25 @@ export default function FinalForm({ form, privacyHref, metrikaId }: FinalFormPro
             <div className="grid gap-5">
               <label className="grid gap-1.5 text-[13px] text-[#666666]">
                 <span>{form.nameLabel}</span>
-                <input className={inputClass} name="name" placeholder={form.namePlaceholder} required type="text" />
+                <input
+                  className={`${inputClass} ${fieldErrors.name ? "ring-2 ring-brand-accent/60" : ""}`}
+                  name="name"
+                  onChange={(event) => {
+                    setName(event.target.value);
+                    if (fieldErrors.name) setFieldErrors((prev) => ({ ...prev, name: undefined }));
+                  }}
+                  placeholder={form.namePlaceholder}
+                  type="text"
+                  value={name}
+                />
+                {fieldErrors.name ? <span className="text-[12px] font-semibold text-brand-accent">{fieldErrors.name}</span> : null}
               </label>
               <label className="grid gap-1.5 text-[13px] text-[#666666]">
                 <span>{form.phoneLabel}</span>
                 <input
                   autoComplete="tel"
-                  className={inputClass}
+                  className={`${inputClass} ${fieldErrors.phone ? "ring-2 ring-brand-accent/60" : ""}`}
                   inputMode="tel"
-                  minLength={18}
                   name="phone"
                   onChange={(event) => {
                     const next = event.target.value;
@@ -131,6 +158,7 @@ export default function FinalForm({ form, privacyHref, metrikaId }: FinalFormPro
                     const nextDigits = next.replace(/\D/g, "");
                     // Backspace на скобке или дефисе: цифры не изменились, а маска
                     // вернула бы символ обратно — удаляем ещё и последнюю цифру.
+                    if (fieldErrors.phone) setFieldErrors((prev) => ({ ...prev, phone: undefined }));
                     if (next.length < phone.length && nextDigits === prevDigits) {
                       setPhone(formatRuPhone(nextDigits.slice(0, -1)));
                       return;
@@ -145,10 +173,10 @@ export default function FinalForm({ form, privacyHref, metrikaId }: FinalFormPro
                   }}
                   placeholder={form.phonePlaceholder}
                   ref={phoneRef}
-                  required
                   type="tel"
                   value={phone}
                 />
+                {fieldErrors.phone ? <span className="text-[12px] font-semibold text-brand-accent">{fieldErrors.phone}</span> : null}
               </label>
               <label className="grid gap-1.5 text-[13px] text-[#666666]">
                 <span>{form.emailLabel}</span>
@@ -196,7 +224,7 @@ export default function FinalForm({ form, privacyHref, metrikaId }: FinalFormPro
             </button>
 
             {status === "error" ? (
-              <p className="mt-3 text-[13px] font-semibold leading-[1.4] text-brand-accent">{form.errorText}</p>
+              <p className="mt-3 text-[13px] font-semibold leading-[1.4] text-brand-accent">{serverError || form.errorText}</p>
             ) : null}
           </form>
         )}

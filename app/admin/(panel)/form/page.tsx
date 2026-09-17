@@ -155,6 +155,24 @@ export default function FormPage() {
             path="finalForm.errorText"
             value={form.errorText}
           />
+          <Field
+            label="Пустое имя"
+            onChange={(value) => update((draft) => void (draft.finalForm.nameRequiredText = value))}
+            path="finalForm.nameRequiredText"
+            value={form.nameRequiredText}
+          />
+          <Field
+            label="Пустой телефон"
+            onChange={(value) => update((draft) => void (draft.finalForm.phoneRequiredText = value))}
+            path="finalForm.phoneRequiredText"
+            value={form.phoneRequiredText}
+          />
+          <Field
+            label="Неполный телефон"
+            onChange={(value) => update((draft) => void (draft.finalForm.phoneIncompleteText = value))}
+            path="finalForm.phoneIncompleteText"
+            value={form.phoneIncompleteText}
+          />
         </Row>
         <Field
           label="Текст успеха"

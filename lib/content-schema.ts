@@ -230,7 +230,10 @@ export const contentSchema = z.object({
     consentLinkText: requiredText,
     successTitle: requiredText,
     successText: text,
-    errorText: requiredText
+    errorText: requiredText,
+    nameRequiredText: requiredText,
+    phoneRequiredText: requiredText,
+    phoneIncompleteText: requiredText
   }),
 
   contacts: z.object({
