@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 
 import { formatRuPhone } from "@/lib/phone-mask";
 
@@ -33,6 +33,16 @@ export default function FinalForm({ form, privacyHref, metrikaId }: FinalFormPro
   const [status, setStatus] = useState<Status>("idle");
   const [consent, setConsent] = useState(true);
   const [phone, setPhone] = useState("");
+  const phoneRef = useRef<HTMLInputElement>(null);
+
+  // Маска дописывает скобки и дефисы — курсор держим в конце, чтобы
+  // следующая цифра всегда вставала на своё место.
+  useEffect(() => {
+    const el = phoneRef.current;
+    if (el && document.activeElement === el) {
+      el.setSelectionRange(el.value.length, el.value.length);
+    }
+  }, [phone]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -134,6 +144,7 @@ export default function FinalForm({ form, privacyHref, metrikaId }: FinalFormPro
                     if (phone.trim() === "+7") setPhone("");
                   }}
                   placeholder={form.phonePlaceholder}
+                  ref={phoneRef}
                   required
                   type="tel"
                   value={phone}
