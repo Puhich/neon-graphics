@@ -47,13 +47,19 @@ function diffSections(published: SiteContent, draft: SiteContent): string[] {
 }
 
 export function ContentProvider({
-  published,
+  published: serverPublished,
   children
 }: {
   published: SiteContent;
   children: React.ReactNode;
 }) {
   const router = useRouter();
+  // После успешной публикации сервер ещё секунду отдаёт старую версию —
+  // на это время считаем опубликованным то, что только что отправили,
+  // иначе кнопка «Опубликовать» мигает.
+  const [justPublished, setJustPublished] = useState<SiteContent | null>(null);
+  const published = justPublished ?? serverPublished;
+
   const [content, setContent] = useState<SiteContent>(() => clone(published));
   const [isReady, setIsReady] = useState(false);
   const [publishState, setPublishState] = useState<PublishState>({ status: "idle" });
@@ -85,6 +91,10 @@ export function ContentProvider({
   // Сайт могли опубликовать из другого места (или мы сами только что). Если
   // своих несохранённых правок нет — просто подхватываем новую версию, иначе
   // оставляем черновик и показываем его как изменения.
+  useEffect(() => {
+    setJustPublished(null);
+  }, [serverPublished]);
+
   useEffect(() => {
     if (JSON.stringify(previousPublished.current) === JSON.stringify(published)) {
       return;
@@ -179,6 +189,7 @@ export function ContentProvider({
       }
 
       window.localStorage.removeItem(DRAFT_KEY);
+      setJustPublished(clone(content));
       setPublishState({
         status: "done",
         message: data.message ?? "Опубликовано. Изменения появятся на сайте через 1–2 минуты."
