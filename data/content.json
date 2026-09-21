@@ -20,11 +20,6 @@
     "addressShort": "Московский пр-т, 4Д, стр.18",
     "schedule": "Пн - Пт: 9:00 - 17:00",
     "scheduleShort": "Пн-Пт: 9:00-17:00",
-    "city": "Тольятти",
-    "inn": "",
-    "ogrn": "",
-    "legalAddress": "Самарская обл., г. Тольятти, Московский пр-т, 4Д, стр.18",
-    "foundedYear": "2002",
     "socials": [
       {
         "label": "Telegram",
@@ -41,7 +36,12 @@
         "href": "https://vk.com",
         "icon": "vk"
       }
-    ]
+    ],
+    "city": "Тольятти",
+    "inn": "",
+    "ogrn": "",
+    "legalAddress": "Самарская обл., г. Тольятти, Московский пр-т, 4Д, стр.18",
+    "foundedYear": "2002"
   },
   "nav": {
     "logoSrc": "/logo-dark.svg",
@@ -83,24 +83,7 @@
       "href": "#request"
     },
     "callLabel": "Позвонить",
-    "callQrHint": "Наведите камеру телефона, чтобы позвонить",
-    "socials": [
-      {
-        "label": "Telegram",
-        "href": "https://telegram.org",
-        "icon": "telegram"
-      },
-      {
-        "label": "MAX",
-        "href": "https://max.ru",
-        "icon": "max"
-      },
-      {
-        "label": "VK",
-        "href": "https://vk.com",
-        "icon": "vk"
-      }
-    ]
+    "callQrHint": "Наведите камеру телефона, чтобы позвонить"
   },
   "hero": {
     "title": "Наружная реклама",
@@ -642,24 +625,7 @@
     ],
     "contactsTitle": "Контакты",
     "privacy": "Политика конфиденциальности",
-    "privacyHref": "/privacy",
-    "socials": [
-      {
-        "label": "Telegram",
-        "href": "https://telegram.org",
-        "icon": "telegram"
-      },
-      {
-        "label": "MAX",
-        "href": "https://max.ru",
-        "icon": "max"
-      },
-      {
-        "label": "VK",
-        "href": "https://vk.com",
-        "icon": "vk"
-      }
-    ]
+    "privacyHref": "/privacy"
   },
   "portfolio": {
     "id": "portfolio",
