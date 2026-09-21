@@ -1,0 +1,5 @@
+{
+  "redirects": [
+    { "source": "/(.*)", "destination": "https://xn----8sbigsmpbixo7a.xn--p1ai/$1", "permanent": true }
+  ]
+}
