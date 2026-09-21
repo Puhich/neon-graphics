@@ -78,6 +78,7 @@ export default function ReviewsPage() {
               </Row>
               {reviews.showAvatars !== false ? (
                 <ImageField
+                  clearable
                   label="Фото автора"
                   onChange={(src) => update((draft) => void (draft.reviews.items[index].avatarSrc = src))}
                   ratio="square"

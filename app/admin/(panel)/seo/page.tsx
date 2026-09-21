@@ -45,6 +45,7 @@ export default function SeoPage() {
         description="Превью ссылки в мессенджерах."
       >
         <ImageField
+          clearable
           hint="Картинка 1200×630. Сервер сам обрежет и сожмёт."
           kind="og"
           label="Картинка"

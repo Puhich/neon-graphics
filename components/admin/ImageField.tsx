@@ -11,6 +11,8 @@ type ImageFieldProps = {
   kind?: UploadKind;
   hint?: string;
   ratio?: "wide" | "square" | "logo";
+  /** Кнопка «Убрать» — для необязательных картинок. */
+  clearable?: boolean;
 };
 
 // Превью компактное: миниатюра фиксированного размера, а не картинка во всю
@@ -41,7 +43,8 @@ export default function ImageField({
   onChange,
   kind = "photo",
   hint,
-  ratio = "wide"
+  ratio = "wide",
+  clearable = false
 }: ImageFieldProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isUploading, setIsUploading] = useState(false);
@@ -129,6 +132,15 @@ export default function ImageField({
             >
               {value ? "Заменить" : "Выбрать файл"}
             </button>
+            {clearable && value ? (
+              <button
+                className="rounded-xl px-3 py-2 text-[13px] font-semibold text-[var(--adm-faint)] transition hover:text-brand-accent"
+                onClick={() => onChange("")}
+                type="button"
+              >
+                Убрать
+              </button>
+            ) : null}
             <span className="truncate text-[12px] text-[var(--adm-faint)]">{value || "файл не выбран"}</span>
           </div>
           {error ? <span className="text-[12px] font-semibold text-brand-accent">{error}</span> : null}
