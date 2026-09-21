@@ -203,7 +203,7 @@ export default function Hero({ content }: HeroProps) {
               ))}
             </nav>
             <div className="flex items-center gap-3.5 text-[#999999] xl:gap-5">
-              {nav.socials.map((social) => (
+              {company.socials.map((social) => (
                 <a
                   aria-label={social.label}
                   className="flex items-center transition hover:text-white"
@@ -262,7 +262,7 @@ export default function Hero({ content }: HeroProps) {
             </nav>
 
             <div className="mt-5 flex items-center gap-5 text-[#999999]">
-              {nav.socials.map((social) => (
+              {company.socials.map((social) => (
                 <a
                   aria-label={social.label}
                   className="flex items-center transition hover:text-white"

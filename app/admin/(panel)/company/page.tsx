@@ -1,7 +1,14 @@
 "use client";
 
 import { useContentStore } from "@/components/admin/ContentProvider";
-import { Card, Field, Page, Row } from "@/components/admin/ui";
+import ListEditor from "@/components/admin/ListEditor";
+import { Card, Field, Page, Row, Select } from "@/components/admin/ui";
+
+const socialOptions = [
+  { value: "telegram", label: "Telegram" },
+  { value: "max", label: "MAX" },
+  { value: "vk", label: "VK" }
+];
 
 export default function CompanyPage() {
   const { content, update } = useContentStore();
@@ -62,6 +69,42 @@ export default function CompanyPage() {
             value={company.scheduleShort}
           />
         </Row>
+      </Card>
+
+      <Card title="Соцсети">
+        <ListEditor
+          addLabel="Добавить соцсеть"
+          createItem={() => ({ label: "Telegram", href: "https://t.me/", icon: "telegram" as const })}
+          itemTitle={(item) => item.label}
+          items={company.socials}
+          onChange={(items) => update((draft) => void (draft.company.socials = items))}
+          renderItem={(item, index) => (
+            <>
+              <Row>
+                <Field
+                  label="Название"
+                  onChange={(value) => update((draft) => void (draft.company.socials[index].label = value))}
+                  path={`company.socials.${index}.label`}
+                  value={item.label}
+                />
+                <Select
+                  label="Иконка"
+                  onChange={(value) =>
+                    update((draft) => void (draft.company.socials[index].icon = value as "telegram" | "max" | "vk"))
+                  }
+                  options={socialOptions}
+                  value={item.icon}
+                />
+              </Row>
+              <Field
+                label="Ссылка"
+                onChange={(value) => update((draft) => void (draft.company.socials[index].href = value))}
+                path={`company.socials.${index}.href`}
+                value={item.href}
+              />
+            </>
+          )}
+        />
       </Card>
 
       <Card title="Юридические данные">

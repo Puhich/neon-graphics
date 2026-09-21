@@ -44,7 +44,7 @@ export default function Footer({ footer, company, contactsId, hiddenAnchors = []
             <Image className="footer-logo h-auto w-[225px]" src={footer.logoSrc} alt={footer.logoAlt} width={225} height={97} />
             <p className="mt-6 max-w-[340px] text-[14px] leading-[1.55] text-[#999999]">{footer.about}</p>
             <div className="mt-6 flex items-center gap-4 text-[#999999]">
-              {footer.socials.map((social) => (
+              {company.socials.map((social) => (
                 <a
                   aria-label={social.label}
                   className="flex items-center transition hover:text-white"

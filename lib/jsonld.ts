@@ -27,7 +27,7 @@ export function localBusinessJsonLd(content: SiteContent): string {
       longitude: content.contacts.mapCenter[1]
     },
     openingHours: "Mo-Fr 09:00-17:00",
-    sameAs: content.nav.socials.map((social) => social.href)
+    sameAs: content.company.socials.map((social) => social.href)
   };
 
   if (company.foundedYear) {

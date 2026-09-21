@@ -54,6 +54,8 @@ export const contentSchema = z.object({
     addressShort: requiredText,
     schedule: requiredText,
     scheduleShort: requiredText,
+    // Соцсети вводятся один раз и показываются в шапке и в футере.
+    socials: z.array(socialSchema).default([]),
     city: requiredText,
     inn: text,
     ogrn: text,
@@ -67,7 +69,6 @@ export const contentSchema = z.object({
     menuOpenLabel: requiredText,
     menuCloseLabel: requiredText,
     links: z.array(linkSchema),
-    socials: z.array(socialSchema),
     cta: linkSchema,
     callLabel: requiredText,
     callQrHint: requiredText
@@ -268,7 +269,6 @@ export const contentSchema = z.object({
     logoSrc: requiredText,
     logoAlt: text,
     about: text,
-    socials: z.array(socialSchema),
     navTitle: requiredText,
     nav: z.array(linkSchema),
     servicesTitle: requiredText,

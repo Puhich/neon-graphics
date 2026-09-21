@@ -5,14 +5,8 @@ import Link from "next/link";
 import { useContentStore } from "@/components/admin/ContentProvider";
 import ImageField from "@/components/admin/ImageField";
 import ListEditor from "@/components/admin/ListEditor";
-import { Card, Field, LinkField, Note, Page, Row, Select } from "@/components/admin/ui";
+import { Card, Field, LinkField, Note, Page, Row } from "@/components/admin/ui";
 import { topBarItems } from "@/lib/site";
-
-const socialOptions = [
-  { value: "telegram", label: "Telegram" },
-  { value: "max", label: "MAX" },
-  { value: "vk", label: "VK" }
-];
 
 export default function HeaderPage() {
   const { content, update } = useContentStore();
@@ -77,43 +71,6 @@ export default function HeaderPage() {
                 value={item.href}
               />
             </Row>
-          )}
-        />
-      </Card>
-
-      <Card title="Соцсети">
-        <ListEditor
-          addLabel="Добавить соцсеть"
-          createItem={() => ({ label: "Telegram", href: "https://t.me/", icon: "telegram" as const })}
-          itemTitle={(item) => item.label}
-          items={nav.socials}
-          onChange={(items) => update((draft) => void (draft.nav.socials = items))}
-          renderItem={(item, index) => (
-            <>
-              <Row>
-                <Field
-                  label="Название"
-                  onChange={(value) => update((draft) => void (draft.nav.socials[index].label = value))}
-                  path={`nav.socials.${index}.label`}
-                  value={item.label}
-                />
-                <Select
-                  label="Иконка"
-                  onChange={(value) =>
-                    update((draft) => void (draft.nav.socials[index].icon = value as "telegram" | "max" | "vk"))
-                  }
-                  options={socialOptions}
-                  value={item.icon}
-                />
-              </Row>
-              <Field
-                hint="Полная ссылка, например https://t.me/neongrafiks"
-                label="Ссылка"
-                onChange={(value) => update((draft) => void (draft.nav.socials[index].href = value))}
-                path={`nav.socials.${index}.href`}
-                value={item.href}
-              />
-            </>
           )}
         />
       </Card>
