@@ -62,6 +62,13 @@ a {
   --adm-scroll-thumb-hover: rgb(255 255 255 / 0.24);
 }
 
+/* Пока меняется тема админки — без переходов, чтобы всё перекрасилось разом. */
+html.adm-no-transitions *,
+html.adm-no-transitions *::before,
+html.adm-no-transitions *::after {
+  transition: none !important;
+}
+
 html[data-admin-theme="light"] {
   color-scheme: light;
   --adm-bg: #f1f1ef;

@@ -23,7 +23,12 @@ export default function ThemeToggle() {
   const toggle = () => {
     const next: Theme = theme === "dark" ? "light" : "dark";
 
-    document.documentElement.dataset.adminTheme = next;
+    // На время смены темы гасим все переходы: иначе поля и кнопки
+    // перекрашиваются с задержкой и выглядят как баг.
+    const root = document.documentElement;
+    root.classList.add("adm-no-transitions");
+    root.dataset.adminTheme = next;
+    window.setTimeout(() => root.classList.remove("adm-no-transitions"), 50);
     setTheme(next);
 
     try {
