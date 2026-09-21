@@ -369,6 +369,11 @@
         "icon": "truck",
         "title": "Монтаж по всей России",
         "description": "Доставка и установка"
+      },
+      {
+        "icon": "shield-check",
+        "title": "Новое преимущество",
+        "description": ""
       }
     ]
   },
