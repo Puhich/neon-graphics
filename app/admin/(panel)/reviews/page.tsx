@@ -3,7 +3,7 @@
 import { useContentStore } from "@/components/admin/ContentProvider";
 import ImageField from "@/components/admin/ImageField";
 import ListEditor from "@/components/admin/ListEditor";
-import { Card, Field, Page, Row, SectionVisibility } from "@/components/admin/ui";
+import { Card, Field, Page, Row, SectionVisibility, Toggle } from "@/components/admin/ui";
 
 export default function ReviewsPage() {
   const { content, update } = useContentStore();
@@ -42,9 +42,14 @@ export default function ReviewsPage() {
       </Card>
 
       <Card title="Отзывы">
+        <Toggle
+          checked={reviews.showAvatars !== false}
+          label="Фото авторов"
+          onChange={(value) => update((draft) => void (draft.reviews.showAvatars = value ? undefined : false))}
+        />
         <ListEditor
           addLabel="Добавить отзыв"
-          createItem={() => ({ imageSrc: "", imageAlt: "", text: "«»", author: "Имя", company: "" })}
+          createItem={() => ({ imageSrc: "", imageAlt: "", avatarSrc: "", text: "«»", author: "Имя", company: "" })}
           itemTitle={(item) => `${item.author}${item.company ? ` — ${item.company}` : ""}`}
           items={reviews.items}
           onChange={(items) => update((draft) => void (draft.reviews.items = items))}
@@ -71,8 +76,16 @@ export default function ReviewsPage() {
                   value={item.company}
                 />
               </Row>
+              {reviews.showAvatars !== false ? (
+                <ImageField
+                  label="Фото автора"
+                  onChange={(src) => update((draft) => void (draft.reviews.items[index].avatarSrc = src))}
+                  ratio="square"
+                  value={item.avatarSrc ?? ""}
+                />
+              ) : null}
               <ImageField
-                label="Фотография"
+                label="Фотография работы"
                 onChange={(src) => update((draft) => void (draft.reviews.items[index].imageSrc = src))}
                 value={item.imageSrc}
               />

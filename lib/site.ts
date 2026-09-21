@@ -23,7 +23,7 @@ export function copyrightLine(company: CompanyContent): string {
   const parts = [`© ${new Date().getFullYear()} ${company.legalName}.`];
 
   if (company.inn && company.ogrn) {
-    parts.push(`ИНН ${company.inn} / ОГРН ${company.ogrn}.`);
+    parts.push(`ИНН ${company.inn} / ${ogrnLabel(company.ogrn)} ${company.ogrn}.`);
   } else if (company.inn) {
     parts.push(`ИНН ${company.inn}.`);
   }
@@ -90,4 +90,44 @@ export function hiddenAnchors(content: SiteContent): string[] {
   return HIDEABLE_SECTIONS.filter((key) => content[key].hidden)
     .map((key) => ("id" in content[key] ? `#${(content[key] as { id: string }).id}` : ""))
     .filter(Boolean);
+}
+
+// Подстановки в тексте политики: {{legalName}}, {{inn}}, {{ogrn}}, {{legalAddress}},
+// {{phone}}, {{email}} — берутся из реквизитов, чтобы политика не расходилась
+// с футером, когда клиент меняет данные компании.
+// ОГРНИП у предпринимателя 15 цифр, ОГРН у компании 13 — подпись выбираем сами.
+export function ogrnLabel(ogrn: string): string {
+  return ogrn.replace(/\D/g, "").length === 15 ? "ОГРНИП" : "ОГРН";
+}
+
+// «ИНН …, ОГРН …» только из заполненных полей; пусто — пустая строка.
+export function requisitesLine(company: CompanyContent): string {
+  const parts: string[] = [];
+  if (company.inn) parts.push(`ИНН ${company.inn}`);
+  if (company.ogrn) parts.push(`${ogrnLabel(company.ogrn)} ${company.ogrn}`);
+
+  return parts.join(", ");
+}
+
+export function fillCompanyPlaceholders(text: string, company: CompanyContent): string {
+  const requisites = requisitesLine(company);
+  const operatorParts = [requisites, company.legalAddress ? `адрес: ${company.legalAddress}` : ""].filter(Boolean);
+  const values: Record<string, string> = {
+    legalName: company.legalName,
+    inn: company.inn,
+    ogrn: company.ogrn,
+    legalAddress: company.legalAddress,
+    phone: company.phone,
+    email: company.email,
+    requisites,
+    // «Название (ИНН …, ОГРН …, адрес: …)» — скобки только если есть что в них писать
+    operator: operatorParts.length > 0 ? `${company.legalName} (${operatorParts.join(", ")})` : company.legalName
+  };
+
+  return text
+    .replace(/\{\{\s*(\w+)\s*\}\}/g, (match, key: string) => (key in values ? values[key] : match))
+    // строка, в которой подстановка оказалась пустой, убирается целиком
+    .split("\n")
+    .filter((line, index, lines) => line.trim() !== "" || (index > 0 && lines[index - 1].trim() !== ""))
+    .join("\n");
 }

@@ -5,6 +5,7 @@ import Link from "next/link";
 import Footer from "@/components/Footer";
 import SiteChrome from "@/components/SiteChrome";
 import { getContent } from "@/lib/content";
+import { fillCompanyPlaceholders } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
 
@@ -20,7 +21,8 @@ export function generateMetadata(): Metadata {
 
 export default function PrivacyPage() {
   const content = getContent();
-  const { privacy, nav } = content;
+  const { privacy, nav, company } = content;
+  const fill = (text: string) => fillCompanyPlaceholders(text, company);
 
   return (
     <main className="min-h-screen bg-white text-brand-ink">
@@ -44,7 +46,7 @@ export default function PrivacyPage() {
           <p className="mt-3 text-[13px] text-[#999999]">Редакция от {privacy.updatedAt}</p>
         ) : null}
         {privacy.intro ? (
-          <p className="mt-6 text-[15px] leading-[1.65] text-[#555555] sm:text-[16px]">{privacy.intro}</p>
+          <p className="mt-6 text-[15px] leading-[1.65] text-[#555555] sm:text-[16px]">{fill(privacy.intro)}</p>
         ) : null}
 
         <div className="mt-10 grid gap-9">
@@ -52,7 +54,7 @@ export default function PrivacyPage() {
             <section key={section.title}>
               <h2 className="font-heading text-[20px] leading-[1.25] sm:text-[24px]">{section.title}</h2>
               <div className="mt-3 grid gap-3">
-                {section.text.split("\n\n").map((paragraph, index) => (
+                {fill(section.text).split("\n\n").map((paragraph, index) => (
                   <p
                     className="whitespace-pre-line text-[15px] leading-[1.65] text-[#555555]"
                     key={`${section.title}-${index}`}

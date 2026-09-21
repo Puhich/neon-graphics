@@ -88,12 +88,7 @@ export default function SettingsPage() {
               label="Публикация сайта"
               ok={status.publish.configured}
             />
-            <StatusRow
-              hint="Заявки приходят в Telegram-бот"
-              label="Telegram"
-              ok={status.telegram.configured}
-            />
-            <StatusRow hint="Заявки дублируются на почту" label="Почта" ok={status.email.configured} />
+            <StatusRow hint="Заявки приходят на почту" label="Почта" ok={status.email.configured} />
             {status.isDev ? <Note>Локальный режим разработки: публикация пишет файлы на диск.</Note> : null}
           </>
         ) : (

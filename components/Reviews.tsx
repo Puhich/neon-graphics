@@ -91,7 +91,18 @@ export default function Reviews({ reviews }: ReviewsProps) {
                 </div>
                 <p className="mt-4 text-[15px] leading-[1.6] text-[#333333]">{review.text}</p>
                 <div className="mt-4 flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-[#d0d0d0]" />
+                  {reviews.showAvatars !== false ? (
+                    review.avatarSrc ? (
+                      <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full bg-[#d0d0d0]">
+                        <Image alt="" className="object-cover" fill sizes="40px" src={review.avatarSrc} />
+                      </div>
+                    ) : (
+                      // Нет фото — инициал автора на светлом круге, а не пустой серый кружок
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-accent/10 text-[15px] font-bold text-brand-accent">
+                        {review.author.trim().charAt(0).toUpperCase()}
+                      </div>
+                    )
+                  ) : null}
                   <div>
                     <p className="text-sm font-bold">{review.author}</p>
                     <p className="mt-0.5 text-[13px] text-[#999999]">{review.company}</p>

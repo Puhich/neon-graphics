@@ -174,10 +174,14 @@ export const contentSchema = z.object({
     subtitle: text,
     previousLabel: requiredText,
     nextLabel: requiredText,
+    // Кружок с фото автора у каждого отзыва. Выключить — если фото нет
+    // или клиенты не хотят показываться.
+    showAvatars: z.boolean().optional(),
     items: z.array(
       z.object({
         imageSrc: requiredText,
         imageAlt: text,
+        avatarSrc: text.optional(),
         text: requiredText,
         author: requiredText,
         company: text

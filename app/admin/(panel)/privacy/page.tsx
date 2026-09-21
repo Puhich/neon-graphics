@@ -44,7 +44,7 @@ export default function PrivacyPage() {
         />
       </Card>
 
-      <Card title="Разделы документа">
+      <Card description="Подстановки {{operator}}, {{legalName}}, {{requisites}}, {{legalAddress}}, {{phone}}, {{email}} берут значения из реквизитов." title="Разделы документа">
         <ListEditor
           addLabel="Добавить раздел"
           createItem={() => ({ title: "Новый раздел", text: "" })}
