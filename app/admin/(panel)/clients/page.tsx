@@ -27,7 +27,7 @@ export default function ClientsPage() {
         />
       </Card>
 
-      <Card title="Логотипы" description="Лучше PNG с прозрачным фоном.">
+      <Card title="Логотипы" description="Горизонтальный, около 600×160. Белый фон подойдёт.">
         <ListEditor
           addLabel="Добавить логотип"
           createItem={() => ({ src: "", alt: "" })}
