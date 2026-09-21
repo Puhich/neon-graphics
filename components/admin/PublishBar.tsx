@@ -39,9 +39,9 @@ export default function PublishBar() {
       {isDirty ? (
         isConfirmingReset ? (
           <span className="flex items-center gap-2 text-[13px] text-[var(--adm-nav-text)]">
-            Отменить все правки?
+            <span className="mr-1">Отменить все правки?</span>
             <button
-              className="rounded-lg border border-[var(--adm-border-strong)] px-2.5 py-1 font-bold text-[var(--adm-text)] transition hover:border-brand-accent hover:text-brand-accent"
+              className="rounded-xl border border-[var(--adm-border-strong)] px-3.5 py-2 text-[13px] font-bold text-[var(--adm-text)] transition hover:border-brand-accent hover:text-brand-accent"
               onClick={() => {
                 reset();
                 setIsConfirmingReset(false);
@@ -51,7 +51,7 @@ export default function PublishBar() {
               Да
             </button>
             <button
-              className="rounded-lg border border-[var(--adm-border-strong)] px-2.5 py-1 transition hover:text-[var(--adm-text)]"
+              className="rounded-xl border border-[var(--adm-border-strong)] px-3.5 py-2 text-[13px] font-semibold transition hover:text-[var(--adm-text)]"
               onClick={() => setIsConfirmingReset(false)}
               type="button"
             >
