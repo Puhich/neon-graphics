@@ -18,8 +18,19 @@ export default function Stages({ stages }: StagesProps) {
           <p className="mx-auto mt-4 max-w-[700px] text-sm leading-[1.55] text-[#666666] sm:text-base sm:leading-[1.55]">{stages.subtitle}</p>
         </div>
 
-        <div className="relative mt-12 grid gap-8 lg:grid-cols-4 lg:gap-6">
-          <div className="absolute left-[12.5%] right-[12.5%] top-6 hidden border-t-2 border-dashed border-brand-accent/45 lg:block" />
+        {/* Колонок столько, сколько шагов; пунктир идёт от центра первого кружка
+            до центра последнего — половина ширины колонки с каждого края. */}
+        <div
+          className="relative mt-12 grid gap-8 lg:gap-6 lg:[grid-template-columns:repeat(var(--cols),minmax(0,1fr))]"
+          style={{ ["--cols" as string]: stages.steps.length }}
+        >
+          <div
+            className="absolute top-6 hidden border-t-2 border-dashed border-brand-accent/45 lg:block"
+            style={{
+              left: `${50 / stages.steps.length}%`,
+              right: `${50 / stages.steps.length}%`
+            }}
+          />
           {stages.steps.map((step) => (
             <article className="relative z-10 flex flex-col items-center text-center" key={step.number}>
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-accent font-heading text-2xl text-white">
