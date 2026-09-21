@@ -26,6 +26,6 @@ export async function GET() {
     },
     telegram: { configured: Boolean(telegramBotToken && telegramChatId) },
     email: { configured: Boolean(smtp.host && smtp.user && smtp.password && smtp.to) },
-    history: await recentCommits(5, sectionTitles)
+    history: await recentCommits(10, sectionTitles)
   });
 }

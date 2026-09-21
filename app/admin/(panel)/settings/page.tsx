@@ -115,21 +115,17 @@ export default function SettingsPage() {
       </Card>
 
       {status && status.history.length > 0 ? (
-        <Card title="История публикаций" description="Каждая публикация сохраняется и её можно откатить.">
+        <Card title="История публикаций">
           <ul className="grid gap-2">
             {status.history.map((item) => (
-              <li key={item.url}>
-                <a
-                  className="block rounded-xl border border-[var(--adm-border)] bg-[var(--adm-sunken)] px-4 py-3 transition hover:border-[var(--adm-border-hover)]"
-                  href={item.url}
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  <span className="block truncate text-[14px] text-[var(--adm-text)]">{item.message}</span>
-                  <span className="mt-0.5 block text-[12px] text-[var(--adm-faint)]">
-                    {new Date(item.date).toLocaleString("ru-RU")}
-                  </span>
-                </a>
+              <li
+                className="flex items-baseline justify-between gap-4 rounded-xl border border-[var(--adm-border)] bg-[var(--adm-sunken)] px-4 py-2.5"
+                key={item.url}
+              >
+                <span className="min-w-0 truncate text-[14px] text-[var(--adm-text)]">{item.message}</span>
+                <span className="shrink-0 text-[12px] text-[var(--adm-faint)]">
+                  {new Date(item.date).toLocaleString("ru-RU", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" })}
+                </span>
               </li>
             ))}
           </ul>
