@@ -12,7 +12,7 @@ export default function PublishBar() {
   const canPublish = isDirty && issues.length === 0 && !isPublishing;
 
   return (
-    <div className="flex flex-1 items-center justify-end gap-2 sm:gap-3">
+    <div className="flex min-h-9 flex-1 items-center justify-end gap-2 sm:gap-3">
       <div className="mr-auto flex min-w-0 items-center gap-2">
         <span
           className={`h-2 w-2 shrink-0 rounded-full ${
@@ -41,7 +41,7 @@ export default function PublishBar() {
           <span className="flex items-center gap-2 text-[13px] text-[var(--adm-nav-text)]">
             <span className="mr-1">Отменить все правки?</span>
             <button
-              className="rounded-xl border border-[var(--adm-border-strong)] px-3.5 py-2 text-[13px] font-bold text-[var(--adm-text)] transition hover:border-brand-accent hover:text-brand-accent"
+              className="h-9 rounded-xl border border-[var(--adm-border-strong)] px-3.5 text-[13px] font-bold text-[var(--adm-text)] transition hover:border-brand-accent hover:text-brand-accent"
               onClick={() => {
                 reset();
                 setIsConfirmingReset(false);
@@ -51,7 +51,7 @@ export default function PublishBar() {
               Да
             </button>
             <button
-              className="rounded-xl border border-[var(--adm-border-strong)] px-3.5 py-2 text-[13px] font-semibold transition hover:text-[var(--adm-text)]"
+              className="h-9 rounded-xl border border-[var(--adm-border-strong)] px-3.5 text-[13px] font-semibold transition hover:text-[var(--adm-text)]"
               onClick={() => setIsConfirmingReset(false)}
               type="button"
             >
@@ -60,7 +60,7 @@ export default function PublishBar() {
           </span>
         ) : (
           <button
-            className="rounded-xl border border-[var(--adm-border-strong)] px-3.5 py-2 text-[13px] font-semibold text-[var(--adm-nav-text)] transition hover:border-[var(--adm-border-hover)] hover:text-[var(--adm-text)]"
+            className="h-9 rounded-xl border border-[var(--adm-border-strong)] px-3.5 text-[13px] font-semibold text-[var(--adm-nav-text)] transition hover:border-[var(--adm-border-hover)] hover:text-[var(--adm-text)]"
             onClick={() => setIsConfirmingReset(true)}
             type="button"
           >
@@ -70,7 +70,7 @@ export default function PublishBar() {
       ) : null}
 
       <button
-        className="rounded-xl bg-brand-accent px-4 py-2 text-[13px] font-bold text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-[var(--adm-chip)] disabled:text-[var(--adm-faint)]"
+        className="h-9 rounded-xl bg-brand-accent px-4 text-[13px] font-bold text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-[var(--adm-chip)] disabled:text-[var(--adm-faint)]"
         disabled={!canPublish}
         onClick={publish}
         type="button"
